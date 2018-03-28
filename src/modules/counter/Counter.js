@@ -7,9 +7,9 @@ import {
   incrementAsync,
   decrement,
   decrementAsync
-} from "../../modules/counter";
+} from "../../reducers/counter";
 
-const Home = props => (
+const Counter = props => (
   <div>
     <h1>Home</h1>
     <p>Count: {props.count}</p>
@@ -34,7 +34,7 @@ const Home = props => (
 
     <p>
       <button onClick={() => props.changePage()}>
-        Go to about page via redux
+        Go back to main page.
       </button>
     </p>
   </div>
@@ -53,9 +53,9 @@ const mapDispatchToProps = dispatch =>
       incrementAsync,
       decrement,
       decrementAsync,
-      changePage: () => push("/about-us")
+      changePage: () => push("/")
     },
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

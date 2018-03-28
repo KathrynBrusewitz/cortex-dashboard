@@ -1,8 +1,9 @@
 {
-  "name": "cortex-web-app",
+  "name": "cortex-dashboard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.3.3",
     "history": "^4.7.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

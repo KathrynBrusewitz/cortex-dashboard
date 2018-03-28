@@ -2,20 +2,15 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "react-router-redux";
-import store, { history } from "./store";
-import App from "./containers/app";
-
+import Store, { history } from "./Store";
+import Routes from "./Routes";
 import "./index.css";
 
-const target = document.querySelector("#root");
-
 render(
-  <Provider store={store}>
+  <Provider store={Store}>
     <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
+      <Routes />
     </ConnectedRouter>
   </Provider>,
-  target
+  document.querySelector("#root")
 );
