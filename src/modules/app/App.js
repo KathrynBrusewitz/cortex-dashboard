@@ -3,8 +3,10 @@ import { Route, Link } from "react-router-dom";
 import Dashboard from "../dashboard/Dashboard";
 import Landing from "../landing/Landing";
 
-// if logged out, show Landing
-// if logged in, show Dashboard
+// Directs routes based on current user (logged in/out)
+// Logged Out ? show Landing : show Dashboard
+
+// Fake backend var for testing
 const currentUser = false;
 
 const App = () => (

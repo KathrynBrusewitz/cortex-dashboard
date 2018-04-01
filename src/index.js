@@ -6,6 +6,11 @@ import Store, { history } from "./Store";
 import Routes from "./Routes";
 import "./index.css";
 
+// Setup fake backend. Remove these two lines when adding real API
+// import { configureFakeBackend } from './_helpers';
+// configureFakeBackend();
+
+// Main Entry File
 render(
   <Provider store={Store}>
     <ConnectedRouter history={history}>

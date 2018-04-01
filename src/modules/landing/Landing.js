@@ -1,18 +1,20 @@
-import React from "react";
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { Layout, Row, Col, Form, Button } from 'antd';
+import LoginForm from './LoginForm';
 
-const Landing = () => (
-  <div>
-    <h1>Landing Page</h1>
-    <p>Add info about Cortex. Add login form.</p>
-
-    <Link to="/counter">
-      <button>
-        Go to counter page for an example of using Redux.
-      </button>
-    </Link> 
-   
-  </div>
-);
+class Landing extends Component {
+  render() {
+    return (
+      <Layout>
+        <Layout.Content style={{ background: '#fff' }}>
+          <Row type="flex" justify="space-around" align="middle" style={{height:'80vh'}}>
+            <LoginForm/>
+          </Row>
+        </Layout.Content>
+      </Layout>
+    );
+  }
+}
 
 export default Landing;
