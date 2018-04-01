@@ -1,21 +1,18 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { ConnectedRouter } from "react-router-redux";
-import Store, { history } from "./Store";
-import Routes from "./Routes";
+import Store from "./Store";
+import App from './components/app/App';
 import "./index.css";
 
 // Setup fake backend. Remove these two lines when adding real API
-// import { configureFakeBackend } from './_helpers';
-// configureFakeBackend();
+import { fakeBackend } from './utilities';
+fakeBackend();
 
-// Main Entry File
+// Main Entry
 render(
   <Provider store={Store}>
-    <ConnectedRouter history={history}>
-      <Routes />
-    </ConnectedRouter>
+    <App />
   </Provider>,
   document.querySelector("#root")
 );

@@ -1,19 +1,11 @@
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
-import { routerMiddleware, routerReducer } from "react-router-redux";
+import { routerMiddleware } from "react-router-redux";
 import thunk from "redux-thunk";
 import createHistory from "history/createBrowserHistory";
+import rootReducer from './reducers';
 
-// Import all the reducers here
-import counter from "./reducers/counter";
-
-// Create a history of your choosing (we're using a browser history in this case)
+// Create a history of your choosing (we're using browser history in this case)
 export const history = createHistory();
-
-// Combine all the reducers here
-const rootReducer = combineReducers({
-  routing: routerReducer,
-  counter
-});
 
 const initialState = {};
 const enhancers = [];
@@ -31,7 +23,6 @@ if (process.env.NODE_ENV === "development") {
 // Apply our middleware for navigating
 const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
 
-// Add the reducer to your store on the `router` key
 const Store = createStore(rootReducer, initialState, composedEnhancers);
 
 export default Store;
