@@ -45,5 +45,19 @@ You need to **put any JS and CSS files inside `src`**, otherwise Webpack won’t
 Only files inside `public` can be used from `public/index.html`.<br>
 Read instructions below for using assets from JavaScript and HTML.
 
-You can, however, create more top-level directories.<br>
-They will not be included in the production build so you can use them for things like documentation.
+Top-level directories are not included in the production build so you can use them for things like documentation and boilerplate code.
+
+## Dev Resources
+
+App architecture is loosely based off of
+[Redux on highly scalable javascript applications](https://medium.com/@alexmngn/how-to-use-redux-on-highly-scalable-javascript-applications-4e4b8cb5ef38), [React and Redux Boilerplate with Backend](http://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example#private-route-jsx), [Scaling with Ducks](https://medium.freecodecamp.org/scaling-your-redux-app-with-ducks-6115955638be), and most importantly [The 100% correct way to structure a React app](https://hackernoon.com/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed).
+
+My personal preferences:
+- Name your file the same as the thing you're exporting from that file.
+- Barreling components for tidy imports means an extra file (`index.js`) for every directory. I'd just deal with messy imports for now.
+- However, I'd barrel utilities. 
+- I'm not a fan of trying hard to keep containers and stateless components separate. We'd collectively lose our sanity being strict about it.
+- Use `.js` not `.jsx`
+
+App design uses components from [Ant Design React UI Library](https://ant.design).
+
