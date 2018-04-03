@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import { history } from '../../Store';
 
@@ -9,10 +9,6 @@ import Landing from '../landing/Landing';
 const loggedIn = false;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <ConnectedRouter history={history}>

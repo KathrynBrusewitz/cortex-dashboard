@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { Layout, Row, Col, Form, Button } from 'antd';
+import { Layout, Button } from 'antd';
 import { alertActions } from '../../actions';
 
 class Landing extends Component {
