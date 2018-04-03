@@ -4,7 +4,7 @@ import { Layout, Menu, Icon } from 'antd';
 
 const items = [
   { type: 'pie-chart', name: 'Analytics' },
-  { type: 'profile', name: 'Articles' }, //copy, file-text
+  { type: 'profile', name: 'Articles' },
   { type: 'sound', name: 'Podcasts' },
   { type: 'play-circle', name: 'Videos' },
   { type: 'bars', name: 'Glossary' },
@@ -29,9 +29,10 @@ class Sider extends Component {
         trigger={null}
         collapsible
         collapsed={!this.props.menuOpen}
+        style={{ background: '#fff'}}
       >
         <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+        <Menu theme="light" mode="inline" defaultSelectedKeys={['0']}>
           {menuItems()}
         </Menu>
       </Layout.Sider>
