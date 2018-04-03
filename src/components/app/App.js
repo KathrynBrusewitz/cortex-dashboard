@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import { history } from '../../Store';
+
 import Dashboard from '../dashboard/Dashboard';
 import Landing from '../landing/Landing';
 
-const loggedIn = localStorage.getItem('user');
+const loggedIn = false;
 
-const App = () => (
-  <ConnectedRouter history={history}>
-    <div>
-      { loggedIn 
-        ? <Route path="/" component={Dashboard} />
-        : <Route path="/" component={Landing} />
-      }
-    </div>
-  </ConnectedRouter>
-);
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <ConnectedRouter history={history}>
+        <div>
+          { loggedIn 
+            ? <Route path="/" component={Dashboard} />
+            : <Route path="/" component={Landing} />
+          }
+        </div>
+      </ConnectedRouter>
+    );
+  }
+}
 
 export default App;

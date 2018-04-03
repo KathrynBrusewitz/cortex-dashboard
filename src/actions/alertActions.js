@@ -1,3 +1,5 @@
+import { message } from 'antd';
+
 // Types
 export const alertConstants = {
   SUCCESS: 'ALERT_SUCCESS',
@@ -13,12 +15,14 @@ export const alertActions = {
 };
 
 // Implementations
-function success(message) {
-  return { type: alertConstants.SUCCESS, message };
+function success(text) {
+  message.success(text);
+  return { type: alertConstants.SUCCESS, text };
 }
 
-function error(message) {
-  return { type: alertConstants.ERROR, message };
+function error(text) {
+  message.error(text);
+  return { type: alertConstants.ERROR, text };
 }
 
 function clear() {

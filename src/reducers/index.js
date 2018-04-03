@@ -1,13 +1,11 @@
 import { routerReducer } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
-import { user } from './user.reducer';
-import { alert } from './alert.reducer';
+import { alertReducer } from './alertReducer';
 
 const rootReducer = combineReducers({
   router: routerReducer,
-  user,
-  alert
+  alert: alertReducer,
 });
 
 export default rootReducer;

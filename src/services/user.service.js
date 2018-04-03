@@ -50,7 +50,7 @@ function getAll() {
     return fetch('/users', requestOptions).then(handleResponse);
 }
 
-function getById(id) {
+function getById(_id) {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
