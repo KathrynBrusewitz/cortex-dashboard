@@ -7,16 +7,26 @@ export const alertReducer = (state = ALERT_INITIAL, action) => {
     case alertConstants.SUCCESS:
       return {
         type: 'success',
-        message: action.message
+        message: action.text
       };
     case alertConstants.ERROR:
       return {
         type: 'error',
-        message: action.message
+        message: action.text
+      };
+    case alertConstants.WARNING:
+      return {
+        type: 'warning',
+        message: action.text
+      };
+    case alertConstants.INFO:
+      return {
+        type: 'info',
+        message: action.text
       };
     case alertConstants.CLEAR:
       return {};
     default:
-      return state
+      return state;
   }
 }

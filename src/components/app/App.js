@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
+import { connect } from 'react-redux';
 import { history } from '../../Store';
 
 import Dashboard from '../dashboard/Dashboard';
 import Landing from '../landing/Landing';
-
-const loggedIn = false;
 
 class App extends Component {
   render() {
     return (
       <ConnectedRouter history={history}>
         <div>
-          { loggedIn 
+          { 
+            // this.props.user 
+            true
             ? <Route path="/" component={Dashboard} />
             : <Route path="/" component={Landing} />
           }
@@ -23,4 +24,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.auth.user,
+});
+
+export default connect(mapStateToProps)(App);
