@@ -5,7 +5,7 @@ export const authService = {
 
 function login(email, password) {
   const resOk = true;
-  return resOk ? { email, password } : null;
+  return resOk ? { email } : null;
 }
 
 function logout() {

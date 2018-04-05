@@ -13,8 +13,7 @@ class App extends Component {
       <ConnectedRouter history={history}>
         <div>
           { 
-            // this.props.user 
-            true
+            this.props.user 
             ? <Route path="/" component={Dashboard} />
             : <Route path="/" component={Landing} />
           }

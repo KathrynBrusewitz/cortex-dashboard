@@ -1,6 +1,13 @@
 import { authConstants } from '../actions';
 
-const AUTH_INITIAL = {};
+const AUTH_INITIAL = {
+  // TODO: Remove once API is hooked up
+  // ONLY for testing to stay logged in after refresh
+  user: {
+    email: 'kathryn.brusewitz@gmail.com',
+    name: 'Kathryn Brusewitz',
+  },
+};
 
 export const authReducer = (state = AUTH_INITIAL, action) => {
   switch (action.type) {

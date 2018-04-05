@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Layout, Icon, Row } from 'antd';
+import DropdownMenu from './DropdownMenu';
 import Avatar from './Avatar';
 
 import { menuActions } from '../../actions';
@@ -20,7 +21,9 @@ class Dashboard extends Component {
             type={this.props.menuOpen ? 'menu-fold': 'menu-unfold'}
             onClick={this.toggleMenu}
           />
-          <Avatar/>
+          <DropdownMenu>
+            <Avatar />
+          </DropdownMenu>
         </Row>
       </Layout.Header>
     ); 

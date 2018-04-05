@@ -4,6 +4,12 @@ import { bindActionCreators } from 'redux';
 import { Layout, Button } from 'antd';
 import { authActions } from '../../actions';
 
+const tempUser = {
+  email: 'kathryn.brusewitz@gmail.com',
+  password: 'password',
+  name: 'Kathryn Brusewitz',
+};
+
 class Landing extends Component {
   render() {
     const { login } = this.props;
@@ -11,7 +17,7 @@ class Landing extends Component {
     return (
       <Layout>
         <Layout.Content>
-          <Button onClick={() => login('email', 'password')}>Log In</Button>
+          <Button onClick={() => login(tempUser)}>Log In</Button>
         </Layout.Content>
       </Layout>
     );
