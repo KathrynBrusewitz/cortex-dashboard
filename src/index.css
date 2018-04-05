@@ -39,3 +39,8 @@ body {
   line-height: 64px;
   cursor: pointer;
 }
+
+.dashboard-content {
+  padding: 20px;
+  background: #fff;
+}

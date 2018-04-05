@@ -19,7 +19,7 @@ class Dashboard extends Component {
         <Sider />
         <Layout>
           <Header />
-          <Layout.Content>
+          <Layout.Content className='dashboard-content'>
             <Switch>
               <Route exact path="/" component={Analytics} />
               <Route exact path="/articles" component={ListArticles} />

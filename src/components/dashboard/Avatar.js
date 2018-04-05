@@ -6,8 +6,8 @@ import { Avatar as AntAvatar } from 'antd';
 class Avatar extends Component {
   render() {
     return (
-      <AntAvatar {...this.props} style={{ backgroundColor: '#f56a00', verticalAlign: 'middle' }} shape="square" className='user-avatar'>
-        KB
+      <AntAvatar {...this.props} style={{ backgroundColor: '#a5a5a5', verticalAlign: 'middle' }} shape="square" className='user-avatar'>
+        K
       </AntAvatar>
     );
   }
