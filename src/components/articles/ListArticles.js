@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Table, Divider, Icon, Button, Row, Col } from 'antd';
+
+import { alertActions } from '../../actions';
 
 const dataSource = [];
 for (let i = 0; i < 46; i++) {
@@ -73,6 +77,7 @@ class ListArticles extends Component {
   start = () => {
     this.setState({ loading: true });
     setTimeout(() => {
+      this.props.success(`Successfully published ${this.state.selectedRowKeys.length} articles!`);
       this.setState({
         selectedRowKeys: [],
         loading: false,
@@ -126,4 +131,8 @@ class ListArticles extends Component {
   }
 }
 
-export default ListArticles;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  ...alertActions,
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(ListArticles);
