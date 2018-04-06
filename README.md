@@ -13,8 +13,8 @@ Frontend
 
 [x] General Page Routing  
 [x] Global Alerts  
-[ ] Main Landing Components  
-  [ ] Form Login
+[x] Main Landing Components  
+  [x] Form Login
 [ ] Main Dash Components   
   Articles: [x] List [ ] Create [ ] Edit [ ] View  
   Podcasts: [x] List [ ] Create [ ] Edit [ ] View  
