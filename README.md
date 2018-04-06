@@ -8,33 +8,36 @@ More extensive documentation can be found in `/docs`. Below should give you enou
 
 ## Todo
 
+```
 Frontend
-- [x] General Page Routing
-- [ ] Main Login Components
-  - [ ] Fields
-  - [x] Fake auth
-  - [ ] Real auth connected
-- [ ] Main Dash Components
-  - [x] Global Alerts
-  - Articles: [x] List, [ ] Create, [ ] Edit, [ ] View
-  - Podcasts: [x] List, [ ] Create, [ ] Edit, [ ] View
-  - Videos: [x] List, [ ] Create, [ ] Edit, [ ] View
-  - Glossary: [x] List, [ ] Create, [ ] Edit, [ ] View
-  - Events: [x] List, [ ] Create, [ ] Edit, [ ] View
-  - Users: [x] List, [ ] Create, [ ] Edit, [ ] View
+
+[x] General Page Routing  
+[x] Global Alerts  
+[ ] Main Landing Components  
+  [ ] Form Login
+[ ] Main Dash Components   
+  Articles: [x] List [ ] Create [ ] Edit [ ] View  
+  Podcasts: [x] List [ ] Create [ ] Edit [ ] View  
+  Videos: [x] List [ ] Create [ ] Edit [ ] View  
+  Glossary: [x] List [ ] Create [ ] Edit [ ] View  
+  Events: [x] List [ ] Create [ ] Edit [ ] View  
+  Users: [x] List [ ] Create [ ] Edit [ ] View  
+[ ] User Invite
+  [ ] Form Signup
+
+Middle
+
+[ ] Unit Tests: Jest and Enzyme  
+[ ] Typechecking: PropTypes and Flow
+[ ] Host on Heroku Dynos (or Zeit or Amazon ec2)
 
 Backend
-- [ ] Connect with Cortex API and MongoDB (Local Env)
-- [ ] Major Cortex API and DB Connections
-  - [ ] Schema Complete
-  - [ ] Stub API Endpoints
 
-Decisions
-- [ ] Host Dash and API on Heroku Dynos
-  - Or ZEIT, or Amazon ec2 depending on GM's expenses
-- [ ] Typechecking
-  - PropTypes (run-time) or Flow (???) or TS (compile-time)
-  - Old but easy, new but don't know it, best but must rewrite and re-tool
+[ ] Connect with Cortex API and MongoDB (Local Env)  
+[ ] In API Project:
+  [ ] Method Stubs to start
+  [ ] Schema Complete
+```
 
 ## Version control
 
