@@ -29,12 +29,12 @@ Backend
   - [ ] Schema Complete
   - [ ] Stub API Endpoints
 
-Misc
+Decisions
 - [ ] Host Dash and API on Heroku Dynos
-  - Or, ZEIT
-  - Or, Amazon ec2 depending on GM's expenses
+  - Or ZEIT, or Amazon ec2 depending on GM's expenses
 - [ ] Typechecking
-  - PropTypes or Flow or refactor to TS
+  - PropTypes (run-time) or Flow (???) or TS (compile-time)
+  - Old but easy, new but don't know it, best but must rewrite and re-tool
 
 ## Version control
 
