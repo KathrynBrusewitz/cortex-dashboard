@@ -6,6 +6,36 @@ Admin Portal, Content Management, and Analytics for Grey Matters and other scien
 
 More extensive documentation can be found in `/docs`. Below should give you enough instructions to get started.
 
+## Todo
+
+Frontend
+- [x] General Page Routing
+- [ ] Main Login Components
+  - [ ] Fields
+  - [x] Fake auth
+  - [ ] Real auth connected
+- [ ] Main Dash Components
+  - [x] Global Alerts
+  - Articles: [x] List, [ ] Create, [ ] Edit, [ ] View
+  - Podcasts: [x] List, [ ] Create, [ ] Edit, [ ] View
+  - Videos: [x] List, [ ] Create, [ ] Edit, [ ] View
+  - Glossary: [x] List, [ ] Create, [ ] Edit, [ ] View
+  - Events: [x] List, [ ] Create, [ ] Edit, [ ] View
+  - Users: [x] List, [ ] Create, [ ] Edit, [ ] View
+
+Backend
+- [ ] Connect with Cortex API and MongoDB (Local Env)
+- [ ] Major Cortex API and DB Connections
+  - [ ] Schema Complete
+  - [ ] Stub API Endpoints
+
+Misc
+- [ ] Host Dash and API on Heroku Dynos
+  - Or, ZEIT
+  - Or, Amazon ec2 depending on GM's expenses
+- [ ] Typechecking
+  - PropTypes or Flow or refactor to TS
+
 ## Version control
 
 The `master` and `development` branches are the two active branches. Master contains the live production code. Development is the demo-able, next to release code.
@@ -14,7 +44,7 @@ Other branches are created per feature. Naming convention is loose, but choose a
 
 When finished with a feature or bug fix, create a Pull Request on the development branch.
 
-## Dev Setup
+## Setup
 
 I like `yarn`, but `npm` is fine too. In the project directory, you can run:
 
@@ -30,7 +60,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
-## Folder Structure
+## Folder structure
 
 For the project to build, **these files must exist with exact filenames**:
 
@@ -45,7 +75,7 @@ Read instructions below for using assets from JavaScript and HTML.
 
 Top-level directories are not included in the production build so you can use them for things like documentation and boilerplate code.
 
-## Dev Resources
+## Resources
 
 App architecture is loosely based off of
 [Redux on highly scalable javascript applications](https://medium.com/@alexmngn/how-to-use-redux-on-highly-scalable-javascript-applications-4e4b8cb5ef38), [React and Redux Boilerplate with Backend](http://jasonwatmore.com/post/2017/09/16/react-redux-user-registration-and-login-tutorial-example#private-route-jsx), [Scaling with Ducks](https://medium.freecodecamp.org/scaling-your-redux-app-with-ducks-6115955638be), and most importantly [The 100% correct way to structure a React app](https://hackernoon.com/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed).
