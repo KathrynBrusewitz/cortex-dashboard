@@ -6,15 +6,64 @@ body {
   font-family: sans-serif;
 }
 
-/* Future: refactor into separate files, maybe couple with components? */
-.login-form {
-  width: 300px;
+/* TODO: refactor into separate files, maybe couple with components? */
+/* TODO: CSS Modules or SCSS? */
+
+/* Landing */
+
+.gradient-bg {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(237deg, #696969, #558394, #839ea5, #4a676e, #3f565c, #505050);
+  background-size: 1200% 1200%;
+
+  -webkit-animation: LandingGradient 47s ease infinite;
+  -moz-animation: LandingGradient 47s ease infinite;
+  -o-animation: LandingGradient 47s ease infinite;
+  animation: LandingGradient 47s ease infinite;
 }
-.login-form-forgot {
-  float: right;
+
+@-webkit-keyframes LandingGradient {
+  0%{background-position:14% 0%}
+  50%{background-position:87% 100%}
+  100%{background-position:14% 0%}
+}
+@-moz-keyframes LandingGradient {
+  0%{background-position:14% 0%}
+  50%{background-position:87% 100%}
+  100%{background-position:14% 0%}
+}
+@-o-keyframes LandingGradient {
+  0%{background-position:14% 0%}
+  50%{background-position:87% 100%}
+  100%{background-position:14% 0%}
+}
+@keyframes LandingGradient { 
+  0%{background-position:14% 0%}
+  50%{background-position:87% 100%}
+  100%{background-position:14% 0%}
+}
+
+.login-form-wrap {
+  width: 350px;
+  background-color: #fff;
+  margin-top: 20px;
+  padding: 40px 30px 20px;
 }
 .login-form-button {
   width: 100%;
+}
+.login-logo {
+  font-size: 60px;
+  margin: 10px;
+  color: #fff;
+}
+
+/* Dashboard */
+
+.dashboard-content {
+  padding: 20px;
+  background: #fff;
 }
 
 .logo {
@@ -38,9 +87,4 @@ body {
 .user-avatar {
   line-height: 64px;
   cursor: pointer;
-}
-
-.dashboard-content {
-  padding: 20px;
-  background: #fff;
 }

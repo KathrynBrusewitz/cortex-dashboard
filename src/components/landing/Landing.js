@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Button } from 'antd';
-import { authActions } from '../../actions';
+import { Layout, Button, Row, Col, Icon } from 'antd';
+import LoginForm from './LoginForm';
+// import { authActions } from '../../actions';
 
 const tempUser = {
   email: 'kathryn.brusewitz@gmail.com',
@@ -17,15 +18,27 @@ class Landing extends Component {
     return (
       <Layout>
         <Layout.Content>
-          <Button onClick={() => login(tempUser)}>Log In</Button>
+          <Row className="gradient-bg" type="flex" justify="center" align="middle">
+            <Col type="flex" align="middle">
+              <Row>
+                <Icon type="api" className="login-logo" />
+              </Row>
+              <Row className="login-form-wrap">
+                
+                <LoginForm />
+              </Row>
+              {/* <Button onClick={() => login(tempUser)}>Log In</Button> */}
+            </Col>
+          </Row>
         </Layout.Content>
       </Layout>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  ...authActions,
-}, dispatch);
+// const mapDispatchToProps = dispatch => bindActionCreators({
+//   ...authActions,
+// }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Landing);
+// export default connect(null, mapDispatchToProps)(Landing);
+export default Landing;
