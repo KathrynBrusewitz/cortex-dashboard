@@ -3,13 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Layout, Button, Row, Col, Icon } from 'antd';
 import LoginForm from './LoginForm';
-// import { authActions } from '../../actions';
-
-const tempUser = {
-  email: 'kathryn.brusewitz@gmail.com',
-  password: 'password',
-  name: 'Kathryn Brusewitz',
-};
+import { authActions } from '../../actions';
 
 class Landing extends Component {
   render() {
@@ -25,9 +19,8 @@ class Landing extends Component {
               </Row>
               <Row className="login-form-wrap">
                 
-                <LoginForm />
+                <LoginForm onSubmit={login} />
               </Row>
-              {/* <Button onClick={() => login(tempUser)}>Log In</Button> */}
             </Col>
           </Row>
         </Layout.Content>
@@ -36,9 +29,8 @@ class Landing extends Component {
   }
 }
 
-// const mapDispatchToProps = dispatch => bindActionCreators({
-//   ...authActions,
-// }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  ...authActions,
+}, dispatch);
 
-// export default connect(null, mapDispatchToProps)(Landing);
-export default Landing;
+export default connect(null, mapDispatchToProps)(Landing);
