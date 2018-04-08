@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 
 class StatefulComponent extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class StatefulComponent extends Component {
     return (
       <div>
         <h1>StatefulComponent</h1>
+        <Button>Do Nothing</Button>
       </div>
     );
   }
