@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 const items = [
-  { type: 'pie-chart', name: 'Analytics', route: '/' },
-  { type: 'profile', name: 'Articles', route: '/articles' },
-  { type: 'sound', name: 'Podcasts', route: '/podcasts' },
-  { type: 'play-circle', name: 'Videos', route: '/videos' },
-  { type: 'bars', name: 'Glossary', route: '/glossary' },
-  { type: 'calendar', name: 'Events', route: '/events' },
-  { type: 'user', name: 'Users', route: '/users' },
+  { icon: 'pie-chart', name: 'Analytics', route: '/' },
+  { icon: 'profile', name: 'Articles', route: '/articles' },
+  { icon: 'sound', name: 'Podcasts', route: '/podcasts' },
+  { icon: 'play-circle', name: 'Videos', route: '/videos' },
+  { icon: 'bars', name: 'Glossary', route: '/glossary' },
+  { icon: 'calendar', name: 'Events', route: '/events' },
+  { icon: 'user', name: 'Users', route: '/users' },
 ];
 
 const menuItems = (
   items.map((item, i) => (
     <Menu.Item key={i.toString()}>
       <Link to={item.route}>
-        <Icon type={item.type} />
+        <Icon type={item.icon} />
         <span>{item.name}</span>
       </Link>
     </Menu.Item>
