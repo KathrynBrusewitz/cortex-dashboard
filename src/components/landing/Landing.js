@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Button, Row, Col, Icon } from 'antd';
+import { Layout, Row, Col, Icon } from 'antd';
 import LoginForm from './LoginForm';
+
 import { authActions } from '../../actions';
 
 class Landing extends Component {
   render() {
     const { login } = this.props;
-    
     return (
       <Layout>
         <Layout.Content>

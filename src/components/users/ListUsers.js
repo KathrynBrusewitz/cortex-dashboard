@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Divider, Icon, Button, Row, Col } from 'antd';
+import { Table, Divider, Button, Row, Col } from 'antd';
 
 const dataSource = [];
 for (let i = 0; i < 46; i++) {

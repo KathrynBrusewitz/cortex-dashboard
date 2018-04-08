@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Divider, Icon, Button, Row, Col, Calendar } from 'antd';
+import { Table, Divider, Button, Row, Col, Calendar } from 'antd';
 import Stat from '../shared/Stat';
 
 const dataSource = [];

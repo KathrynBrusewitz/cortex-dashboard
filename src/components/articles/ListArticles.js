@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Table, Divider, Icon, Button, Row, Col } from 'antd';
+import { Table, Divider, Button, Row, Col } from 'antd';
 import Stat from '../shared/Stat';
 
 import { alertActions } from '../../actions';
