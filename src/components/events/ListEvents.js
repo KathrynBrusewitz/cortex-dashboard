@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Divider, Icon, Button, Row, Col, Calendar } from 'antd';
+import Stat from '../shared/Stat';
 
 const dataSource = [];
 for (let i = 0; i < 46; i++) {
@@ -7,6 +8,7 @@ for (let i = 0; i < 46; i++) {
     key: i,
     name: `Event Name ${i}`,
     description: 'Lorem ipsum dolor sit amet, consectetur...',
+    going: Math.round(Math.random() * 100),
   });
 }
 
@@ -37,6 +39,15 @@ const columns = [{
       <a href="/events">Edit</a>
       <Divider type="vertical" />
       <a href="/events">Delete</a>
+    </span>
+  ),
+}, {
+  title: 'Stats',
+  dataIndex: 'stats',
+  key: 'stats',
+  render: (text, record) => (
+    <span>
+      <Stat stat={record.going} icon="smile-o" tooltip={`${record.going} going`} />
     </span>
   ),
 }];

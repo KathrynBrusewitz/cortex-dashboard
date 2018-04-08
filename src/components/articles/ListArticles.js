@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Table, Divider, Icon, Button, Row, Col } from 'antd';
+import Stat from '../shared/Stat';
 
 import { alertActions } from '../../actions';
 
@@ -15,6 +16,8 @@ for (let i = 0; i < 46; i++) {
       status: 'Published',
       editTime: 'April 5, 2018 8:31 AM',
       publishTime: 'April 5, 2018 9:23 AM',
+      views: Math.round(Math.random() * 100),
+      bookmarks: Math.round(Math.random() * 100),
     });
   } else {
     dataSource.push({
@@ -23,6 +26,8 @@ for (let i = 0; i < 46; i++) {
       writers: 'Corey, Troy, Kathryn',
       status: 'Not Published',
       editTime: 'April 5, 2018 8:31 AM',
+      views: 0,
+      bookmarks: 0,
     });
   }
 }
@@ -62,6 +67,17 @@ const columns = [{
         ? <span><Divider type="vertical" /><a href="/articles">Publish</a></span>
         : <span><Divider type="vertical" /><a href="/articles">Unpublish</a></span>
       }
+    </span>
+  ),
+}, {
+  title: 'Stats',
+  dataIndex: 'stats',
+  key: 'stats',
+  render: (text, record) => (
+    <span>
+      <Stat stat={record.views} icon="eye-o" tooltip={`${record.views} views`} />
+      <Divider type="vertical" />
+      <Stat stat={record.bookmarks} icon="book" tooltip={`${record.bookmarks} bookmarks`}/>
     </span>
   ),
 }];

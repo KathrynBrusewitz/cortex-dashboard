@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import { Table, Divider, Icon, Button, Row, Col } from 'antd';
+import Stat from '../shared/Stat';
 
 const dataSource = [];
 for (let i = 0; i < 46; i++) {
-  if (Math.round(Math.random()) < 0.5) {
-    dataSource.push({
-      key: i,
-      term: `Scientific Term ${i}`,
-      definition: 'Lorem ipsum dolor sit amet, consectetur...',
-    });
-  } else {
-    dataSource.push({
-      key: i,
-      term: `Scientific Term ${i}`,
-      definition: 'Lorem ipsum dolor sit amet, consectetur...',
-    });
-  }
+  dataSource.push({
+    key: i,
+    term: `Scientific Term ${i}`,
+    definition: 'Lorem ipsum dolor sit amet, consectetur...',
+    articles: Math.round(Math.random() * 100),
+    bookmarks: Math.round(Math.random() * 100),
+  });
 }
 
 const columns = [{
@@ -27,14 +22,6 @@ const columns = [{
   dataIndex: 'definition',
   key: 'definition',
 }, {
-  title: 'Tags',
-  dataIndex: 'tags',
-  key: 'tags',
-}, {
-  title: 'Articles',
-  dataIndex: 'articles',
-  key: 'articles',
-}, {
   title: 'Actions',
   dataIndex: 'actions',
   key: 'actions',
@@ -45,6 +32,17 @@ const columns = [{
       <a href="/glossary">Edit</a>
       <Divider type="vertical" />
       <a href="/glossary">Delete</a>
+    </span>
+  ),
+}, {
+  title: 'Stats',
+  dataIndex: 'stats',
+  key: 'stats',
+  render: (text, record) => (
+    <span>
+      <Stat stat={record.articles} icon="profile" tooltip={`${record.articles} article appearances`}/>
+      <Divider type="vertical" />
+      <Stat stat={record.bookmarks} icon="book" tooltip={`${record.bookmarks} bookmarks`}/>
     </span>
   ),
 }];

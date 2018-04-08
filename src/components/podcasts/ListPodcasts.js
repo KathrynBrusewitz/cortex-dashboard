@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Divider, Icon, Button, Row, Col } from 'antd';
+import Stat from '../shared/Stat';
 
 const dataSource = [];
 for (let i = 0; i < 46; i++) {
@@ -10,6 +11,9 @@ for (let i = 0; i < 46; i++) {
       hosts: 'Corey, Troy, Kathryn',
       status: 'Published',
       publishTime: 'April 5, 2018 9:23 AM',
+      duration: '0h : 5m : 15s',
+      listens: Math.round(Math.random() * 100),
+      bookmarks: Math.round(Math.random() * 100),
     });
   } else {
     dataSource.push({
@@ -17,6 +21,9 @@ for (let i = 0; i < 46; i++) {
       title: `Podcast Title ${i}`,
       hosts: 'Corey, Troy, Kathryn',
       status: 'Not Published',
+      duration: '0h : 8m : 30s',
+      listens: 0,
+      bookmarks: 0,
     });
   }
 }
@@ -38,6 +45,10 @@ const columns = [{
   dataIndex: 'publishTime',
   key: 'publishTime',
 }, {
+  title: 'Duration',
+  dataIndex: 'duration',
+  key: 'duration',
+}, {
   title: 'Actions',
   dataIndex: 'actions',
   key: 'actions',
@@ -52,6 +63,17 @@ const columns = [{
         ? <span><Divider type="vertical" /><a href="/podcasts">Publish</a></span>
         : <span><Divider type="vertical" /><a href="/podcasts">Unpublish</a></span>
       }
+    </span>
+  ),
+}, {
+  title: 'Stats',
+  dataIndex: 'stats',
+  key: 'stats',
+  render: (text, record) => (
+    <span>
+      <Stat stat={record.listens} icon="play-circle-o" tooltip={`${record.listens} listens`} />
+      <Divider type="vertical" />
+      <Stat stat={record.bookmarks} icon="book" tooltip={`${record.bookmarks} bookmarks`}/>
     </span>
   ),
 }];
