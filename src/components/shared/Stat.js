@@ -21,10 +21,4 @@ class Stat extends Component {
   }
 }
 
-
-// TODO: Add Proptypes
-// stat : string or component or number // required
-// icon : string // required
-// tooltip : string, component, number // optional, default null
-
 export default Stat;

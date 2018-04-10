@@ -27,8 +27,6 @@ Frontend
 
 Middle
 
-[ ] Unit Tests: Jest and Enzyme  
-[ ] Typechecking: PropTypes and Flow
 [ ] Host on Heroku Dynos (or Zeit or Amazon ec2)
 
 Backend
