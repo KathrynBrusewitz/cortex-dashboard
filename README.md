@@ -28,13 +28,14 @@ Frontend
 Middle
 
 [ ] Host on Heroku Dynos (or Zeit or Amazon ec2)
+[ ] Use `react-ga` (Google Analytics) to track page views, etc.
 
 Backend
 
+See Api README for more detailed todo
 [ ] Connect with Cortex API and MongoDB (Local Env)  
-[ ] In API Project:
-  [ ] Method Stubs to start
-  [ ] Schema Complete
+[ ] Method Stubs to start
+[ ] Schema
 ```
 
 ## Version control
