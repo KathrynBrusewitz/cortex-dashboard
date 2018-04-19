@@ -1,20 +1,12 @@
 import { authConstants } from '../actions';
 
-const AUTH_INITIAL = {
-  // TODO: Remove once API is hooked up
-  // ONLY for testing to stay logged in after refresh
-  // user: {
-  //   email: 'kathryn.brusewitz@gmail.com',
-  //   name: 'Kathryn Brusewitz',
-  // },
-};
+const AUTH_INITIAL = {};
 
 export const authReducer = (state = AUTH_INITIAL, action) => {
   switch (action.type) {
     case authConstants.LOGIN_REQUEST:
       return {
-        loggingIn: true,
-        user: action.user,
+        isLoggingIn: true,
       };
     case authConstants.LOGIN_SUCCESS:
       return {
