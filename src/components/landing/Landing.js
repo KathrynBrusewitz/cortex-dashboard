@@ -8,20 +8,20 @@ import { authActions } from '../../actions';
 
 class Landing extends Component {
   render() {
-    const { login } = this.props;
+    const { login, isLoggingIn } = this.props;
+
     return (
       <Layout>
         <Layout.Content>
           <Row className="gradient-bg" type="flex" justify="center" align="middle">
-            <Col type="flex" align="middle">
-              <Row>
-                <Icon type="api" className="login-logo" />
-              </Row>
-              <Row className="login-form-wrap">
-                
-                <LoginForm onSubmit={login} />
-              </Row>
-            </Col>
+          <Col type="flex" align="middle">
+            <Row>
+              <Icon type="api" className="login-logo" />
+            </Row>
+            <Row className="login-form-wrap">
+              <LoginForm onSubmit={login} loading={isLoggingIn} />
+            </Row>
+          </Col>
           </Row>
         </Layout.Content>
       </Layout>
@@ -29,8 +29,13 @@ class Landing extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  isLoggingIn: state.auth.isLoggingIn,
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...authActions,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Landing);
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

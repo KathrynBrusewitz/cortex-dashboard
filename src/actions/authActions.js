@@ -1,5 +1,7 @@
 import { alertActions } from './';
-import { authService } from '../services';
+import axios from 'axios';
+
+const baseURL = 'http://localhost:8080/api/';
 
 // Types
 export const authConstants = {
@@ -17,26 +19,38 @@ export const authActions = {
 };
 
 // Implementations
-function login({ email, password, name }) {
+function login({ email, password }) {
   return dispatch => {
-    dispatch(request({ email }));
+    dispatch(request());
 
-    const user = authService.login(email, password);
-    if (user) {
-      // TODO: Use this line when API works
-      // dispatch(success(user));
-      // TODO: Remove this line when API works
-      dispatch(success({ email, name }));
-    } else {
-      const error = 'Invalid Login'
+    axios({
+      method: 'post',
+      url: '/authenticate',
+      baseURL,
+      data: {
+        email,
+        password,
+      }
+    })
+    .then(res => {
+      if (res.data.success) {
+        const user = res.data;
+        dispatch(success(res.data));
+        dispatch(alertActions.success(`Welcome ${res.data.name}!`));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error));
-    }
+      dispatch(alertActions.error(error.message));
+    });
   };
 
-  function request(user) { return { type: authConstants.LOGIN_REQUEST, user } }
+  function request() { return { type: authConstants.LOGIN_REQUEST } }
   function success(user) { return { type: authConstants.LOGIN_SUCCESS, user } }
-  function failure(error) { return { type: authConstants.LOGIN_FAILURE, error } }
+  function failure() { return { type: authConstants.LOGIN_FAILURE } }
 }
 
 function logout() {

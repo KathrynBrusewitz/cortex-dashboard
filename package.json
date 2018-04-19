@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^3.3.3",
+    "axios": "^0.18.0",
     "history": "^4.7.2",
     "immutable": "^3.8.2",
     "react": "^16.2.0",
