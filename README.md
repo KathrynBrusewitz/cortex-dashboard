@@ -18,7 +18,7 @@ Frontend
 [ ] Main Dash Components   
   Articles: [x] List [x] Create [x] Edit [x] View  
   Podcasts: [x] List [x] Create [x] Edit [x] View  
-  Videos: [x] List [ ] Create [ ] Edit [ ] View  
+  Videos: [x] List [x] Create [x] Edit [x] View  
   Glossary: [x] List [ ] Create [ ] Edit [ ] View  
   Events: [x] List [ ] Create [ ] Edit [ ] View  
   Users: [x] List [ ] Create [ ] Edit [ ] View  
