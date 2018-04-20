@@ -1,7 +1,9 @@
 import { alertActions } from './';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 const baseURL = 'http://localhost:8080/api/';
+const cookies = new Cookies();
 
 // Types
 export const authConstants = {
@@ -30,13 +32,15 @@ function login({ email, password }) {
       data: {
         email,
         password,
+        entry: 'dash',
       }
     })
     .then(res => {
-      if (res.data.success) {
+      if (res.data.token) {
         const user = res.data;
-        dispatch(success(res.data));
-        dispatch(alertActions.success(`Welcome ${res.data.name}!`));
+        dispatch(success(user));
+        dispatch(alertActions.success(`Welcome ${user.name}!`));
+        cookies.set('token', user.token, { path: '/' });
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -54,5 +58,11 @@ function login({ email, password }) {
 }
 
 function logout() {
-  return { type: authConstants.LOGOUT };
+  cookies.remove('token', { path: '/' });
+  return dispatch => {
+    dispatch(alertActions.success(`Logged Out!`));
+    dispatch(success());
+  };
+
+  function success() { return { type: authConstants.LOGOUT } }
 }
