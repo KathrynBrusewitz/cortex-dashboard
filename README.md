@@ -17,10 +17,10 @@ Frontend
   [x] Form Login
 [ ] Main Dash Components   
   Articles: [x] List [x] Create [x] Edit [x] View  
-  Podcasts: [x] List [ ] Create [ ] Edit [ ] View  
-  Videos: [x] List [ ] Create [ ] Edit [ ] View  
+  Podcasts: [x] List [x] Create [x] Edit [x] View  
+  Videos: [x] List [x] Create [x] Edit [x] View  
   Glossary: [x] List [ ] Create [ ] Edit [ ] View  
-  Events: [x] List [ ] Create [ ] Edit [ ] View  
+  Events: [x] List [x] Create [x] Edit [x] View  
   Users: [x] List [ ] Create [ ] Edit [ ] View  
 [ ] User Invite
   [ ] Form Signup

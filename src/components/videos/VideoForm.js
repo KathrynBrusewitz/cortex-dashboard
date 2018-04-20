@@ -5,13 +5,13 @@ import Mentions from '../shared/Mentions';
 import SelectTags from '../shared/SelectTags';
 import UploadDragger from '../shared/UploadDragger';
 
-class PodcastForm extends Component {
+class VideoForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         // this.props.onSubmit(values);
-        console.log('created podcast!');
+        console.log('created video!');
       }
     });
   }
@@ -32,7 +32,7 @@ class PodcastForm extends Component {
             <Input />
           )}
         </Form.Item>
-        <Form.Item label="Description" help="Summarize or describe the podcast under 160 characters. This shows up underneath the title when scrolling through content">
+        <Form.Item label="Description" help="Summarize or describe the video under 160 characters. This shows up underneath the title when scrolling through content">
           <Input />
         </Form.Item>
         <Form.Item label="Upload">
@@ -50,7 +50,7 @@ class PodcastForm extends Component {
         <Form.Item>
           <CheckableTags />
         </Form.Item>
-        <Form.Item label="What should be the status of this podcast?">
+        <Form.Item label="What should be the status of this video?">
           <Radio.Group defaultValue="draftState" onChange={this.handlePublishSelect}>
             <Radio value="publishState">Published to App</Radio>
             <Radio value="draftState">Saved as Draft (Unpublished)</Radio>
@@ -58,7 +58,7 @@ class PodcastForm extends Component {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            {this.props.edit ? 'Update Podcast' : 'Create Podcast'}
+            {this.props.edit ? 'Update Video' : 'Create Video'}
           </Button>
         </Form.Item>
       </Form>
@@ -66,4 +66,4 @@ class PodcastForm extends Component {
   }
 }
 
-export default Form.create()(PodcastForm);
+export default Form.create()(VideoForm);
