@@ -20,7 +20,7 @@ Frontend
   Podcasts: [x] List [x] Create [x] Edit [x] View  
   Videos: [x] List [x] Create [x] Edit [x] View  
   Glossary: [x] List [ ] Create [ ] Edit [ ] View  
-  Events: [x] List [ ] Create [ ] Edit [ ] View  
+  Events: [x] List [x] Create [x] Edit [x] View  
   Users: [x] List [ ] Create [ ] Edit [ ] View  
 [ ] User Invite
   [ ] Form Signup

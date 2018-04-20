@@ -41,7 +41,7 @@ class PodcastForm extends Component {
         <Form.Item label="Hosts" help="If empty, defaults to Grey Matters">
           <SelectTags placeholder="Select a host or host names" />
         </Form.Item>
-        <Form.Item label="Host Body" help="Will soon support Markdown. Good for transcripts or for more detailed reading">
+        <Form.Item label="Body" help="Will soon support Markdown. Good for transcripts or for more detailed reading">
           <Input.TextArea />
         </Form.Item>
         <Form.Item label="References">

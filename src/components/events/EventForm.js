@@ -3,15 +3,15 @@ import { Form, Icon, Input, Button, Radio } from 'antd';
 import CheckableTags from '../shared/CheckableTags';
 import Mentions from '../shared/Mentions';
 import SelectTags from '../shared/SelectTags';
-import UploadDragger from '../shared/UploadDragger';
+import DateTimePicker from '../shared/DateTimePicker';
 
-class VideoForm extends Component {
+class EventForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         // this.props.onSubmit(values);
-        console.log('created video!');
+        console.log('created event!');
       }
     });
   }
@@ -32,33 +32,21 @@ class VideoForm extends Component {
             <Input />
           )}
         </Form.Item>
-        <Form.Item label="Description" help="Summarize or describe the video under 160 characters. This shows up underneath the title when scrolling through content">
+        <Form.Item label="Description" help="Summarize or describe the event under 160 characters. This shows up underneath the title when scrolling through content">
           <Input />
         </Form.Item>
-        <Form.Item label="Upload">
-          <UploadDragger />
+        <Form.Item label="Date and Time">
+          <DateTimePicker />
         </Form.Item>
-        <Form.Item label="Hosts" help="If empty, defaults to Grey Matters">
-          <SelectTags placeholder="Select a host or host names" />
-        </Form.Item>
-        <Form.Item label="Body" help="Will soon support Markdown. Good for transcripts or for more detailed reading">
-          <Input.TextArea />
-        </Form.Item>
-        <Form.Item label="References">
+        <Form.Item label="Event Details" help="Will soon support Markdown">
           <Input.TextArea />
         </Form.Item>
         <Form.Item>
           <CheckableTags />
         </Form.Item>
-        <Form.Item label="What should be the status of this video?">
-          <Radio.Group defaultValue="draftState" onChange={this.handlePublishSelect}>
-            <Radio value="publishState">Published to App</Radio>
-            <Radio value="draftState">Saved as Draft (Unpublished)</Radio>
-          </Radio.Group>
-        </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            {this.props.edit ? 'Update Video' : 'Create Video'}
+            {this.props.edit ? 'Update Event' : 'Publish Event'}
           </Button>
         </Form.Item>
       </Form>
@@ -66,4 +54,4 @@ class VideoForm extends Component {
   }
 }
 
-export default Form.create()(VideoForm);
+export default Form.create()(EventForm);
