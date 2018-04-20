@@ -16,7 +16,7 @@ Frontend
 [x] Main Landing Components  
   [x] Form Login
 [ ] Main Dash Components   
-  Articles: [x] List [ ] Create [ ] Edit [ ] View  
+  Articles: [x] List [x] Create [x] Edit [ ] View  
   Podcasts: [x] List [ ] Create [ ] Edit [ ] View  
   Videos: [x] List [ ] Create [ ] Edit [ ] View  
   Glossary: [x] List [ ] Create [ ] Edit [ ] View  
@@ -27,6 +27,7 @@ Frontend
 [ ] Cookies (See Api README)
   [x] Setting/Removing Token in Cookies
   [ ] Login with Token: Call server
+[ ] Populate Edit Forms from Store
 
 Middle
 
