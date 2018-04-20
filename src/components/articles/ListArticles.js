@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col } from 'antd';
 import Stat from '../shared/Stat';
 
@@ -58,14 +59,14 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <a href="/podcasts">View</a>
+      <Link to={'/articles/_id'}>View</Link>
       <Divider type="vertical" />
-      <a href="/articles">Edit</a>
+      <Link to="/articles/_id/edit">Edit</Link>
       <Divider type="vertical" />
-      <a href="/articles">Delete</a>
+      <Link to="/articles">Delete</Link>
       {!record.publishTime 
-        ? <span><Divider type="vertical" /><a href="/articles">Publish</a></span>
-        : <span><Divider type="vertical" /><a href="/articles">Unpublish</a></span>
+        ? <span><Divider type="vertical" /><Link to="/articles">Publish</Link></span>
+        : <span><Divider type="vertical" /><Link to="/articles">Unpublish</Link></span>
       }
     </span>
   ),
@@ -133,11 +134,11 @@ class ListArticles extends Component {
               </span>
             </Col>
             <Col>
-            <Button
-              type="primary"
-            >
-              Create New Article
-            </Button>
+              <Link to={'/articles/new'}>
+                <Button type="primary">
+                  Create New Article
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Divider, Button, Row, Col, Calendar } from 'antd';
+import { Link } from 'react-router-dom';
 import Stat from '../shared/Stat';
 
 const dataSource = [];
@@ -34,11 +35,11 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <a href="/events">View</a>
+      <Link to="/events/_id">View</Link>
       <Divider type="vertical" />
-      <a href="/events">Edit</a>
+      <Link to="/events/_id/edit">Edit</Link>
       <Divider type="vertical" />
-      <a href="/events">Delete</a>
+      <Link to="/events">Delete</Link>
     </span>
   ),
 }, {
@@ -103,11 +104,11 @@ class Events extends Component {
               </span>
             </Col>
             <Col>
-            <Button
-              type="primary"
-            >
-              Create New Event
-            </Button>
+              <Link to={'/events/new'}>
+                <Button type="primary">
+                  Create New Event
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Divider, Button, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
 import Stat from '../shared/Stat';
 
 const dataSource = [];
@@ -54,14 +55,14 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <a href="/videos">View</a>
+      <Link to="/videos/_id">View</Link>
       <Divider type="vertical" />
-      <a href="/videos">Edit</a>
+      <Link to="/videos/_id/edit">Edit</Link>
       <Divider type="vertical" />
-      <a href="/videos">Delete</a>
+      <Link to="/videos">Delete</Link>
       {!record.publishTime 
-        ? <span><Divider type="vertical" /><a href="/podcasts">Publish</a></span>
-        : <span><Divider type="vertical" /><a href="/podcasts">Unpublish</a></span>
+        ? <span><Divider type="vertical" /><Link to="/videos">Publish</Link></span>
+        : <span><Divider type="vertical" /><Link to="/videos">Unpublish</Link></span>
       }
     </span>
   ),
@@ -128,11 +129,11 @@ class ListVideos extends Component {
               </span>
             </Col>
             <Col>
-            <Button
-              type="primary"
-            >
-              Upload New Video
-            </Button>
+              <Link to={'/videos/new'}>
+                <Button type="primary">
+                  Upload New Video
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>

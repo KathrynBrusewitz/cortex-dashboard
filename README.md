@@ -16,7 +16,7 @@ Frontend
 [x] Main Landing Components  
   [x] Form Login
 [ ] Main Dash Components   
-  Articles: [x] List [ ] Create [ ] Edit [ ] View  
+  Articles: [x] List [x] Create [x] Edit [x] View  
   Podcasts: [x] List [ ] Create [ ] Edit [ ] View  
   Videos: [x] List [ ] Create [ ] Edit [ ] View  
   Glossary: [x] List [ ] Create [ ] Edit [ ] View  
@@ -24,6 +24,10 @@ Frontend
   Users: [x] List [ ] Create [ ] Edit [ ] View  
 [ ] User Invite
   [ ] Form Signup
+[ ] Cookies (See Api README)
+  [x] Setting/Removing Token in Cookies
+  [ ] Login with Token: Call server
+[ ] Populate Edit Forms from Store
 
 Middle
 
@@ -33,9 +37,9 @@ Middle
 Backend
 
 See Api README for more detailed todo
-[ ] Connect with Cortex API and MongoDB (Local Env)  
-[ ] Method Stubs to start
-[ ] Schema
+[x] Connect with Cortex API and MongoDB (Local Env)  
+[x] Schema
+[ ] Login with Token: Verify, then send back User
 ```
 
 ## Version control
@@ -61,6 +65,11 @@ Runs the app in development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. You will also see any lint errors in the console.
+
+### Cortex API
+
+Clone the API at https://github.com/KathrynBrusewitz/cortex-api<br>
+Follow the setup and run instructions in the README.
 
 ## Folder structure
 
