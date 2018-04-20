@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Divider, Button, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
 import Stat from '../shared/Stat';
 
 const dataSource = [];
@@ -26,13 +27,7 @@ const columns = [{
   dataIndex: 'actions',
   key: 'actions',
   render: (text, record) => (
-    <span>
-      <a href="/glossary">View</a>
-      <Divider type="vertical" />
-      <a href="/glossary">Edit</a>
-      <Divider type="vertical" />
-      <a href="/glossary">Delete</a>
-    </span>
+    <Link to="/glossary/_id">View</Link>
   ),
 }, {
   title: 'Stats',
@@ -97,11 +92,11 @@ class Glossary extends Component {
               </span>
             </Col>
             <Col>
-            <Button
-              type="primary"
-            >
-              Add New Terms
-            </Button>
+              <Link to="/glossary/edit">
+                <Button type="primary">
+                  Add New Terms
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>
