@@ -23,13 +23,6 @@ const columns = [{
   dataIndex: 'definition',
   key: 'definition',
 }, {
-  title: 'Actions',
-  dataIndex: 'actions',
-  key: 'actions',
-  render: (text, record) => (
-    <Link to="/glossary/_id">View</Link>
-  ),
-}, {
   title: 'Stats',
   dataIndex: 'stats',
   key: 'stats',
@@ -100,7 +93,7 @@ class Glossary extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={dataSource} columns={columns} />
+        <Table rowSelection={rowSelection} dataSource={dataSource} columns={columns} expandedRowRender={record => <p style={{ margin: 0 }}>{record.definition}</p>} />
       </div>
     );
   }

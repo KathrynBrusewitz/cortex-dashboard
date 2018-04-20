@@ -26,7 +26,6 @@ import ViewVideo from '../videos/ViewVideo';
 import ViewPodcast from '../podcasts/ViewPodcast';
 import ViewUser from '../users/ViewUser';
 import ViewEvent from '../events/ViewEvent';
-import ViewTerm from '../glossary/ViewTerm';
 
 import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
@@ -67,7 +66,6 @@ class Dashboard extends Component {
 
               <Route exact path="/glossary" component={ListGlossary} />
               <Route exact path="/glossary/edit" component={EditGlossary} />
-              <Route exact path="/glossary/_id" component={ViewTerm} />
 
               <Route exact path="/events" component={ListEvents} />
               <Route exact path="/events/new" component={CreateEvent} />
