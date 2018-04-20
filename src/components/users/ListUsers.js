@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col } from 'antd';
 
 const dataSource = [];
@@ -45,9 +46,11 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <a href="/users">View</a>
+      <Link to="/users/_id">View</Link>
       <Divider type="vertical" />
-      <a href="/users">Delete</a>
+      <Link to="/users/_id/edit">Edit</Link>
+      <Divider type="vertical" />
+      <Link to="/users">Delete</Link>
     </span>
   ),
 }];
@@ -102,11 +105,9 @@ class ListUsers extends Component {
               </span>
             </Col>
             <Col>
-            <Button
-              type="primary"
-            >
-              Invite New User
-            </Button>
+              <Button type="primary">
+                Invite New User
+              </Button>
             </Col>
           </Row>
         </div>

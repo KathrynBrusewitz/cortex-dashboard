@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table, Divider, Button, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
 import Stat from '../shared/Stat';
 
 const dataSource = [];
@@ -54,14 +55,14 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <a href="/podcasts">View</a>
+      <Link to="/podcasts/_id">View</Link>
       <Divider type="vertical" />
-      <a href="/podcasts">Edit</a>
+      <Link to="/podcasts/_id/edit">Edit</Link>
       <Divider type="vertical" />
-      <a href="/podcasts">Delete</a>
+      <Link to="/podcasts">Delete</Link>
       {!record.publishTime 
-        ? <span><Divider type="vertical" /><a href="/podcasts">Publish</a></span>
-        : <span><Divider type="vertical" /><a href="/podcasts">Unpublish</a></span>
+        ? <span><Divider type="vertical" /><Link to="/podcasts">Publish</Link></span>
+        : <span><Divider type="vertical" /><Link to="/podcasts">Unpublish</Link></span>
       }
     </span>
   ),
@@ -128,11 +129,11 @@ class ListPodcasts extends Component {
               </span>
             </Col>
             <Col>
-            <Button
-              type="primary"
-            >
-              Upload New Podcast
-            </Button>
+              <Link to={'/podcasts/new'}>
+                <Button type="primary">
+                  Upload New Podcast
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>
