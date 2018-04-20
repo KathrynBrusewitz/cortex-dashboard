@@ -30,6 +30,7 @@ function login({ email, password }) {
       data: {
         email,
         password,
+        entry: 'dash',
       }
     })
     .then(res => {
