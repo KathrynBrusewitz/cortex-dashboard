@@ -37,10 +37,9 @@ function login({ email, password }) {
     })
     .then(res => {
       if (res.data.token) {
-        const user = res.data;
-        dispatch(success(user));
-        dispatch(alertActions.success(`Welcome ${user.name}!`));
-        cookies.set('token', user.token, { path: '/' });
+        dispatch(success(res.data));
+        dispatch(alertActions.success(`Welcome ${res.data.name}!`));
+        cookies.set('token', res.data.token, { path: '/' });
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
