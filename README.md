@@ -24,9 +24,9 @@ Frontend
   Users: [x] List [ ] Create [ ] Edit [ ] View  
 [ ] User Invite
   [ ] Form Signup
-[ ] Cookies (See Api README)
+[x] Cookies (See Api README)
   [x] Setting/Removing Token in Cookies
-  [ ] Login with Token: Call server
+  [x] Login with Token: Call server
 [ ] Populate Edit Forms from Store
 
 Middle
@@ -39,8 +39,13 @@ Backend
 See Api README for more detailed todo
 [x] Connect with Cortex API and MongoDB (Local Env)  
 [x] Schema
-[ ] Login with Token: Verify, then send back User
+[x] Login with Token: Verify, then send back User
+
 ```
+
+### Notes to Self
+
+Consider [Authenticated Components](https://stackoverflow.com/questions/34624257/react-router-redux-how-can-i-update-state-on-load-of-page-for-authentication) or fallback on Authenticated Routes.
 
 ## Version control
 
