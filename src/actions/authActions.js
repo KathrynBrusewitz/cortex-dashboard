@@ -4,12 +4,16 @@ import Cookies from 'universal-cookie';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
+const token = cookies.get('token'); // TODO: Check what this returns if not found
 
 // Types
 export const authConstants = {
   LOGIN_REQUEST: 'AUTH_LOGIN_REQUEST',
   LOGIN_SUCCESS: 'AUTH_LOGIN_SUCCESS',
   LOGIN_FAILURE: 'AUTH_LOGIN_FAILURE',
+  TOKEN_LOGIN_REQUEST: 'AUTH_TOKEN_LOGIN_REQUEST',
+  TOKEN_LOGIN_SUCCESS: 'AUTH_TOKEN_LOGIN_SUCCESS',
+  TOKEN_LOGIN_FAILURE: 'AUTH_TOKEN_LOGIN_FAILURE',
 
   LOGOUT: 'AUTH_LOGOUT',
 };
@@ -17,6 +21,7 @@ export const authConstants = {
 // Creators
 export const authActions = {
   login,
+  tokenLogin,
   logout,
 };
 
@@ -46,7 +51,7 @@ function login({ email, password }) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
+      dispatch(failure());
       dispatch(alertActions.error(error.message));
     });
   };
@@ -54,6 +59,37 @@ function login({ email, password }) {
   function request() { return { type: authConstants.LOGIN_REQUEST } }
   function success(user) { return { type: authConstants.LOGIN_SUCCESS, user } }
   function failure() { return { type: authConstants.LOGIN_FAILURE } }
+}
+
+function tokenLogin() {
+  return dispatch => {
+    if (!token) {
+      dispatch(failure());
+    } else {
+      dispatch(request());
+      axios({
+        method: 'get',
+        url: '/user',
+        baseURL,
+        headers: {'x-access-token': token},
+      })
+      .then(res => {
+        if (res.data.token) {
+          dispatch(success(res.data));
+          dispatch(alertActions.success(`Welcome ${res.data.name}!`));
+        } else {
+          dispatch(failure());
+        }
+      })
+      .catch(error => {
+        dispatch(failure());
+      });
+    }
+  };
+
+  function request() { return { type: authConstants.TOKEN_LOGIN_REQUEST } }
+  function success(user) { return { type: authConstants.TOKEN_LOGIN_SUCCESS, user } }
+  function failure() { return { type: authConstants.TOKEN_LOGIN_FAILURE } }
 }
 
 function logout() {
