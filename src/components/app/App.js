@@ -11,11 +11,13 @@ import Landing from '../landing/Landing';
 import { authActions } from '../../actions'
 
 class App extends Component {
-  render() {
+  componentDidMount() {
     if (!this.props.user) {
       this.props.tokenLogin();
     }
+  }
 
+  render() {
     return (
       <ConnectedRouter history={history}>
         <div>

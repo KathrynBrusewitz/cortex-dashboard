@@ -79,6 +79,7 @@ function tokenLogin() {
           dispatch(alertActions.success(`Welcome ${res.data.name}!`));
         } else {
           dispatch(failure());
+          dispatch(alertActions.error(res.data.message));
         }
       })
       .catch(error => {
