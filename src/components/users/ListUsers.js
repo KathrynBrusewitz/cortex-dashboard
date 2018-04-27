@@ -1,32 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col } from 'antd';
 
-const dataSource = [];
-for (let i = 0; i < 46; i++) {
-  if (Math.round(Math.random()) < 0.5) {
-    dataSource.push({
-      key: i,
-      name: `Reader ${i}`,
-      email: `user${i}@gmail.com`,
-      role: 'Reader',
-    });
-  } else if (Math.round(Math.random()) < 0.5) {
-    dataSource.push({
-      key: i,
-      name: `Writer ${i}`,
-      email: `writer${i}@gmail.com`,
-      role: 'Writer',
-    });
-  } else {
-    dataSource.push({
-      key: i,
-      name: `Admin ${i}`,
-      email: `admin${i}@uw.edu`,
-      role: 'Admin',
-    });
-  }
-}
+import { usersActions } from '../../actions';
 
 const columns = [{
   title: 'Name',
@@ -46,9 +24,7 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <Link to="/users/_id">View</Link>
-      <Divider type="vertical" />
-      <Link to="/users/_id/edit">Edit</Link>
+      <Link to={`/users/${record._id}`}>View</Link>
       <Divider type="vertical" />
       <Link to="/users">Delete</Link>
     </span>
@@ -56,30 +32,20 @@ const columns = [{
 }];
 
 class ListUsers extends Component {
-  state = {
-    selectedRowKeys: [],
-    // TODO: Remove after API is hooked up
-    loading: false,
-  };
-
-  // TODO: Remove after API is hooked up
-  start = () => {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
-      });
-    }, 1000);
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedRowKeys: [],
+    };
+    props.getUsers();
   }
 
   onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     this.setState({ selectedRowKeys });
   }
 
   render() {
-    const { loading, selectedRowKeys } = this.state;
+    const { selectedRowKeys } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
@@ -92,12 +58,7 @@ class ListUsers extends Component {
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>
-              <Button
-                type="primary"
-                onClick={this.start}
-                disabled={!hasSelected}
-                loading={loading}
-              >
+              <Button type="ghost">
                 Email
               </Button>
               <span style={{ marginLeft: 8 }}>
@@ -111,10 +72,19 @@ class ListUsers extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={dataSource} columns={columns} />
+        <Table rowSelection={rowSelection} dataSource={this.props.users} columns={columns} loading={this.props.isGettingUsers} rowKey={record => record._id} />
       </div>
     );
   }
 }
 
-export default ListUsers;
+const mapStateToProps = state => ({
+  users: state.users.users,
+  isGettingUsers: state.users.isGettingUsers,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getUsers: usersActions.getUsers,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListUsers);

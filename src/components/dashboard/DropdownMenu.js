@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Menu, Dropdown } from 'antd';
+import { Link } from 'react-router-dom';
 
 import { authActions } from '../../actions';
 
@@ -20,7 +21,9 @@ class DropdownMenu extends Component {
         <Menu.Item key="1">Profile Settings</Menu.Item>
         <Menu.Item key="2">Cortex Settings</Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="3" action={() => logout()}>Log Out</Menu.Item>
+        <Menu.Item key="3" action={() => logout()}>
+          <Link to="/">Log Out</Link>
+        </Menu.Item>
       </Menu>
     );
   }

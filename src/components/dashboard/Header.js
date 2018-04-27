@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Icon, Row } from 'antd';
+import { Layout, Icon, Row, Col } from 'antd';
 import DropdownMenu from './DropdownMenu';
 import Avatar from './Avatar';
 
@@ -21,9 +21,12 @@ class Dashboard extends Component {
             type={this.props.menuOpen ? 'menu-fold': 'menu-unfold'}
             onClick={this.toggleMenu}
           />
-          <DropdownMenu>
-            <Avatar />
-          </DropdownMenu>
+          <Col>
+            <span style={{ marginRight: 8 }}>{this.props.user.name}</span>
+            <DropdownMenu>
+              <Avatar name={this.props.user.name} />
+            </DropdownMenu>
+          </Col>
         </Row>
       </Layout.Header>
     ); 
@@ -32,6 +35,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
   menuOpen: state.menu.open,
+  user: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

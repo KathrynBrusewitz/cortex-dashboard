@@ -24,9 +24,9 @@ Frontend
   Users: [x] List [ ] Create [ ] Edit [ ] View  
 [ ] User Invite
   [ ] Form Signup
-[ ] Cookies (See Api README)
+[x] Cookies (See Api README)
   [x] Setting/Removing Token in Cookies
-  [ ] Login with Token: Call server
+  [x] Login with Token: Call server
 [ ] Populate Edit Forms from Store
 
 Middle
@@ -39,18 +39,11 @@ Backend
 See Api README for more detailed todo
 [x] Connect with Cortex API and MongoDB (Local Env)  
 [x] Schema
-[ ] Login with Token: Verify, then send back User
+[x] Login with Token: Verify, then send back User
+
 ```
 
-## Version control
-
-The `master` and `development` branches are the two active branches. Master contains the live production code. Development is the demo-able, next to release code.
-
-Other branches are created per feature. Naming convention is loose, but choose a short, understandable term that describes the feature. Use hyphens, not spaces. For example: `analytics-components`.
-
-When finished with a feature or bug fix, create a Pull Request on the development branch.
-
-## Setup
+## Setup and Run Dashboard
 
 I like `yarn`, but `npm` is fine too. In the project directory, you can run:
 
@@ -66,10 +59,20 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits. You will also see any lint errors in the console.
 
-### Cortex API
+## Setup and Run API
 
-Clone the API at https://github.com/KathrynBrusewitz/cortex-api<br>
-Follow the setup and run instructions in the README.
+### `git clone https://github.com/KathrynBrusewitz/cortex-api.git`
+
+Clone the [Cortex API](https://github.com/KathrynBrusewitz/cortex-api.git).<br>
+Follow the README instructions and run it alongside your Dashboard instance.
+
+## Version control
+
+The `master` and `development` branches are the two active branches. Master contains the live production code. Development is the demo-able, next to release code.
+
+Other branches are created per feature. Naming convention is loose, but choose a short, understandable term that describes the feature. Use hyphens, not spaces. For example: `analytics-components`.
+
+When finished with a feature or bug fix, create a Pull Request on the development branch.
 
 ## Folder structure
 
@@ -93,7 +96,21 @@ App architecture is loosely based off of
 
 Just my opinion, but generally:
 - Name your file the same as the thing you're exporting from that file.
-- Barreling components for tidy imports means an extra file (`index.js`) for every directory. I'd just deal with messy imports for now.
-- Use `.js` not `.jsx`
+- Barreling components for tidy imports means an extra file (`index.js`) for every directory. I'd just deal with messy imports for now. However, it can make sense for some folders. For this project, I do barrel Redux `/actions` and `/reducers`.
+- Use `.js` not `.jsx`.
 
 App design uses components from [Ant Design React UI Library](https://ant.design).
+
+## Developer Notes
+
+<i>To be organized into docs at a later time.</i>
+
+`componentDidMount` is the best place to call actions making an API calls that hydrate the Redux state.
+
+```
+componentDidMount() is invoked immediately after a component is mounted. Initialization that requires DOM nodes should go here. If you need to load data from a remote endpoint, this is a good place to instantiate the network request. Setting state in this method will trigger a re-rendering.
+```
+
+Avoid `componentWillMount`. It will be deprecated in React 17.
+
+Consider [Authenticated Components](https://stackoverflow.com/questions/34624257/react-router-redux-how-can-i-update-state-on-load-of-page-for-authentication) or fallback on Authenticated Routes.
