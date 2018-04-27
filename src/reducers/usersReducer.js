@@ -25,6 +25,22 @@ export const usersReducer = (state = USERS_INITIAL, action) => {
         ...state,
         isGettingUsers: false,
       };
+    case usersConstants.GET_USER_REQUEST:
+      return {
+        ...state,
+        isGettingUser: true,
+      };
+    case usersConstants.GET_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.users,
+        isGettingUser: false,
+      };
+    case usersConstants.GET_USER_FAILURE:
+      return {
+        ...state,
+        isGettingUser: false,
+      };
     default:
       return state;
   }

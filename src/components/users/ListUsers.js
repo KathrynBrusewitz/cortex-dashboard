@@ -24,9 +24,9 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <Link to="/users/_id">View</Link>
+      <Link to={`/users/${record._id}`}>View</Link>
       <Divider type="vertical" />
-      <Link to="/users/_id/edit">Edit</Link>
+      <Link to={`/users/${record._id}/edit`}>Edit</Link>
       <Divider type="vertical" />
       <Link to="/users">Delete</Link>
     </span>
@@ -86,7 +86,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  ...usersActions,
+  getUsers: usersActions.getUsers,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListUsers);
