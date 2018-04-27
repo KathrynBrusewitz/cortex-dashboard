@@ -53,7 +53,6 @@ function getUsers() {
 }
 
 function getUser(id) {
-  console.log(id);
   return dispatch => {
     dispatch(request());
 

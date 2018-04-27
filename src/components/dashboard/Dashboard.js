@@ -10,7 +10,6 @@ import CreateEvent from '../events/CreateEvent';
 import EditArticle from '../articles/EditArticle';
 import EditVideo from '../videos/EditVideo';
 import EditPodcast from '../podcasts/EditPodcast';
-import EditUser from '../users/EditUser';
 import EditGlossary from '../glossary/EditGlossary';
 import EditEvent from '../events/EditEvent';
 
@@ -31,8 +30,6 @@ import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
 import Header from './Header';
 import Sider from './Sider';
-
-// TODO: Pass _id to component
 
 class Dashboard extends Component {
   render() {
@@ -62,7 +59,6 @@ class Dashboard extends Component {
 
               <Route exact path="/users" component={ListUsers} />
               <Route exact path="/users/:id" component={ViewUser} />
-              <Route exact path="/users/:id/edit" component={EditUser} />
 
               <Route exact path="/glossary" component={ListGlossary} />
               <Route exact path="/glossary/edit" component={EditGlossary} />

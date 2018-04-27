@@ -26,8 +26,6 @@ const columns = [{
     <span>
       <Link to={`/users/${record._id}`}>View</Link>
       <Divider type="vertical" />
-      <Link to={`/users/${record._id}/edit`}>Edit</Link>
-      <Divider type="vertical" />
       <Link to="/users">Delete</Link>
     </span>
   ),

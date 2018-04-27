@@ -33,7 +33,7 @@ export const usersReducer = (state = USERS_INITIAL, action) => {
     case usersConstants.GET_USER_SUCCESS:
       return {
         ...state,
-        user: action.users,
+        user: action.user,
         isGettingUser: false,
       };
     case usersConstants.GET_USER_FAILURE:

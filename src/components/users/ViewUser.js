@@ -5,6 +5,7 @@ import { Row, Col } from 'antd';
 import Loading from '../shared/Loading';
 
 import { usersActions } from '../../actions';
+import Avatar from '../dashboard/Avatar';
 
 class ViewUser extends Component {
   componentDidMount() {
@@ -12,7 +13,6 @@ class ViewUser extends Component {
   }
 
   render() {
-    // console.log(this.props.);
     if (this.props.isGettingUser) {
       return (
         <Loading text="Loading User..." />
@@ -27,12 +27,15 @@ class ViewUser extends Component {
     }
     return (
       <div>
-        <h1>{this.props.user.name}</h1>
+        <Row>
+          <h1><Avatar name={this.props.user.name} /> {this.props.user.name}</h1>
+        </Row>
         <div style={{ marginBottom: 16 }}>
-          <Row type="flex" justify="space-between">
-            <Col>
-              Information about the user goes here.
-            </Col>
+          <Row>
+            Email: {this.props.user.email}
+          </Row>
+          <Row> 
+            Role: {this.props.user.role}
           </Row>
         </div>
       </div>
