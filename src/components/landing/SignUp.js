@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button } from 'antd';
+import { Layout, Row, Col, Icon } from 'antd';
+import SignUpForm from './SignUpForm';
 
-import { alertActions } from '../../actions';
+import { authActions } from '../../actions';
 
 class SignUp extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const { signup, isSigningUp } = this.props;
+
     return (
-      <div>
-        <h1>SignUp</h1>
-        <Button onClick={() => this.props.success('success!')}>Show Alert</Button>
-      </div>
+      <Row className="gradient-bg" type="flex" justify="center" align="middle" style={{ height: '100vh' }}>
+        <Col type="flex" align="middle">
+          <Row >
+            <h1 style={{ color: "#fff"}}>Sign Up</h1>
+          </Row>
+          <Row className="login-form-wrap">
+            <i>Note: This page is for development purposes only.</i>
+            <SignUpForm onSubmit={signup} loading={isSigningUp} />
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  alert: state.alert,
+  signup: state.auth.isSigningUp,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  ...alertActions,
+  ...authActions,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

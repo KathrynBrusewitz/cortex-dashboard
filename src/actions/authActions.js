@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
@@ -43,6 +44,7 @@ function login({ email, password }) {
     .then(res => {
       if (res.data.token) {
         dispatch(success(res.data));
+        dispatch(push('/'));
         dispatch(alertActions.success(`Welcome ${res.data.name}!`));
         cookies.set('token', res.data.token, { path: '/' });
       } else {

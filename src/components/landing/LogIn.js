@@ -1,41 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button } from 'antd';
+import { Layout, Row, Col, Icon } from 'antd';
+import LoginForm from './LoginForm';
 
-import { alertActions } from '../../actions';
+import { authActions } from '../../actions';
 
 class LogIn extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    const { login, isLoggingIn } = this.props;
+
     return (
-      <div>
-        <h1>LogIn</h1>
-        <Button onClick={() => this.props.success('success!')}>Show Alert</Button>
-        {/* <Row className="gradient-bg" type="flex" justify="center" align="middle">
-            <Col type="flex" align="middle">
-              <Row>
-                <Icon type="api" className="login-logo" />
-              </Row>
-              <Row className="login-form-wrap">
-                <LoginForm onSubmit={login} loading={isLoggingIn} />
-              </Row>
-            </Col>
-          </Row> */}
-      </div>
+      <Row className="gradient-bg" type="flex" justify="center" align="middle" style={{ height: '100vh' }}>
+        <Col type="flex" align="middle">
+          <Row >
+            <h1 style={{ color: "#fff"}}>Log In</h1>
+          </Row>
+          <Row className="login-form-wrap">
+            <LoginForm onSubmit={login} loading={isLoggingIn} />
+          </Row>
+        </Col>
+      </Row>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  alert: state.alert,
+  isLoggingIn: state.auth.isLoggingIn,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  ...alertActions,
+  ...authActions,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
