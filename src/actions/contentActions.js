@@ -9,35 +9,69 @@ const token = cookies.get('token');
 
 // Types
 export const contentConstants = {
+  GET_CONTENTS_REQUEST: 'GET_CONTENTS_REQUEST',
+  GET_CONTENTS_SUCCESS: 'GET_CONTENTS_SUCCESS',
+  GET_CONTENTS_FAILURE: 'GET_CONTENTS_FAILURE',
+
   GET_CONTENT_REQUEST: 'GET_CONTENT_REQUEST',
   GET_CONTENT_SUCCESS: 'GET_CONTENT_SUCCESS',
   GET_CONTENT_FAILURE: 'GET_CONTENT_FAILURE',
 
-  CREATE_ARTICLE_REQUEST: 'CREATE_ARTICLE_REQUEST',
-  CREATE_ARTICLE_SUCCESS: 'CREATE_ARTICLE_SUCCESS',
-  CREATE_ARTICLE_FAILURE: 'CREATE_ARTICLE_FAILURE',
+  CREATE_CONTENT_REQUEST: 'CREATE_CONTENT_REQUEST',
+  CREATE_CONTENT_SUCCESS: 'CREATE_CONTENT_SUCCESS',
+  CREATE_CONTENT_FAILURE: 'CREATE_CONTENT_FAILURE',
 };
 
 // Creators
 export const contentActions = {
   getContent,
-  createArticle,
+  getContents,
+  createContent,
 };
 
 // Implementations
-function getContent() {
+function getContents() {
   return dispatch => {
     dispatch(request());
 
     axios({
       method: 'get',
-      url: '/content',
+      url: '/contents',
       baseURL,
       headers: {'x-access-token': token},
     })
     .then(res => {
       if (res.data.success) {
-        dispatch(success(res.data.content));
+        dispatch(success(res.data.payload));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure(error));
+      dispatch(alertActions.error('Unable to Get Contents'));
+    });
+  };
+
+  function request() { return { type: contentConstants.GET_CONTENTS_REQUEST } }
+  function success(payload) { return { type: contentConstants.GET_CONTENTS_SUCCESS, payload } }
+  function failure() { return { type: contentConstants.GET_CONTENTS_FAILURE } }
+}
+
+function getContent(id) {
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'get',
+      url: `/contents/${id}`,
+      baseURL,
+      headers: {'x-access-token': token},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success(res.data.payload));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -50,30 +84,35 @@ function getContent() {
   };
 
   function request() { return { type: contentConstants.GET_CONTENT_REQUEST } }
-  function success(content) { return { type: contentConstants.GET_CONTENT_SUCCESS, content } }
+  function success(payload) { return { type: contentConstants.GET_CONTENT_SUCCESS, payload } }
   function failure() { return { type: contentConstants.GET_CONTENT_FAILURE } }
 }
 
-function createArticle(fields) {
-  console.log(fields);
+function createContent(fields) {
+  if (!fields.title || !fields.state || !fields.type) {
+    console.log('Error: Missing title, state, or type.');
+    return dispatch => {
+      dispatch(alertActions.error('Missing title, state, or type.'));
+    };
+  }
+
   return dispatch => {
     dispatch(request());
 
     axios({
       method: 'post',
-      url: '/content',
+      url: '/contents',
       baseURL,
       data: {
         ...fields,
-        type: "article",
       },
       headers: {'x-access-token': token},
     })
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(push('/articles'));
-        dispatch(alertActions.success('Article Successfully Created'));
+        dispatch(push(`/${fields.type}s`));
+        dispatch(alertActions.success('Successfully created!'));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -81,11 +120,11 @@ function createArticle(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Create Article'));
+      dispatch(alertActions.error('Unable to create content'));
     });
   };
 
-  function request() { return { type: contentConstants.CREATE_ARTICLE_REQUEST } }
-  function success() { return { type: contentConstants.CREATE_ARTICLE_SUCCESS } }
-  function failure() { return { type: contentConstants.CREATE_ARTICLE_FAILURE } }
+  function request() { return { type: contentConstants.CREATE_CONTENT_REQUEST } }
+  function success() { return { type: contentConstants.CREATE_CONTENT_SUCCESS } }
+  function failure() { return { type: contentConstants.CREATE_CONTENT_FAILURE } }
 }

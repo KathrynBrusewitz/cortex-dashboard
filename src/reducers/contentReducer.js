@@ -2,8 +2,10 @@ import { contentConstants } from '../actions';
 
 const CONTENT_INITIAL = {
   content: null,
+  contents: null,
   isGettingContent: false,
-  isCreatingArticle: false,
+  isGettingContents: false,
+  isCreatingContent: false,
 };
 
 export const contentReducer = (state = CONTENT_INITIAL, action) => {
@@ -16,7 +18,7 @@ export const contentReducer = (state = CONTENT_INITIAL, action) => {
     case contentConstants.GET_CONTENT_SUCCESS:
       return {
         ...state,
-        content: action.content,
+        content: action.payload,
         isGettingContent: false,
       };
     case contentConstants.GET_CONTENT_FAILURE:
@@ -25,21 +27,41 @@ export const contentReducer = (state = CONTENT_INITIAL, action) => {
         content: null,
         isGettingContent: false,
       };
-    case contentConstants.CREATE_ARTICLE_REQUEST:
+
+    case contentConstants.GET_CONTENTS_REQUEST:
       return {
         ...state,
-        isCreatingArticle: true,
+        isGettingContents: true,
       };
-    case contentConstants.CREATE_ARTICLE_SUCCESS:
+    case contentConstants.GET_CONTENTS_SUCCESS:
       return {
         ...state,
-        isCreatingArticle: false,
+        contents: action.payload,
+        isGettingContents: false,
       };
-    case contentConstants.CREATE_ARTICLE_FAILURE:
+    case contentConstants.GET_CONTENTS_FAILURE:
       return {
         ...state,
-        isCreatingArticle: false,
+        contents: null,
+        isGettingContents: false,
       };
+
+    case contentConstants.CREATE_CONTENT_REQUEST:
+      return {
+        ...state,
+        isCreatingContent: true,
+      };
+    case contentConstants.CREATE_CONTENT_SUCCESS:
+      return {
+        ...state,
+        isCreatingContent: false,
+      };
+    case contentConstants.CREATE_CONTENT_FAILURE:
+      return {
+        ...state,
+        isCreatingContent: false,
+      };
+      
     default:
       return state;
   }

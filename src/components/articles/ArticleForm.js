@@ -7,9 +7,9 @@ import SelectTags from '../shared/SelectTags';
 class ArticleForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields((err, options) => {
       if (!err) {
-        this.props.onSubmit(values);
+        this.props.onSubmit({...options, type: "article" });
       }
     });
   }
@@ -28,12 +28,12 @@ class ArticleForm extends Component {
         </Form.Item>
         <Form.Item label="Description" help="Summarize or describe the article under 160 characters. This shows up underneath the title when scrolling through content">
           {getFieldDecorator('description')(
-            <Input />
+            <Input.TextArea />
           )}
         </Form.Item>
         <Form.Item label="Writers" help="If empty, defaults to Grey Matters">
           {getFieldDecorator('creators')(
-            <SelectTags placeholder="Select a writer or write names" />
+            <SelectTags placeholder="Select one or more writers or write names" />
           )}
         </Form.Item>
         <Form.Item label="Article Body" help="Will soon support Markdown">
@@ -41,16 +41,6 @@ class ArticleForm extends Component {
             rules: [{ required: true }],
           })(
             <Input.TextArea />
-          )}
-        </Form.Item>
-        <Form.Item label="References">
-          {getFieldDecorator('references')(
-            <Input.TextArea />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('categories')(
-            <CheckableTags />
           )}
         </Form.Item>
         <Form.Item label="What should be the status of this article?">

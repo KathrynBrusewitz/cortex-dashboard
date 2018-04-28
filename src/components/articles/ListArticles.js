@@ -56,7 +56,7 @@ class ListArticles extends Component {
   }
 
   componentDidMount() {
-    this.props.getContent();
+    this.props.getContents();
   }
 
   onSelectChange = (selectedRowKeys) => {
@@ -71,7 +71,7 @@ class ListArticles extends Component {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
-    if (this.props.isGettingContent) {
+    if (this.props.isGettingContents) {
       return (
         <Loading />
       );
@@ -102,19 +102,19 @@ class ListArticles extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.content} columns={columns} loading={this.props.isGettingContent} rowKey={record => record._id} />
+        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={columns} loading={this.props.isGettingContents} rowKey={record => record._id} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  content: state.content.content,
-  isGettingContent: state.content.isGettingContent,
+  contents: state.content.contents,
+  isGettingContents: state.content.isGettingContents,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getContent: contentActions.getContent,
+  getContents: contentActions.getContents,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListArticles);

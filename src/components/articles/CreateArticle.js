@@ -8,23 +8,23 @@ import { contentActions } from '../../actions';
 
 class CreateArticle extends Component {
   render() {
-    const { createArticle, isCreatingArticle } = this.props;
+    const { createContent, isCreatingContent } = this.props;
 
     return (
       <div>
         <h1>Create New Article</h1>
-        <ArticleForm initialValues={{}} onSubmit={createArticle} loading={isCreatingArticle} />
+        <ArticleForm initialValues={{}} onSubmit={createContent} loading={isCreatingContent} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isCreatingArticle: state.content.isCreatingArticle,
+  isCreatingContent: state.content.isCreatingContent,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  createArticle: contentActions.createArticle,
+  createContent: contentActions.createContent,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(CreateArticle);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateArticle);
