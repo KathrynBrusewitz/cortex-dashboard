@@ -43,16 +43,11 @@ class ViewArticle extends Component {
           <Stat stat={46} icon="book" tooltip="46 bookmarks" />
         </Row>
         <h1>{content.title}</h1>
-        <p>Last Updated: {content.updateTime}</p>
-        <p>Published: {content.publishTime && content.publishTime}</p>
-        {content.body && content.body}
+        <p>{content.body && content.body}</p>
         <h2>Description</h2>
-        {content.description && content.description}
-
-        <div>
-          <div style={{ marginRight: 8, display: 'inline-block' }}>Categories:</div>
-          <Tag>Physiology</Tag><Tag>Anatomy</Tag><Tag>Behavioral</Tag>
-        </div>
+        <p>{content.description && content.description}</p>
+        <h3>Last Updated: {content.updateTime}</h3>
+        <h3>Published: {content.publishTime && content.publishTime}</h3>
       </div>
     );
   }

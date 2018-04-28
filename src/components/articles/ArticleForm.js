@@ -3,6 +3,7 @@ import { Form, Icon, Input, Button, Radio } from 'antd';
 import CheckableTags from '../shared/CheckableTags';
 import Mentions from '../shared/Mentions';
 import SelectTags from '../shared/SelectTags';
+import SelectUserTags from '../shared/SelectUserTags';
 
 class ArticleForm extends Component {
   handleSubmit = (e) => {
@@ -31,9 +32,9 @@ class ArticleForm extends Component {
             <Input.TextArea />
           )}
         </Form.Item>
-        <Form.Item label="Writers" help="If empty, defaults to Grey Matters">
+        <Form.Item label="Writers">
           {getFieldDecorator('creators')(
-            <SelectTags placeholder="Select one or more writers or write names" />
+            <SelectUserTags placeholder="Select one or more writers or write names" users={this.props.creatorOptions} />
           )}
         </Form.Item>
         <Form.Item label="Article Body" help="Will soon support Markdown">

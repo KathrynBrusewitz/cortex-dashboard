@@ -1,6 +1,7 @@
 import { alertActions } from './';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import queryString from 'query-string';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
@@ -23,19 +24,26 @@ export const usersActions = {
 };
 
 // Implementations
-function getUsers() {
+function getUsers(filters = {}) {
+  const query = queryString.stringify(filters);
+  console.log(query);
+  // query became { role: { $in: ['admin', 'writer'] }}
+
   return dispatch => {
     dispatch(request());
 
     axios({
       method: 'get',
-      url: '/users',
+      // url: '/users?role[]=admin&role[]=writer', // works
+      // req.query becomes { role: [ 'admin', 'writer' ] }
+      // { role: { $in: ['admin', 'writer'] }}
+      url: `/users?${query}`,
       baseURL,
       headers: {'x-access-token': token},
     })
     .then(res => {
-      if (res.data) {
-        dispatch(success(res.data));
+      if (res.data.success) {
+        dispatch(success(res.data.payload));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -63,8 +71,8 @@ function getUser(id) {
       headers: {'x-access-token': token},
     })
     .then(res => {
-      if (res.data) {
-        dispatch(success(res.data));
+      if (res.data.success) {
+        dispatch(success(res.data.payload));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
