@@ -106,3 +106,11 @@ componentDidMount() is invoked immediately after a component is mounted. Initial
 Avoid `componentWillMount`. It will be deprecated in React 17.
 
 Consider [Authenticated Components](https://stackoverflow.com/questions/34624257/react-router-redux-how-can-i-update-state-on-load-of-page-for-authentication) or fallback on Authenticated Routes.
+
+## Useful git Commands
+
+### `git branch -a`
+shows all local and remote branches that (local) git knows about.
+
+### `git remote update origin --prune`
+refreshes the local list of remote branches.
