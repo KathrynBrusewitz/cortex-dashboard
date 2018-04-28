@@ -9,14 +9,9 @@ class ArticleForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        // this.props.onSubmit(values);
-        console.log('created article!');
+        this.props.onSubmit(values);
       }
     });
-  }
-
-  handlePublishSelect = (e) => {
-    console.log('publish value selected: ', e.target.value);
   }
 
   render() {
@@ -32,10 +27,14 @@ class ArticleForm extends Component {
           )}
         </Form.Item>
         <Form.Item label="Description" help="Summarize or describe the article under 160 characters. This shows up underneath the title when scrolling through content">
-          <Input />
+          {getFieldDecorator('description')(
+            <Input />
+          )}
         </Form.Item>
         <Form.Item label="Writers" help="If empty, defaults to Grey Matters">
-          <SelectTags placeholder="Select a writer or write names" />
+          {getFieldDecorator('creators')(
+            <SelectTags placeholder="Select a writer or write names" />
+          )}
         </Form.Item>
         <Form.Item label="Article Body" help="Will soon support Markdown">
           {getFieldDecorator('body', {
@@ -45,19 +44,27 @@ class ArticleForm extends Component {
           )}
         </Form.Item>
         <Form.Item label="References">
-          <Input.TextArea />
+          {getFieldDecorator('references')(
+            <Input.TextArea />
+          )}
         </Form.Item>
         <Form.Item>
-          <CheckableTags />
+          {getFieldDecorator('categories')(
+            <CheckableTags />
+          )}
         </Form.Item>
         <Form.Item label="What should be the status of this article?">
-          <Radio.Group defaultValue="draftState" onChange={this.handlePublishSelect}>
-            <Radio value="publishState">Published to App</Radio>
-            <Radio value="draftState">Saved as Draft (Unpublished)</Radio>
-          </Radio.Group>
+          {getFieldDecorator('state', {
+            rules: [{ required: true }],
+          })(
+            <Radio.Group>
+              <Radio value="published">Published to App</Radio>
+              <Radio value="unpublished">Saved as Draft (Unpublished)</Radio>
+            </Radio.Group>
+          )}
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={loading}>
             {this.props.edit ? 'Update Article' : 'Create Article'}
           </Button>
         </Form.Item>

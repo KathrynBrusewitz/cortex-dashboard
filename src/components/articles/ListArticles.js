@@ -4,34 +4,9 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col } from 'antd';
 import Stat from '../shared/Stat';
+import Loading from '../shared/Loading';
 
-import { alertActions } from '../../actions';
-
-const dataSource = [];
-for (let i = 0; i < 46; i++) {
-  if (Math.round(Math.random()) < 0.5) {
-    dataSource.push({
-      key: i,
-      title: `Article Title ${i}`,
-      writers: 'Corey, Troy, Kathryn',
-      status: 'Published',
-      editTime: 'April 5, 2018 8:31 AM',
-      publishTime: 'April 5, 2018 9:23 AM',
-      views: Math.round(Math.random() * 100),
-      bookmarks: Math.round(Math.random() * 100),
-    });
-  } else {
-    dataSource.push({
-      key: i,
-      title: `Article Title ${i}`,
-      writers: 'Corey, Troy, Kathryn',
-      status: 'Not Published',
-      editTime: 'April 5, 2018 8:31 AM',
-      views: 0,
-      bookmarks: 0,
-    });
-  }
-}
+import { contentActions } from '../../actions';
 
 const columns = [{
   title: 'Title',
@@ -39,16 +14,16 @@ const columns = [{
   key: 'title',
 }, {
   title: 'Writers',
-  dataIndex: 'writers',
-  key: 'writers',
+  dataIndex: 'creators',
+  key: 'creators',
 }, {
   title: 'Status',
-  dataIndex: 'status',
-  key: 'status',
+  dataIndex: 'state',
+  key: 'state',
 }, {
-  title: 'Edit Time',
-  dataIndex: 'editTime',
-  key: 'editTime',
+  title: 'Update Time',
+  dataIndex: 'updateTime',
+  key: 'updateTime',
 }, {
   title: 'Publish Time',
   dataIndex: 'publishTime',
@@ -59,9 +34,9 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <Link to={'/articles/_id'}>View</Link>
+      <Link to={`/articles/${record._id}`}>View</Link>
       <Divider type="vertical" />
-      <Link to="/articles/_id/edit">Edit</Link>
+      <Link to={`/articles/${record._id}/edit`}>Edit</Link>
       <Divider type="vertical" />
       <Link to="/articles">Delete</Link>
       {!record.publishTime 
@@ -70,50 +45,37 @@ const columns = [{
       }
     </span>
   ),
-}, {
-  title: 'Stats',
-  dataIndex: 'stats',
-  key: 'stats',
-  render: (text, record) => (
-    <span>
-      <Stat stat={record.views} icon="eye-o" tooltip={`${record.views} views`} />
-      <Divider type="vertical" />
-      <Stat stat={record.bookmarks} icon="book" tooltip={`${record.bookmarks} bookmarks`}/>
-    </span>
-  ),
 }];
 
 class ListArticles extends Component {
-  state = {
-    selectedRowKeys: [],
-    // TODO: Remove after API is hooked up
-    loading: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedRowKeys: [],
+    };
+  }
 
-  // TODO: Remove after API is hooked up
-  start = () => {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.props.success(`Successfully published ${this.state.selectedRowKeys.length} articles!`);
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
-      });
-    }, 1000);
+  componentDidMount() {
+    this.props.getContent();
   }
 
   onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     this.setState({ selectedRowKeys });
   }
 
   render() {
-    const { loading, selectedRowKeys } = this.state;
+    const { selectedRowKeys } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
     };
     const hasSelected = selectedRowKeys.length > 0;
+
+    if (this.props.isGettingContent) {
+      return (
+        <Loading />
+      );
+    }
 
     return (
       <div>
@@ -123,9 +85,7 @@ class ListArticles extends Component {
             <Col>
               <Button
                 type="primary"
-                onClick={this.start}
                 disabled={!hasSelected}
-                loading={loading}
               >
                 Publish
               </Button>
@@ -142,14 +102,19 @@ class ListArticles extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={dataSource} columns={columns} />
+        <Table rowSelection={rowSelection} dataSource={this.props.content} columns={columns} loading={this.props.isGettingContent} rowKey={record => record._id} />
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  content: state.content.content,
+  isGettingContent: state.content.isGettingContent,
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
-  ...alertActions,
+  getContent: contentActions.getContent,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(ListArticles);
+export default connect(mapStateToProps, mapDispatchToProps)(ListArticles);
