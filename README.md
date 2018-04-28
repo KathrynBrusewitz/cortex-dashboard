@@ -66,14 +66,6 @@ The page will reload if you make edits. You will also see any lint errors in the
 Clone the [Cortex API](https://github.com/KathrynBrusewitz/cortex-api.git).<br>
 Follow the README instructions and run it alongside your Dashboard instance.
 
-## Version control
-
-The `master` and `development` branches are the two active branches. Master contains the live production code. Development is the demo-able, next to release code.
-
-Other branches are created per feature. Naming convention is loose, but choose a short, understandable term that describes the feature. Use hyphens, not spaces. For example: `analytics-components`.
-
-When finished with a feature or bug fix, create a Pull Request on the development branch.
-
 ## Folder structure
 
 For the project to build, **these files must exist with exact filenames**:
