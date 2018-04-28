@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col } from 'antd';
+import Loading from '../shared/Loading';
 
 import { usersActions } from '../../actions';
 
@@ -37,7 +38,10 @@ class ListUsers extends Component {
     this.state = {
       selectedRowKeys: [],
     };
-    props.getUsers();
+  }
+
+  componentDidMount() {
+    this.props.getUsers();
   }
 
   onSelectChange = (selectedRowKeys) => {
@@ -51,6 +55,12 @@ class ListUsers extends Component {
       onChange: this.onSelectChange,
     };
     const hasSelected = selectedRowKeys.length > 0;
+
+    if (this.props.isGettingUsers) {
+      return (
+        <Loading />
+      );
+    }
 
     return (
       <div>

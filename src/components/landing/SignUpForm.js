@@ -38,9 +38,9 @@ class SignUpForm extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label="Role"
+          label="Choose a Role"
         >
-          {getFieldDecorator('radio-group', {
+          {getFieldDecorator('role', {
             rules: [{ required: true }],
           })(
             <Radio.Group>
@@ -52,7 +52,7 @@ class SignUpForm extends Component {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-            Log In
+            Create Account
           </Button>
         </Form.Item>
       </Form>

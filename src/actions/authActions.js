@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
-const token = cookies.get('token'); // TODO: Check what this returns if not found
+const token = cookies.get('token');
 
 // Types
 export const authConstants = {
@@ -15,7 +15,9 @@ export const authConstants = {
   TOKEN_LOGIN_REQUEST: 'AUTH_TOKEN_LOGIN_REQUEST',
   TOKEN_LOGIN_SUCCESS: 'AUTH_TOKEN_LOGIN_SUCCESS',
   TOKEN_LOGIN_FAILURE: 'AUTH_TOKEN_LOGIN_FAILURE',
-
+  SIGNUP_REQUEST: 'AUTH_SIGNUP_REQUEST',
+  SIGNUP_SUCCESS: 'AUTH_SIGNUP_SUCCESS',
+  SIGNUP_FAILURE: 'AUTH_SIGNUP_FAILURE',
   LOGOUT: 'AUTH_LOGOUT',
 };
 
@@ -24,6 +26,7 @@ export const authActions = {
   login,
   tokenLogin,
   logout,
+  signup,
 };
 
 // Implementations
@@ -42,7 +45,7 @@ function login({ email, password }) {
       }
     })
     .then(res => {
-      if (res.data.token) {
+      if (res.data.success) {
         dispatch(success(res.data));
         dispatch(push('/'));
         dispatch(alertActions.success(`Welcome ${res.data.name}!`));
@@ -54,7 +57,7 @@ function login({ email, password }) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error(error.message));
+      dispatch(alertActions.error('Unable to Complete Request'));
     });
   };
 
@@ -76,7 +79,7 @@ function tokenLogin() {
         headers: {'x-access-token': token},
       })
       .then(res => {
-        if (res.data.token) {
+        if (res.data.success) {
           dispatch(success(res.data));
           dispatch(alertActions.success(`Welcome ${res.data.name}!`));
         } else {
@@ -103,4 +106,40 @@ function logout() {
   };
 
   function success() { return { type: authConstants.LOGOUT } }
+}
+
+function signup({ name, email, password, role }) {
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'post',
+      url: '/createUser',
+      baseURL,
+      data: {
+        name,
+        email,
+        password,
+        role,
+      }
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success(res.data));
+        dispatch(push('/login'));
+        dispatch(alertActions.success('Account successfully created! Try logging in now.'));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure());
+      dispatch(alertActions.error('Unable to Complete Request'));
+    });
+  };
+
+  function request() { return { type: authConstants.SIGNUP_REQUEST } }
+  function success() { return { type: authConstants.SIGNUP_SUCCESS } }
+  function failure() { return { type: authConstants.SIGNUP_FAILURE } }
 }

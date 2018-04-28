@@ -17,7 +17,6 @@ class SignUp extends Component {
             <h1 style={{ color: "#fff"}}>Sign Up</h1>
           </Row>
           <Row className="login-form-wrap">
-            <i>Note: This page is for development purposes only.</i>
             <SignUpForm onSubmit={signup} loading={isSigningUp} />
           </Row>
         </Col>
@@ -27,11 +26,11 @@ class SignUp extends Component {
 }
 
 const mapStateToProps = state => ({
-  signup: state.auth.isSigningUp,
+  isSigningUp: state.auth.isSigningUp,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  ...authActions,
+  signup: authActions.signup,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
