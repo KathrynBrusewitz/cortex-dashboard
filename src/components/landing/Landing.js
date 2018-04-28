@@ -1,41 +1,29 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { Switch, Route } from 'react-router-dom';
 import { Layout, Row, Col, Icon } from 'antd';
-import LoginForm from './LoginForm';
+import Header from './Header';
 
-import { authActions } from '../../actions';
+import Marketing from './Marketing';
+import LogIn from './LogIn';
+import SignUp from './SignUp';
+import DeadEnd from '../shared/DeadEnd';
 
 class Landing extends Component {
   render() {
-    const { login, isLoggingIn } = this.props;
-
     return (
       <Layout>
+        <Header />
         <Layout.Content>
-          <Row className="gradient-bg" type="flex" justify="center" align="middle">
-          <Col type="flex" align="middle">
-            <Row>
-              <Icon type="api" className="login-logo" />
-            </Row>
-            <Row className="login-form-wrap">
-              <LoginForm onSubmit={login} loading={isLoggingIn} />
-            </Row>
-          </Col>
-          </Row>
+          <Switch>
+            <Route exact path="/" component={Marketing} />
+            <Route exact path="/login" component={LogIn} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route component={DeadEnd}/>
+          </Switch>
         </Layout.Content>
       </Layout>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  isLoggingIn: state.auth.isLoggingIn,
-});
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  ...authActions,
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+export default Landing;
