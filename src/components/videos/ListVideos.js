@@ -1,33 +1,12 @@
 import React, { Component } from 'react';
-import { Table, Divider, Button, Row, Col } from 'antd';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import { Table, Divider, Button, Row, Col } from 'antd';
 import Stat from '../shared/Stat';
+import Loading from '../shared/Loading';
 
-const dataSource = [];
-for (let i = 0; i < 46; i++) {
-  if (Math.round(Math.random()) < 0.5) {
-    dataSource.push({
-      key: i,
-      title: `Video Title ${i}`,
-      creators: 'Corey, Troy, Kathryn',
-      status: 'Published',
-      publishTime: 'April 5, 2018 9:23 AM',
-      duration: '0h : 45m : 02s',
-      plays: Math.round(Math.random() * 100),
-      bookmarks: Math.round(Math.random() * 100),
-    });
-  } else {
-    dataSource.push({
-      key: i,
-      title: `Video Title ${i}`,
-      creators: 'Corey, Troy, Kathryn',
-      status: 'Not Published',
-      duration: '1h : 36m : 30s',
-      plays: 0,
-      bookmarks: 0,
-    });
-  }
-}
+import { contentActions } from '../../actions';
 
 const columns = [{
   title: 'Title',
@@ -39,8 +18,8 @@ const columns = [{
   key: 'creators',
 }, {
   title: 'Status',
-  dataIndex: 'status',
-  key: 'status',
+  dataIndex: 'state',
+  key: 'state',
 }, {
   title: 'Publish Time',
   dataIndex: 'publishTime',
@@ -55,9 +34,9 @@ const columns = [{
   key: 'actions',
   render: (text, record) => (
     <span>
-      <Link to="/videos/_id">View</Link>
+      <Link to={`/videos/${record._id}`}>View</Link>
       <Divider type="vertical" />
-      <Link to="/videos/_id/edit">Edit</Link>
+      <Link to={`/videos/${record._id}/edit`}>Edit</Link>
       <Divider type="vertical" />
       <Link to="/videos">Delete</Link>
       {!record.publishTime 
@@ -66,49 +45,37 @@ const columns = [{
       }
     </span>
   ),
-}, {
-  title: 'Stats',
-  dataIndex: 'stats',
-  key: 'stats',
-  render: (text, record) => (
-    <span>
-      <Stat stat={record.plays} icon="play-circle-o" tooltip={`${record.plays} plays`} />
-      <Divider type="vertical" />
-      <Stat stat={record.bookmarks} icon="book" tooltip={`${record.bookmarks} bookmarks`}/>
-    </span>
-  ),
 }];
 
 class ListVideos extends Component {
-  state = {
-    selectedRowKeys: [],
-    // TODO: Remove after API is hooked up
-    loading: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedRowKeys: [],
+    };
+  }
 
-  // TODO: Remove after API is hooked up
-  start = () => {
-    this.setState({ loading: true });
-    setTimeout(() => {
-      this.setState({
-        selectedRowKeys: [],
-        loading: false,
-      });
-    }, 1000);
+  componentDidMount() {
+    this.props.getContents({ type: 'video' });
   }
 
   onSelectChange = (selectedRowKeys) => {
-    console.log('selectedRowKeys changed: ', selectedRowKeys);
     this.setState({ selectedRowKeys });
   }
 
   render() {
-    const { loading, selectedRowKeys } = this.state;
+    const { selectedRowKeys } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectChange,
     };
     const hasSelected = selectedRowKeys.length > 0;
+
+    if (this.props.isGettingContents) {
+      return (
+        <Loading />
+      );
+    }
 
     return (
       <div>
@@ -118,9 +85,7 @@ class ListVideos extends Component {
             <Col>
               <Button
                 type="primary"
-                onClick={this.start}
                 disabled={!hasSelected}
-                loading={loading}
               >
                 Publish
               </Button>
@@ -131,16 +96,25 @@ class ListVideos extends Component {
             <Col>
               <Link to={'/videos/new'}>
                 <Button type="primary">
-                  Upload New Video
+                  Create New Video
                 </Button>
               </Link>
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={dataSource} columns={columns} />
+        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={columns} loading={this.props.isGettingContents} rowKey={record => record._id} />
       </div>
     );
   }
 }
 
-export default ListVideos;
+const mapStateToProps = state => ({
+  contents: state.content.contents,
+  isGettingContents: state.content.isGettingContents,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getContents: contentActions.getContents,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListVideos);

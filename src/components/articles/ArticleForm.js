@@ -54,6 +54,13 @@ class ArticleForm extends Component {
             <Input.TextArea />
           )}
         </Form.Item>
+        <Form.Item label="References">
+          {getFieldDecorator('references', {
+            initialValue: content.references || null,
+          })(
+            <Input />
+          )}
+        </Form.Item>
         <Form.Item label="What should be the status of this article?">
           {getFieldDecorator('state', {
             rules: [{ required: true }],
