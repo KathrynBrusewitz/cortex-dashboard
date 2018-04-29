@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Radio } from 'antd';
-import CheckableTags from '../shared/CheckableTags';
 import Mentions from '../shared/Mentions';
-import SelectTags from '../shared/SelectTags';
 import SelectUserTags from '../shared/SelectUserTags';
 
 class ArticleForm extends Component {
@@ -10,7 +8,11 @@ class ArticleForm extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, options) => {
       if (!err) {
-        this.props.onSubmit({...options, type: "article"}, this.props.content._id);
+        if (this.props.content) {
+          this.props.onSubmit({...options, type: "article"}, this.props.content._id);
+        } else {
+          this.props.onSubmit({...options, type: "article"});
+        }
       }
     });
   }
@@ -21,7 +23,7 @@ class ArticleForm extends Component {
     const { content } = this.props || {};
 
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
+      <Form onSubmit={this.handleSubmit}>
         <Form.Item label="Title">
           {getFieldDecorator('title', {
             rules: [{ required: true }],
@@ -39,7 +41,7 @@ class ArticleForm extends Component {
         </Form.Item>
         <Form.Item label="Writers">
           {getFieldDecorator('creators', {
-            initialValue: content && content.creators || null,
+            initialValue: content && content.creators || [],
           })(
             <SelectUserTags placeholder="Select one or more writers or write names" users={this.props.creatorOptions} />
           )}

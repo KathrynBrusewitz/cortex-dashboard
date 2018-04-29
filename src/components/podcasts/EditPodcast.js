@@ -3,48 +3,55 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import PodcastForm from './PodcastForm';
-
-import { podcastActions } from '../../actions';
 import Loading from '../shared/Loading';
 
+import { contentActions } from '../../actions';
+import { usersActions } from '../../actions';
+
 class EditPodcast extends Component {
-  constructor(props) {
-    super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-  }
-
-  componentWillMount() {
-    // console.log(this.props.podcastId);
-    // this.props.loadPodcast(this.props.podcastId);
-  }
-
-  onFormSubmit(options = {}) {
-    // console.log(this.props.formValues);
-    // this.props.updatePodcast(this.props.podcastId, this.props.formValues);
+  componentDidMount() {
+    this.props.getUsers({ role: [ 'admin', 'writer' ] });
+    this.props.getContent(this.props.match.params.id);
   }
 
   render() {
-    return this.props.isLoadingPodcast ? (
-      <Loading text="Retrieving Podcast" />
-    ) : (
+    const { updateContent, isUpdatingContent, users, isGettingUsers, isGettingContent, content } = this.props;
+
+    if (isGettingUsers || isGettingContent) {
+      return (
+        <Loading text="Loading Form..." />
+      );
+
+    }
+
+    if (!users || !content) {
+      return (
+        <p>
+          Form unavailable. Error occurred while loading users and content.
+        </p>
+      );
+    }
+
+    return (
       <div>
         <h1>Edit Podcast</h1>
-        <PodcastForm initialValues={this.props.podcast} onSubmit={this.onFormSubmit} edit />
+        <PodcastForm onSubmit={updateContent} loading={isUpdatingContent} creatorOptions={users} edit={true} content={content} />
       </div>
     );
   }
 }
-
-// expects podcastId
-
 const mapStateToProps = state => ({
-  // podcast: state.podcasts.podcast,
-  // isLoadingPodcast: state.podcasts.podcast.isLoading,
-  // formValues: state.form.podcastForm || {},
+  isUpdatingContent: state.content.isUpdatingContent,
+  isGettingContent: state.content.isGettingContent,
+  isGettingUsers: state.users.isGettingUsers,
+  users: state.users.users,
+  content: state.content.content,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  // ...podcastActions,
+  updateContent: contentActions.updateContent,
+  getUsers: usersActions.getUsers,
+  getContent: contentActions.getContent,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditPodcast);

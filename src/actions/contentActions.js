@@ -2,6 +2,7 @@ import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import queryString from 'query-string';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
@@ -35,13 +36,14 @@ export const contentActions = {
 };
 
 // Implementations
-function getContents() {
+function getContents(filters = {}) {
+  const query = queryString.stringify(filters);
   return dispatch => {
     dispatch(request());
 
     axios({
       method: 'get',
-      url: '/contents',
+      url: `/contents?${query}`,
       baseURL,
       headers: {'x-access-token': token},
     })
