@@ -6,6 +6,7 @@ const CONTENT_INITIAL = {
   isGettingContent: false,
   isGettingContents: false,
   isCreatingContent: false,
+  isUpdatingContent: false,
 };
 
 export const contentReducer = (state = CONTENT_INITIAL, action) => {
@@ -60,6 +61,22 @@ export const contentReducer = (state = CONTENT_INITIAL, action) => {
       return {
         ...state,
         isCreatingContent: false,
+      };
+    
+    case contentConstants.UPDATE_CONTENT_REQUEST:
+      return {
+        ...state,
+        isUpdatingContent: true,
+      };
+    case contentConstants.UPDATE_CONTENT_SUCCESS:
+      return {
+        ...state,
+        isUpdatingContent: false,
+      };
+    case contentConstants.UPDATE_CONTENT_FAILURE:
+      return {
+        ...state,
+        isUpdatingContent: false,
       };
       
     default:
