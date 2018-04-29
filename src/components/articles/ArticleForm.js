@@ -16,29 +16,30 @@ class ArticleForm extends Component {
   }
 
   render() {
-    const { loading, content } = this.props;
+    const { loading } = this.props;
     const { getFieldDecorator } = this.props.form;
+    const { content } = this.props || {};
 
     return (
       <Form onSubmit={this.handleSubmit} className="login-form">
         <Form.Item label="Title">
           {getFieldDecorator('title', {
             rules: [{ required: true }],
-            initialValue: content.title || null,
+            initialValue: content && content.title || null,
           })(
             <Input />
           )}
         </Form.Item>
         <Form.Item label="Description" help="Summarize or describe the article under 160 characters. This shows up underneath the title when scrolling through content">
           {getFieldDecorator('description', {
-            initialValue: content.description || null,
+            initialValue: content && content.description || null,
           })(
             <Input.TextArea />
           )}
         </Form.Item>
         <Form.Item label="Writers">
           {getFieldDecorator('creators', {
-            initialValue: content.creators || null,
+            initialValue: content && content.creators || null,
           })(
             <SelectUserTags placeholder="Select one or more writers or write names" users={this.props.creatorOptions} />
           )}
@@ -46,7 +47,7 @@ class ArticleForm extends Component {
         <Form.Item label="Article Body" help="Will soon support Markdown">
           {getFieldDecorator('body', {
             rules: [{ required: true }],
-            initialValue: content.body || null,
+            initialValue: content && content.body || null,
           })(
             <Input.TextArea />
           )}
@@ -54,7 +55,7 @@ class ArticleForm extends Component {
         <Form.Item label="What should be the status of this article?">
           {getFieldDecorator('state', {
             rules: [{ required: true }],
-            initialValue: content.state || null,
+            initialValue: content && content.state || null,
           })(
             <Radio.Group>
               <Radio value="published">Published to App</Radio>
