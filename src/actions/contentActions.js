@@ -20,6 +20,10 @@ export const contentConstants = {
   CREATE_CONTENT_REQUEST: 'CREATE_CONTENT_REQUEST',
   CREATE_CONTENT_SUCCESS: 'CREATE_CONTENT_SUCCESS',
   CREATE_CONTENT_FAILURE: 'CREATE_CONTENT_FAILURE',
+
+  UPDATE_CONTENT_REQUEST: 'UPDATE_CONTENT_REQUEST',
+  UPDATE_CONTENT_SUCCESS: 'UPDATE_CONTENT_SUCCESS',
+  UPDATE_CONTENT_FAILURE: 'UPDATE_CONTENT_FAILURE',
 };
 
 // Creators
@@ -27,6 +31,7 @@ export const contentActions = {
   getContent,
   getContents,
   createContent,
+  updateContent,
 };
 
 // Implementations
@@ -127,4 +132,45 @@ function createContent(fields) {
   function request() { return { type: contentConstants.CREATE_CONTENT_REQUEST } }
   function success() { return { type: contentConstants.CREATE_CONTENT_SUCCESS } }
   function failure() { return { type: contentConstants.CREATE_CONTENT_FAILURE } }
+}
+
+function updateContent(fields, id) {
+  if (!fields.title || !fields.state || !fields.type) {
+    console.log('Error: Missing title, state, or type.');
+    return dispatch => {
+      dispatch(alertActions.error('Missing title, state, or type.'));
+    };
+  }
+
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'put',
+      url: `/contents/${id}`,
+      baseURL,
+      data: {
+        ...fields,
+      },
+      headers: {'x-access-token': token},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success());
+        dispatch(push(`/${fields.type}s`));
+        dispatch(alertActions.success('Successfully updated!'));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure(error));
+      dispatch(alertActions.error('Unable to update content'));
+    });
+  };
+
+  function request() { return { type: contentConstants.UPDATE_CONTENT_REQUEST } }
+  function success() { return { type: contentConstants.UPDATE_CONTENT_SUCCESS } }
+  function failure() { return { type: contentConstants.UPDATE_CONTENT_FAILURE } }
 }

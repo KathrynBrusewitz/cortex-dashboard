@@ -34,7 +34,7 @@ class CreateArticle extends Component {
     return (
       <div>
         <h1>Create New Article</h1>
-        <ArticleForm initialValues={{}} onSubmit={createContent} loading={isCreatingContent} creatorOptions={users} />
+        <ArticleForm onSubmit={createContent} loading={isCreatingContent} creatorOptions={users} />
       </div>
     );
   }
