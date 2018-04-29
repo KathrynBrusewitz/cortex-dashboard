@@ -3,32 +3,52 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import PodcastForm from './PodcastForm';
+import Loading from '../shared/Loading';
 
-import { podcastActions } from '../../actions';
+import { contentActions } from '../../actions';
+import { usersActions } from '../../actions';
 
 class CreatePodcast extends Component {
-  constructor(props) {
-    super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-  }
-
-  onFormSubmit(options = {}) {
-    // console.log(this.props.formValues);
-    // this.props.createPodcast(this.props.formValues);
+  componentDidMount() {
+    this.props.getUsers({ role: [ 'admin', 'writer' ] });
   }
 
   render() {
+    const { createContent, isCreatingContent, users, isGettingUsers } = this.props;
+
+    if (isGettingUsers) {
+      return (
+        <Loading text="Loading Form..." />
+      );
+
+    }
+
+    if (!users) {
+      return (
+        <p>
+          Form unavailable. Need admins or writers in userbase.
+        </p>
+      );
+    }
+
     return (
       <div>
         <h1>Create New Podcast</h1>
-        <PodcastForm initialValues={{}} onSubmit={this.onFormSubmit} />
+        <PodcastForm onSubmit={createContent} loading={isCreatingContent} creatorOptions={users} />
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  isCreatingContent: state.content.isCreatingContent,
+  isGettingUsers: state.users.isGettingUsers,
+  users: state.users.users,
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
-  // ...podcastActions,
+  createContent: contentActions.createContent,
+  getUsers: usersActions.getUsers,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(CreatePodcast);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePodcast);

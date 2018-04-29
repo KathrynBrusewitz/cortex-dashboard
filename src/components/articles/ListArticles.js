@@ -56,7 +56,7 @@ class ListArticles extends Component {
   }
 
   componentDidMount() {
-    this.props.getContents();
+    this.props.getContents({ type: 'article' });
   }
 
   onSelectChange = (selectedRowKeys) => {
