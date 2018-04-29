@@ -13,6 +13,7 @@ class SelectUserTags extends Component {
 
     return (
       <Select
+        {...this.props}
         mode="multiple"
         style={{ width: '100%' }}
         placeholder={placeholder || 'Select Users'}

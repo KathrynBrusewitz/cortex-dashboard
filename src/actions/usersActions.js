@@ -26,17 +26,15 @@ export const usersActions = {
 // Implementations
 function getUsers(filters = {}) {
   const query = queryString.stringify(filters);
-  console.log(query);
-  // query became { role: { $in: ['admin', 'writer'] }}
+
+  // want my query to be of form:
+  // filters = { _id: this.article.creators }
 
   return dispatch => {
     dispatch(request());
 
     axios({
       method: 'get',
-      // url: '/users?role[]=admin&role[]=writer', // works
-      // req.query becomes { role: [ 'admin', 'writer' ] }
-      // { role: { $in: ['admin', 'writer'] }}
       url: `/users?${query}`,
       baseURL,
       headers: {'x-access-token': token},
