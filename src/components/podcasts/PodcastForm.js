@@ -25,21 +25,21 @@ class PodcastForm extends Component {
   render() {
     const { loading } = this.props;
     const { getFieldDecorator } = this.props.form;
-    const { content } = this.props || {};
+    const content = this.props.content || {};
 
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Item label="Title">
           {getFieldDecorator('title', {
             rules: [{ required: true }],
-            initialValue: content && content.title || null,
+            initialValue: content.title || null,
           })(
             <Input />
           )}
         </Form.Item>
         <Form.Item label="Description" help="Summarize or describe the podcast under 160 characters. This shows up underneath the title when scrolling through content">
           {getFieldDecorator('description', {
-            initialValue: content && content.description || null,
+            initialValue: content.description || null,
           })(
             <Input.TextArea />
           )}
@@ -47,14 +47,14 @@ class PodcastForm extends Component {
         <Form.Item label="Upload" help="Will be supported soon.">
           {getFieldDecorator('podcastRef', {
             // rules: [{ required: true }],
-            initialValue: content && content.podcastRef || null,
+            initialValue: content.podcastRef || null,
           })(
             <UploadDragger />
           )}
         </Form.Item>
         <Form.Item label="Hosts">
           {getFieldDecorator('creators', {
-            initialValue: content && content.creators || [],
+            initialValue: content.creators || [],
           })(
             <SelectUserTags placeholder="Select one or more hosts or write names" users={this.props.creatorOptions} />
           )}
@@ -62,7 +62,7 @@ class PodcastForm extends Component {
         <Form.Item label="Podcast Body" help="Will soon support Markdown. Good for transcripts or for more detailed reading">
           {getFieldDecorator('body', {
             rules: [{ required: true }],
-            initialValue: content && content.body || null,
+            initialValue: content.body || null,
           })(
             <Input.TextArea />
           )}
@@ -70,7 +70,7 @@ class PodcastForm extends Component {
         <Form.Item label="What should be the status of this podcast?">
           {getFieldDecorator('state', {
             rules: [{ required: true }],
-            initialValue: content && content.state || null,
+            initialValue: content.state || null,
           })(
             <Radio.Group>
               <Radio value="published">Published to App</Radio>
