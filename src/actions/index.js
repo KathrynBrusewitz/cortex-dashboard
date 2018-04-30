@@ -3,3 +3,4 @@ export * from './authActions';
 export * from './menuActions';
 export * from './usersActions';
 export * from './contentActions';
+export * from './termsActions';

@@ -8,7 +8,7 @@ const items = [
   { icon: 'profile', name: 'Articles', route: '/articles' },
   { icon: 'sound', name: 'Podcasts', route: '/podcasts' },
   { icon: 'play-circle', name: 'Videos', route: '/videos' },
-  { icon: 'bars', name: 'Glossary', route: '/glossary' },
+  { icon: 'bars', name: 'Terms', route: '/terms' },
   { icon: 'calendar', name: 'Events', route: '/events' },
   { icon: 'user', name: 'Users', route: '/users' },
 ];

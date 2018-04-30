@@ -1,38 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col } from 'antd';
+import { Link } from 'react-router-dom';
+import Stat from '../shared/Stat';
 import Loading from '../shared/Loading';
 
-import { usersActions } from '../../actions';
+import { termsActions } from '../../actions';
 
 const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
+  title: 'Term',
+  dataIndex: 'term',
+  key: 'term',
 }, {
-  title: 'Email',
-  dataIndex: 'email',
-  key: 'email',
+  title: 'Description',
+  dataIndex: 'description',
+  key: 'description',
 }, {
-  title: 'Role',
-  dataIndex: 'role',
-  key: 'role',
-}, {
-  title: 'Actions',
-  dataIndex: 'actions',
-  key: 'actions',
-  render: (text, record) => (
-    <span>
-      <Link to={`/users/${record._id}`}>View</Link>
-      <Divider type="vertical" />
-      <Link to="/users">Delete</Link>
-    </span>
-  ),
+  title: 'Stats',
+  dataIndex: 'stats',
+  key: 'stats',
 }];
 
-class ListUsers extends Component {
+class ListTerms extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +31,7 @@ class ListUsers extends Component {
   }
 
   componentDidMount() {
-    this.props.getUsers();
+    this.props.getTerms();
   }
 
   onSelectChange = (selectedRowKeys) => {
@@ -56,7 +46,7 @@ class ListUsers extends Component {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
-    if (this.props.isGettingUsers) {
+    if (this.props.isGettingTerms) {
       return (
         <Loading />
       );
@@ -64,37 +54,42 @@ class ListUsers extends Component {
 
     return (
       <div>
-        <h1>Users</h1>
+        <h1>Terms</h1>
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>
-              <Button>
-                Email
+              <Button
+                type="danger"
+                disabled={!hasSelected}
+              >
+                Delete
               </Button>
               <span style={{ marginLeft: 8 }}>
-                {hasSelected ? `Selected ${selectedRowKeys.length} users` : ''}
+                {hasSelected ? `Selected ${selectedRowKeys.length} terms` : ''}
               </span>
             </Col>
             <Col>
-              <Button type="primary">
-                Invite New User
-              </Button>
+              <Link to="/terms/new">
+                <Button type="primary">
+                  Add New Term
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.users} columns={columns} loading={this.props.isGettingUsers} rowKey={record => record._id} />
+        <Table rowSelection={rowSelection} dataSource={this.props.terms} columns={columns} expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>} rowKey={record => record._id} />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  users: state.users.users,
-  isGettingUsers: state.users.isGettingUsers,
+  terms: state.terms.terms,
+  isGettingTerms: state.users.isGettingTerms,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getUsers: usersActions.getUsers,
+  getTerms: termsActions.getTerms,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListUsers);
+export default connect(mapStateToProps, mapDispatchToProps)(ListTerms);

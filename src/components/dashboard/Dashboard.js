@@ -5,19 +5,20 @@ import { Layout } from 'antd';
 import CreateArticle from '../articles/CreateArticle';
 import CreateVideo from '../videos/CreateVideo';
 import CreatePodcast from '../podcasts/CreatePodcast';
+import CreateTerm from '../terms/CreateTerm';
 import CreateEvent from '../events/CreateEvent';
 
 import EditArticle from '../articles/EditArticle';
 import EditVideo from '../videos/EditVideo';
 import EditPodcast from '../podcasts/EditPodcast';
-import EditGlossary from '../glossary/EditGlossary';
+import EditTerm from '../terms/EditTerm';
 import EditEvent from '../events/EditEvent';
 
 import ListArticles from '../articles/ListArticles';
 import ListVideos from '../videos/ListVideos';
 import ListPodcasts from '../podcasts/ListPodcasts';
 import ListUsers from '../users/ListUsers';
-import ListGlossary from '../glossary/ListGlossary';
+import ListTerms from '../terms/ListTerms';
 import ListEvents from '../events/ListEvents';
 
 import ViewArticle from '../articles/ViewArticle';
@@ -60,8 +61,9 @@ class Dashboard extends Component {
               <Route exact path="/users" component={ListUsers} />
               <Route exact path="/users/:id" component={ViewUser} />
 
-              <Route exact path="/glossary" component={ListGlossary} />
-              <Route exact path="/glossary/edit" component={EditGlossary} />
+              <Route exact path="/terms" component={ListTerms} />
+              <Route exact path="/terms/new" component={CreateTerm} />
+              <Route exact path="/terms/:id/edit" component={EditTerm} />
 
               <Route exact path="/events" component={ListEvents} />
               <Route exact path="/events/new" component={CreateEvent} />

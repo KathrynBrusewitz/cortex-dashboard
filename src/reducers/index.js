@@ -6,6 +6,7 @@ import { authReducer } from './authReducer';
 import { menuReducer } from './menuReducer';
 import { usersReducer } from './usersReducer';
 import { contentReducer } from './contentReducer';
+import { termsReducer } from './termsReducer';
 
 const rootReducer = combineReducers({
   router: routerReducer,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   menu: menuReducer,
   users: usersReducer,
   content: contentReducer,
+  terms: termsReducer,
 });
 
 export default rootReducer;
