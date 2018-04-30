@@ -43,7 +43,7 @@ function getContents(filters = {}) {
 
     axios({
       method: 'get',
-      url: `/contents?${query}`,
+      url: `/prot/contents?${query}`,
       baseURL,
       headers: {'x-access-token': token},
     })
@@ -72,7 +72,7 @@ function getContent(id) {
 
     axios({
       method: 'get',
-      url: `/contents/${id}`,
+      url: `/prot/contents/${id}`,
       baseURL,
       headers: {'x-access-token': token},
     })
