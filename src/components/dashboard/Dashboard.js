@@ -31,6 +31,7 @@ import ListUsers from '../users/ListUsers';
 import EditEvent from '../events/EditEvent';
 import ListEvents from '../events/ListEvents';
 
+import Settings from './Settings';
 import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
 import Header from './Header';
@@ -46,6 +47,7 @@ class Dashboard extends Component {
           <Layout.Content className='dashboard-content'>
             <Switch>
               <Route exact path="/" component={Analytics} />
+              <Route exact path="/settings" component={Settings} />
 
               <Route exact path="/articles" component={ListArticles} />
               <Route exact path="/articles/new" component={CreateArticle} />

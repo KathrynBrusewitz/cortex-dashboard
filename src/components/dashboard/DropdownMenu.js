@@ -21,7 +21,9 @@ class DropdownMenu extends Component {
         <Menu.Item key="1">
           <Link to={`/users/${currentUser._id}`}>Profile Settings</Link>
         </Menu.Item>
-        <Menu.Item key="2">Cortex Settings</Menu.Item>
+        <Menu.Item key="2">
+          <Link to="/settings">Cortex Settings</Link>
+        </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="3" action={() => logout()}>
           <Link to="/">Log Out</Link>
