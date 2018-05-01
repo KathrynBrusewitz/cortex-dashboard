@@ -3,48 +3,51 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import EventForm from './EventForm';
-
-import { eventActions } from '../../actions';
 import Loading from '../shared/Loading';
 
+import { eventsActions } from '../../actions';
+
 class EditEvent extends Component {
-  constructor(props) {
-    super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-  }
-
-  componentWillMount() {
-    // console.log(this.props.eventId);
-    // this.props.loadEvent(this.props.eventId);
-  }
-
-  onFormSubmit(options = {}) {
-    // console.log(this.props.formValues);
-    // this.props.updateEvent(this.props.eventId, this.props.formValues);
+  componentDidMount() {
+    this.props.getEvent(this.props.match.params.id);
   }
 
   render() {
-    return this.props.isLoadingEvent ? (
-      <Loading text="Retrieving Event" />
-    ) : (
+    const { updateEvent, isUpdatingEvent, event, isGettingEvent } = this.props;
+
+    if (isGettingEvent) {
+      return (
+        <Loading text="Loading Form..." />
+      );
+
+    }
+
+    if (!event) {
+      return (
+        <p>
+          Form unavailable. Error occurred while loading event.
+        </p>
+      );
+    }
+
+    return (
       <div>
-        <h1>Edit Event</h1>
-        <EventForm initialValues={this.props.event} onSubmit={this.onFormSubmit} edit />
+        <h1>Update Event</h1>
+        <EventForm onSubmit={updateEvent} loading={isUpdatingEvent} edit={true} event={event} />
       </div>
     );
   }
 }
 
-// expects eventId
-
 const mapStateToProps = state => ({
-  // event: state.events.event,
-  // isLoadingEvent: state.events.event.isLoading,
-  // formValues: state.form.eventForm || {},
+  isUpdatingEvent: state.events.isUpdatingEvent,
+  isGettingEvent: state.events.isGettingEvent,
+  event: state.events.event,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  // ...eventActions,
+  updateEvent: eventsActions.updateEvent,
+  getEvent: eventsActions.getEvent,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditEvent);

@@ -3,32 +3,35 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import EventForm from './EventForm';
+import Loading from '../shared/Loading';
 
-import { eventActions } from '../../actions';
+import { eventsActions } from '../../actions';
 
 class CreateEvent extends Component {
-  constructor(props) {
-    super(props);
-    this.onFormSubmit = this.onFormSubmit.bind(this);
-  }
-
-  onFormSubmit(options = {}) {
-    // console.log(this.props.formValues);
-    // this.props.createEvent(this.props.formValues);
-  }
-
   render() {
+    const { createEvent, isCreatingEvent } = this.props;
+
+    if (isCreatingEvent) {
+      return (
+        <Loading text="Loading Form..." />
+      );
+    }
+
     return (
       <div>
         <h1>Create New Event</h1>
-        <EventForm initialValues={{}} onSubmit={this.onFormSubmit} />
+        <EventForm onSubmit={createEvent} loading={isCreatingEvent} />
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  isCreatingEvent: state.events.isCreatingEvent,
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
-  // ...eventActions,
+  createEvent: eventsActions.createEvent,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(CreateEvent);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent);
