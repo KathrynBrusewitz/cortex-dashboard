@@ -11,6 +11,12 @@ class CreateTerm extends Component {
   render() {
     const { createTerm, isCreatingTerm } = this.props;
 
+    if (isCreatingTerm) {
+      return (
+        <Loading text="Loading Form..." />
+      );
+    }
+
     return (
       <div>
         <h1>Create New Term</h1>

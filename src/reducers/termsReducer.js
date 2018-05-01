@@ -7,6 +7,7 @@ const TERMS_INITIAL = {
   isGettingTerms: false,
   isCreatingTerm: false,
   isUpdatingTerm: false,
+  isDeletingTerm: false,
 };
 
 export const termsReducer = (state = TERMS_INITIAL, action) => {
@@ -77,6 +78,22 @@ export const termsReducer = (state = TERMS_INITIAL, action) => {
       return {
         ...state,
         isUpdatingTerm: false,
+      };
+    
+    case termsConstants.DELETE_TERM_REQUEST:
+      return {
+        ...state,
+        isDeletingTerm: true,
+      };
+    case termsConstants.DELETE_TERM_SUCCESS:
+      return {
+        ...state,
+        isDeletingTerm: false,
+      };
+    case termsConstants.DELETE_TERM_FAILURE:
+      return {
+        ...state,
+        isDeletingTerm: false,
       };
       
     default:

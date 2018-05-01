@@ -25,6 +25,10 @@ export const termsConstants = {
   UPDATE_TERM_REQUEST: 'UPDATE_TERM_REQUEST',
   UPDATE_TERM_SUCCESS: 'UPDATE_TERM_SUCCESS',
   UPDATE_TERM_FAILURE: 'UPDATE_TERM_FAILURE',
+
+  DELETE_TERM_REQUEST: 'DELETE_TERM_REQUEST',
+  DELETE_TERM_SUCCESS: 'DELETE_TERM_SUCCESS',
+  DELETE_TERM_FAILURE: 'DELETE_TERM_FAILURE',
 };
 
 // Creators
@@ -33,6 +37,7 @@ export const termsActions = {
   getTerms,
   createTerm,
   updateTerm,
+  deleteTerm,
 };
 
 // Implementations
@@ -175,4 +180,34 @@ function updateTerm(fields, id) {
   function request() { return { type: termsConstants.UPDATE_TERM_REQUEST } }
   function success() { return { type: termsConstants.UPDATE_TERM_SUCCESS } }
   function failure() { return { type: termsConstants.UPDATE_TERM_FAILURE } }
+}
+
+function deleteTerm(id) {
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'delete',
+      url: `/terms/${id}`,
+      baseURL,
+      headers: {'x-access-token': token},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success());
+        dispatch(alertActions.success('Successfully deleted!'));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure(error));
+      dispatch(alertActions.error('Unable to delete term'));
+    });
+  };
+
+  function request() { return { type: termsConstants.DELETE_TERM_REQUEST } }
+  function success() { return { type: termsConstants.DELETE_TERM_SUCCESS } }
+  function failure() { return { type: termsConstants.DELETE_TERM_FAILURE } }
 }

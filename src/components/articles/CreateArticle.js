@@ -20,7 +20,6 @@ class CreateArticle extends Component {
       return (
         <Loading text="Loading Form..." />
       );
-
     }
 
     if (!users) {

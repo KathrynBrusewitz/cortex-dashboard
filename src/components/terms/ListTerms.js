@@ -1,26 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Table, Divider, Button, Row, Col } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import Stat from '../shared/Stat';
 import Loading from '../shared/Loading';
 
 import { termsActions } from '../../actions';
-
-const columns = [{
-  title: 'Term',
-  dataIndex: 'term',
-  key: 'term',
-}, {
-  title: 'Description',
-  dataIndex: 'description',
-  key: 'description',
-}, {
-  title: 'Stats',
-  dataIndex: 'stats',
-  key: 'stats',
-}];
 
 class ListTerms extends Component {
   constructor(props) {
@@ -34,8 +20,49 @@ class ListTerms extends Component {
     this.props.getTerms();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.isDeletingTerm) {
+      this.props.getTerms();
+    }
+  }
+
   onSelectChange = (selectedRowKeys) => {
     this.setState({ selectedRowKeys });
+  }
+
+  getColumns() {
+    return (
+      [{
+        title: 'Term',
+        dataIndex: 'term',
+        key: 'term',
+      }, {
+        title: 'Description',
+        dataIndex: 'description',
+        key: 'description',
+      }, {
+        title: 'Actions',
+        dataIndex: 'actions',
+        key: 'actions',
+        render: (text, record) => (
+          <span>
+            <Link to={`/terms/${record._id}/edit`}>Edit</Link>
+            <Divider type="vertical" />
+            <Popconfirm
+              title="Are you sure delete this term?"
+              onConfirm={() => {
+                this.props.deleteTerm(record._id);
+              }}
+              onCancel={() => {}}
+              okText="Yes"
+              cancelText="No"
+            >
+              <a href="#">Delete</a>
+            </Popconfirm>
+          </span>
+        ),
+      }]
+    );
   }
 
   render() {
@@ -46,7 +73,7 @@ class ListTerms extends Component {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
-    if (this.props.isGettingTerms) {
+    if (this.props.isGettingTerms || this.props.isDeletingTerm) {
       return (
         <Loading />
       );
@@ -77,7 +104,7 @@ class ListTerms extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.terms} columns={columns} expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>} rowKey={record => record._id} />
+        <Table rowSelection={rowSelection} dataSource={this.props.terms} columns={this.getColumns()} expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>} loading={this.props.isGettingTerms || this.props.isDeletingTerm} rowKey={record => record._id} />
       </div>
     );
   }
@@ -85,11 +112,13 @@ class ListTerms extends Component {
 
 const mapStateToProps = state => ({
   terms: state.terms.terms,
-  isGettingTerms: state.users.isGettingTerms,
+  isGettingTerms: state.terms.isGettingTerms,
+  isDeletingTerm: state.terms.isDeletingTerm,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getTerms: termsActions.getTerms,
+  deleteTerm: termsActions.deleteTerm,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListTerms);

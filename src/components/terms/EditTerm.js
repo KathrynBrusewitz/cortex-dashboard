@@ -25,7 +25,7 @@ class EditTerm extends Component {
     if (!term) {
       return (
         <p>
-          Form unavailable. Error occurred while loading users and content.
+          Form unavailable. Error occurred while loading term.
         </p>
       );
     }
@@ -33,7 +33,7 @@ class EditTerm extends Component {
     return (
       <div>
         <h1>Update Term</h1>
-        <TermForm onSubmit={updateTerm} loading={isUpdatingTerm} edit={true} initialValues={term} />
+        <TermForm onSubmit={updateTerm} loading={isUpdatingTerm} edit={true} term={term} />
       </div>
     );
   }
