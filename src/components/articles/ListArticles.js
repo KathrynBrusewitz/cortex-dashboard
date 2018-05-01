@@ -2,50 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import Stat from '../shared/Stat';
 import Loading from '../shared/Loading';
 
 import { contentActions } from '../../actions';
-
-const columns = [{
-  title: 'Title',
-  dataIndex: 'title',
-  key: 'title',
-}, {
-  title: 'Writers',
-  dataIndex: 'creators',
-  key: 'creators',
-}, {
-  title: 'Status',
-  dataIndex: 'state',
-  key: 'state',
-}, {
-  title: 'Update Time',
-  dataIndex: 'updateTime',
-  key: 'updateTime',
-}, {
-  title: 'Publish Time',
-  dataIndex: 'publishTime',
-  key: 'publishTime',
-}, {
-  title: 'Actions',
-  dataIndex: 'actions',
-  key: 'actions',
-  render: (text, record) => (
-    <span>
-      <Link to={`/articles/${record._id}`}>View</Link>
-      <Divider type="vertical" />
-      <Link to={`/articles/${record._id}/edit`}>Edit</Link>
-      <Divider type="vertical" />
-      <Link to="/articles">Delete</Link>
-      {!record.publishTime 
-        ? <span><Divider type="vertical" /><Link to="/articles">Publish</Link></span>
-        : <span><Divider type="vertical" /><Link to="/articles">Unpublish</Link></span>
-      }
-    </span>
-  ),
-}];
 
 class ListArticles extends Component {
   constructor(props) {
@@ -59,8 +20,63 @@ class ListArticles extends Component {
     this.props.getContents({ type: 'article' });
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.isDeletingContent) {
+      this.props.getContents({ type: 'article' });
+    }
+  }
+
   onSelectChange = (selectedRowKeys) => {
     this.setState({ selectedRowKeys });
+  }
+
+  getColumns() {
+    return (
+      [{
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
+      }, {
+        title: 'Writers',
+        dataIndex: 'creators',
+        key: 'creators',
+      }, {
+        title: 'Status',
+        dataIndex: 'state',
+        key: 'state',
+      }, {
+        title: 'Update Time',
+        dataIndex: 'updateTime',
+        key: 'updateTime',
+      }, {
+        title: 'Publish Time',
+        dataIndex: 'publishTime',
+        key: 'publishTime',
+      }, {
+        title: 'Actions',
+        dataIndex: 'actions',
+        key: 'actions',
+        render: (text, record) => (
+          <span>
+            <Link to={`/articles/${record._id}`}>View</Link>
+            <Divider type="vertical" />
+            <Link to={`/articles/${record._id}/edit`}>Edit</Link>
+            <Divider type="vertical" />
+            <Popconfirm
+              title="Are you sure delete this article?"
+              onConfirm={() => {
+                this.props.deleteContent(record._id);
+              }}
+              onCancel={() => {}}
+              okText="Yes"
+              cancelText="No"
+            >
+              <a href="#">Delete</a>
+            </Popconfirm>
+          </span>
+        ),
+      }]
+    );
   }
 
   render() {
@@ -71,7 +87,7 @@ class ListArticles extends Component {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
-    if (this.props.isGettingContents) {
+    if (this.props.isGettingContents || this.props.isDeletingContent) {
       return (
         <Loading />
       );
@@ -102,7 +118,7 @@ class ListArticles extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={columns} loading={this.props.isGettingContents} rowKey={record => record._id} />
+        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={this.getColumns()} loading={this.props.isGettingContents || this.props.isDeletingContent} rowKey={record => record._id} />
       </div>
     );
   }
@@ -111,10 +127,12 @@ class ListArticles extends Component {
 const mapStateToProps = state => ({
   contents: state.content.contents,
   isGettingContents: state.content.isGettingContents,
+  isDeletingContent: state.content.isDeletingContent,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getContents: contentActions.getContents,
+  deleteContent: contentActions.deleteContent,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListArticles);

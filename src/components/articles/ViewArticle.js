@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Tag, Button, Row, Col, Divider } from 'antd';
+import { Tag, Button, Row, Col, Divider, Popconfirm } from 'antd';
 
 import { contentActions } from '../../actions';
 import Loading from '../shared/Loading';
@@ -11,6 +11,12 @@ import Stat from '../shared/Stat';
 class ViewArticle extends Component {
   componentDidMount() {
     this.props.getContent(this.props.match.params.id);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.isDeletingContent) {
+      this.props.history.push('/articles');
+    }
   }
 
   render() {
@@ -34,9 +40,17 @@ class ViewArticle extends Component {
         <Row type="flex" justify="end">
           <Link to={`/articles/${content._id}/edit`}>Edit</Link>
           <Divider type="vertical" />
-          <Link to="/articles">Delete</Link>
-          <Divider type="vertical" />
-          <Link to="/articles">Unpublish</Link>
+          <Popconfirm
+            title="Are you sure delete this article?"
+            onConfirm={() => {
+              this.props.deleteContent(this.props.match.params.id);
+            }}
+            onCancel={() => {}}
+            okText="Yes"
+            cancelText="No"
+          >
+            <a href="#">Delete</a>
+          </Popconfirm>
           <Divider type="vertical" />
           <Stat stat={124} icon="eye-o" tooltip="124 views" />
           <Divider type="vertical" />
@@ -56,10 +70,12 @@ class ViewArticle extends Component {
 const mapStateToProps = state => ({
   content: state.content.content,
   isGettingContent: state.content.isGettingContent,
+  isDeletingContent: state.content.isDeletingContent,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getContent: contentActions.getContent,
+  deleteContent: contentActions.deleteContent,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewArticle);

@@ -25,6 +25,10 @@ export const contentConstants = {
   UPDATE_CONTENT_REQUEST: 'UPDATE_CONTENT_REQUEST',
   UPDATE_CONTENT_SUCCESS: 'UPDATE_CONTENT_SUCCESS',
   UPDATE_CONTENT_FAILURE: 'UPDATE_CONTENT_FAILURE',
+
+  DELETE_CONTENT_REQUEST: 'DELETE_CONTENT_REQUEST',
+  DELETE_CONTENT_SUCCESS: 'DELETE_CONTENT_SUCCESS',
+  DELETE_CONTENT_FAILURE: 'DELETE_CONTENT_FAILURE',
 };
 
 // Creators
@@ -33,6 +37,7 @@ export const contentActions = {
   getContents,
   createContent,
   updateContent,
+  deleteContent,
 };
 
 // Implementations
@@ -175,4 +180,34 @@ function updateContent(fields, id) {
   function request() { return { type: contentConstants.UPDATE_CONTENT_REQUEST } }
   function success() { return { type: contentConstants.UPDATE_CONTENT_SUCCESS } }
   function failure() { return { type: contentConstants.UPDATE_CONTENT_FAILURE } }
+}
+
+function deleteContent(id) {
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'delete',
+      url: `/contents/${id}`,
+      baseURL,
+      headers: {'x-access-token': token},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success());
+        dispatch(alertActions.success('Successfully deleted!'));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure(error));
+      dispatch(alertActions.error('Unable to delete content'));
+    });
+  };
+
+  function request() { return { type: contentConstants.DELETE_CONTENT_REQUEST } }
+  function success() { return { type: contentConstants.DELETE_CONTENT_SUCCESS } }
+  function failure() { return { type: contentConstants.DELETE_CONTENT_FAILURE } }
 }

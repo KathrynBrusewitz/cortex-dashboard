@@ -7,6 +7,7 @@ const CONTENT_INITIAL = {
   isGettingContents: false,
   isCreatingContent: false,
   isUpdatingContent: false,
+  isDeletingContent: false,
 };
 
 export const contentReducer = (state = CONTENT_INITIAL, action) => {
@@ -77,6 +78,22 @@ export const contentReducer = (state = CONTENT_INITIAL, action) => {
       return {
         ...state,
         isUpdatingContent: false,
+      };
+    
+    case contentConstants.DELETE_CONTENT_REQUEST:
+      return {
+        ...state,
+        isDeletingContent: true,
+      };
+    case contentConstants.DELETE_CONTENT_SUCCESS:
+      return {
+        ...state,
+        isDeletingContent: false,
+      };
+    case contentConstants.DELETE_CONTENT_FAILURE:
+      return {
+        ...state,
+        isDeletingContent: false,
       };
       
     default:

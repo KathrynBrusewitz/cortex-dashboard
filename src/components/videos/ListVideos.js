@@ -2,50 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import Stat from '../shared/Stat';
 import Loading from '../shared/Loading';
 
 import { contentActions } from '../../actions';
-
-const columns = [{
-  title: 'Title',
-  dataIndex: 'title',
-  key: 'title',
-}, {
-  title: 'Creators',
-  dataIndex: 'creators',
-  key: 'creators',
-}, {
-  title: 'Status',
-  dataIndex: 'state',
-  key: 'state',
-}, {
-  title: 'Publish Time',
-  dataIndex: 'publishTime',
-  key: 'publishTime',
-}, {
-  title: 'Duration',
-  dataIndex: 'duration',
-  key: 'duration',
-}, {
-  title: 'Actions',
-  dataIndex: 'actions',
-  key: 'actions',
-  render: (text, record) => (
-    <span>
-      <Link to={`/videos/${record._id}`}>View</Link>
-      <Divider type="vertical" />
-      <Link to={`/videos/${record._id}/edit`}>Edit</Link>
-      <Divider type="vertical" />
-      <Link to="/videos">Delete</Link>
-      {!record.publishTime 
-        ? <span><Divider type="vertical" /><Link to="/videos">Publish</Link></span>
-        : <span><Divider type="vertical" /><Link to="/videos">Unpublish</Link></span>
-      }
-    </span>
-  ),
-}];
 
 class ListVideos extends Component {
   constructor(props) {
@@ -59,8 +20,61 @@ class ListVideos extends Component {
     this.props.getContents({ type: 'video' });
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.isDeletingContent) {
+      this.props.getContents({ type: 'video' });
+    }
+  }
+
   onSelectChange = (selectedRowKeys) => {
     this.setState({ selectedRowKeys });
+  }
+
+  getColumns() {
+    return [{
+      title: 'Title',
+      dataIndex: 'title',
+      key: 'title',
+    }, {
+      title: 'Creators',
+      dataIndex: 'creators',
+      key: 'creators',
+    }, {
+      title: 'Status',
+      dataIndex: 'state',
+      key: 'state',
+    }, {
+      title: 'Publish Time',
+      dataIndex: 'publishTime',
+      key: 'publishTime',
+    }, {
+      title: 'Duration',
+      dataIndex: 'duration',
+      key: 'duration',
+    }, {
+      title: 'Actions',
+      dataIndex: 'actions',
+      key: 'actions',
+      render: (text, record) => (
+        <span>
+          <Link to={`/videos/${record._id}`}>View</Link>
+          <Divider type="vertical" />
+          <Link to={`/videos/${record._id}/edit`}>Edit</Link>
+          <Divider type="vertical" />
+          <Popconfirm
+            title="Are you sure delete this video?"
+            onConfirm={() => {
+              this.props.deleteContent(record._id);
+            }}
+            onCancel={() => {}}
+            okText="Yes"
+            cancelText="No"
+          >
+            <a href="#">Delete</a>
+          </Popconfirm>
+        </span>
+      ),
+    }];
   }
 
   render() {
@@ -71,7 +85,7 @@ class ListVideos extends Component {
     };
     const hasSelected = selectedRowKeys.length > 0;
 
-    if (this.props.isGettingContents) {
+    if (this.props.isGettingContents || this.props.isDeletingContent) {
       return (
         <Loading />
       );
@@ -102,7 +116,7 @@ class ListVideos extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={columns} loading={this.props.isGettingContents} rowKey={record => record._id} />
+        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={this.getColumns()} loading={this.props.isGettingContents} rowKey={record => record._id} />
       </div>
     );
   }
@@ -111,10 +125,12 @@ class ListVideos extends Component {
 const mapStateToProps = state => ({
   contents: state.content.contents,
   isGettingContents: state.content.isGettingContents,
+  isDeletingContent: state.content.isDeletingContent,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getContents: contentActions.getContents,
+  deleteContent: contentActions.deleteContent,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListVideos);
