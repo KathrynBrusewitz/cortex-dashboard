@@ -14,11 +14,13 @@ class DropdownMenu extends Component {
   }
 
   renderMenu() {
-    const { logout } = this.props;
+    const { logout, currentUser } = this.props;
 
     return (
       <Menu onClick={this.handleClick}>
-        <Menu.Item key="1">Profile Settings</Menu.Item>
+        <Menu.Item key="1">
+          <Link to={`/users/${currentUser._id}`}>Profile Settings</Link>
+        </Menu.Item>
         <Menu.Item key="2">Cortex Settings</Menu.Item>
         <Menu.Divider />
         <Menu.Item key="3" action={() => logout()}>
@@ -37,8 +39,12 @@ class DropdownMenu extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  currentUser: state.auth.user,
+});
+
 const mapDispatchToProps = dispatch => bindActionCreators({
   ...authActions,
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(DropdownMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(DropdownMenu);

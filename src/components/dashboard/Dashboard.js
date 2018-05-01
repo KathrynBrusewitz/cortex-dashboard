@@ -3,29 +3,33 @@ import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import CreateArticle from '../articles/CreateArticle';
-import CreateVideo from '../videos/CreateVideo';
-import CreatePodcast from '../podcasts/CreatePodcast';
-import CreateTerm from '../terms/CreateTerm';
-import CreateEvent from '../events/CreateEvent';
-
-import EditArticle from '../articles/EditArticle';
-import EditVideo from '../videos/EditVideo';
-import EditPodcast from '../podcasts/EditPodcast';
-import EditTerm from '../terms/EditTerm';
-import EditEvent from '../events/EditEvent';
-
-import ListArticles from '../articles/ListArticles';
-import ListVideos from '../videos/ListVideos';
-import ListPodcasts from '../podcasts/ListPodcasts';
-import ListUsers from '../users/ListUsers';
-import ListTerms from '../terms/ListTerms';
-import ListEvents from '../events/ListEvents';
-
 import ViewArticle from '../articles/ViewArticle';
+import EditArticle from '../articles/EditArticle';
+import ListArticles from '../articles/ListArticles';
+
+import CreateVideo from '../videos/CreateVideo';
 import ViewVideo from '../videos/ViewVideo';
+import EditVideo from '../videos/EditVideo';
+import ListVideos from '../videos/ListVideos';
+
+import CreatePodcast from '../podcasts/CreatePodcast';
 import ViewPodcast from '../podcasts/ViewPodcast';
-import ViewUser from '../users/ViewUser';
+import EditPodcast from '../podcasts/EditPodcast';
+import ListPodcasts from '../podcasts/ListPodcasts';
+
+import CreateTerm from '../terms/CreateTerm';
+import EditTerm from '../terms/EditTerm';
+import ListTerms from '../terms/ListTerms';
+
+import CreateEvent from '../events/CreateEvent';
 import ViewEvent from '../events/ViewEvent';
+
+import ViewUser from '../users/ViewUser';
+import EditUser from '../users/EditUser';
+import ListUsers from '../users/ListUsers';
+
+import EditEvent from '../events/EditEvent';
+import ListEvents from '../events/ListEvents';
 
 import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
@@ -60,6 +64,7 @@ class Dashboard extends Component {
 
               <Route exact path="/users" component={ListUsers} />
               <Route exact path="/users/:id" component={ViewUser} />
+              <Route exact path="/users/:id/edit" component={EditUser} />
 
               <Route exact path="/terms" component={ListTerms} />
               <Route exact path="/terms/new" component={CreateTerm} />

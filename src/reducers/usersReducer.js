@@ -5,6 +5,8 @@ const USERS_INITIAL = {
   user: null,
   isGettingUsers: false,
   isGettingUser: false,
+  isUpdatingUser: false,
+  isDeletingUser: false,
 };
 
 export const usersReducer = (state = USERS_INITIAL, action) => {
@@ -25,6 +27,7 @@ export const usersReducer = (state = USERS_INITIAL, action) => {
         ...state,
         isGettingUsers: false,
       };
+
     case usersConstants.GET_USER_REQUEST:
       return {
         ...state,
@@ -33,7 +36,7 @@ export const usersReducer = (state = USERS_INITIAL, action) => {
     case usersConstants.GET_USER_SUCCESS:
       return {
         ...state,
-        user: action.user,
+        user: action.payload,
         isGettingUser: false,
       };
     case usersConstants.GET_USER_FAILURE:
@@ -41,6 +44,39 @@ export const usersReducer = (state = USERS_INITIAL, action) => {
         ...state,
         isGettingUser: false,
       };
+    
+    case usersConstants.UPDATE_USER_REQUEST:
+      return {
+        ...state,
+        isUpdatingUser: true,
+      };
+    case usersConstants.UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        isUpdatingUser: false,
+      };
+    case usersConstants.UPDATE_USER_FAILURE:
+      return {
+        ...state,
+        isUpdatingUser: false,
+      };
+    
+    case usersConstants.DELETE_USER_REQUEST:
+      return {
+        ...state,
+        isDeletingUser: true,
+      };
+    case usersConstants.DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        isDeletingUser: false,
+      };
+    case usersConstants.DELETE_USER_FAILURE:
+      return {
+        ...state,
+        isDeletingUser: false,
+      };
+
     default:
       return state;
   }

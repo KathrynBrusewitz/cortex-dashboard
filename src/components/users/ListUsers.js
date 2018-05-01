@@ -2,35 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import Loading from '../shared/Loading';
 
 import { usersActions } from '../../actions';
-
-const columns = [{
-  title: 'Name',
-  dataIndex: 'name',
-  key: 'name',
-}, {
-  title: 'Email',
-  dataIndex: 'email',
-  key: 'email',
-}, {
-  title: 'Role',
-  dataIndex: 'role',
-  key: 'role',
-}, {
-  title: 'Actions',
-  dataIndex: 'actions',
-  key: 'actions',
-  render: (text, record) => (
-    <span>
-      <Link to={`/users/${record._id}`}>View</Link>
-      <Divider type="vertical" />
-      <Link to="/users">Delete</Link>
-    </span>
-  ),
-}];
 
 class ListUsers extends Component {
   constructor(props) {
@@ -46,6 +21,49 @@ class ListUsers extends Component {
 
   onSelectChange = (selectedRowKeys) => {
     this.setState({ selectedRowKeys });
+  }
+
+  getColumns() {
+    return (
+      [{
+        title: 'Name',
+        dataIndex: 'name',
+        key: 'name',
+      }, {
+        title: 'Email',
+        dataIndex: 'email',
+        key: 'email',
+      }, {
+        title: 'Role',
+        dataIndex: 'role',
+        key: 'role',
+      }, {
+        title: 'Actions',
+        dataIndex: 'actions',
+        key: 'actions',
+        render: (text, record) => (
+          <span>
+            <Link to={`/users/${record._id}`}>View</Link>
+            <Divider type="vertical" />
+            <Link to={`/users/${record._id}/edit`}>Edit</Link>
+            <Divider type="vertical" />
+            { (this.props.currentUser._id !== record._id) &&
+              <Popconfirm
+                title="Are you sure delete this user?"
+                onConfirm={() => {
+                  this.props.deleteUser(record._id);
+                }}
+                onCancel={() => {}}
+                okText="Yes"
+                cancelText="No"
+              >
+                <a href="#">Delete</a>
+              </Popconfirm>
+            }
+          </span>
+        ),
+      }]
+    );
   }
 
   render() {
@@ -82,7 +100,7 @@ class ListUsers extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.users} columns={columns} loading={this.props.isGettingUsers} rowKey={record => record._id} />
+        <Table rowSelection={rowSelection} dataSource={this.props.users} columns={this.getColumns()} loading={this.props.isGettingUsers || this.props.isDeletingUser} rowKey={record => record._id} />
       </div>
     );
   }
@@ -91,10 +109,13 @@ class ListUsers extends Component {
 const mapStateToProps = state => ({
   users: state.users.users,
   isGettingUsers: state.users.isGettingUsers,
+  isDeletingUser: state.users.isDeletingUser,
+  currentUser: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getUsers: usersActions.getUsers,
+  deleteUser: usersActions.deleteUser,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListUsers);

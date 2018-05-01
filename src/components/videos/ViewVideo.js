@@ -35,9 +35,7 @@ class ViewVideo extends Component {
       );
     }
 
-    return this.props.isLoadingVideo ? (
-      <Loading text="Retrieving Video" />
-    ) : (
+    return (
       <div>
         <Row type="flex" justify="end">
           <Link to={`/videos/${content._id}/edit`}>Edit</Link>

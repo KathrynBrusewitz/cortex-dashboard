@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Layout, Icon, Row, Col } from 'antd';
 import DropdownMenu from './DropdownMenu';
-import Avatar from './Avatar';
+import Avatar from '../shared/Avatar';
 
 import { menuActions } from '../../actions';
 
@@ -24,7 +24,7 @@ class Dashboard extends Component {
           <Col>
             <span style={{ marginRight: 8 }}>{this.props.user.name}</span>
             <DropdownMenu>
-              <Avatar name={this.props.user.name} />
+              <Avatar name={this.props.user.name} style={{ lineHeight: '64px', cursor: 'pointer' }} />
             </DropdownMenu>
           </Col>
         </Row>

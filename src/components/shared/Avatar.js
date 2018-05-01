@@ -9,6 +9,12 @@ class Avatar extends Component {
   render() {
     let initials = 'Admin';
 
+    const style = {
+      backgroundColor: '#a5a5a5',
+      verticalAlign: 'middle',
+      ...this.props.style,
+    };
+
     if (this.props.name) {
       initials = this.props.name.split(' ').map(x => x[0]).join('');
     }
@@ -18,7 +24,7 @@ class Avatar extends Component {
     }
 
     return (
-      <AntAvatar {...this.props} style={{ backgroundColor: '#a5a5a5', verticalAlign: 'middle' }} shape="square" className='user-avatar'>
+      <AntAvatar {...this.props} style={style} shape="square">
         {initials}
       </AntAvatar>
     );
