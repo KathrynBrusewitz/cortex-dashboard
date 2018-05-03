@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
-const token = cookies.get('token');
+const token = () => cookies.get('token');
 
 // Types
 export const authConstants = {
@@ -46,10 +46,10 @@ function login({ email, password }) {
     })
     .then(res => {
       if (res.data.success) {
-        dispatch(success(res.data));
-        dispatch(push('/'));
-        dispatch(alertActions.success(`Welcome ${res.data.name}!`));
         cookies.set('token', res.data.token, { path: '/' });
+        dispatch(success(res.data));
+        dispatch(alertActions.success(`Welcome ${res.data.name}!`));
+        dispatch(push('/'));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -68,7 +68,7 @@ function login({ email, password }) {
 
 function tokenLogin() {
   return dispatch => {
-    if (!token) {
+    if (!token()) {
       dispatch(failure());
     } else {
       dispatch(request());
