@@ -5,7 +5,6 @@ import Cookies from 'universal-cookie';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
-const token = () => cookies.get('token');
 
 // Types
 export const authConstants = {
@@ -49,15 +48,17 @@ function login({ email, password }) {
         cookies.set('token', res.data.token, { path: '/' });
         dispatch(success(res.data));
         dispatch(alertActions.success(`Welcome ${res.data.name}!`));
-        dispatch(push('/'));
+        dispatch(push('/articles'));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
+        cookies.remove('token', { path: '/' });
       }
     })
     .catch(error => {
       dispatch(failure());
       dispatch(alertActions.error('Unable to Complete Request'));
+      cookies.remove('token', { path: '/' });
     });
   };
 
@@ -68,7 +69,7 @@ function login({ email, password }) {
 
 function tokenLogin() {
   return dispatch => {
-    if (!token()) {
+    if (!cookies.get('token')) {
       dispatch(failure());
     } else {
       dispatch(request());
@@ -76,7 +77,7 @@ function tokenLogin() {
         method: 'get',
         url: '/user',
         baseURL,
-        headers: {'x-access-token': token},
+        headers: {'x-access-token': cookies.get('token')},
       })
       .then(res => {
         if (res.data.success) {
@@ -85,10 +86,12 @@ function tokenLogin() {
         } else {
           dispatch(failure());
           dispatch(alertActions.error(res.data.message));
+          cookies.remove('token', { path: '/' });
         }
       })
       .catch(error => {
         dispatch(failure());
+        cookies.remove('token', { path: '/' });
       });
     }
   };

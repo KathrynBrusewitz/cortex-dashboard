@@ -71,7 +71,7 @@ class PodcastForm extends Component {
           {getFieldDecorator('references', {
             initialValue: content.references || null,
           })(
-            <Input />
+            <Input.TextArea />
           )}
         </Form.Item>
         <Form.Item label="What should be the status of this podcast?">
