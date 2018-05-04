@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm, Popover } from 'antd';
 import Stat from '../shared/Stat';
 import Loading from '../shared/Loading';
+import AvatarList from '../shared/AvatarList';
 
 import { contentActions } from '../../actions';
 
@@ -40,6 +41,7 @@ class ListPodcasts extends Component {
         title: 'Writers',
         dataIndex: 'creators',
         key: 'creators',
+        render: (text, record) => <AvatarList users={record.creators} />,
       }, {
         title: 'Status',
         dataIndex: 'state',

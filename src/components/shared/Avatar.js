@@ -7,11 +7,11 @@ import { Avatar as AntAvatar } from 'antd';
 
 class Avatar extends Component {
   render() {
-    let initials = 'Admin';
+    let initials = 'GM';
 
     const style = {
-      backgroundColor: '#a5a5a5',
       verticalAlign: 'middle',
+      backgroundColor: '#87d068',
       ...this.props.style,
     };
 
@@ -24,7 +24,7 @@ class Avatar extends Component {
     }
 
     return (
-      <AntAvatar {...this.props} style={style} shape="square">
+      <AntAvatar shape={this.props.shape || "square"} size={this.props.size || "default" } {...this.props} style={style}>
         {initials}
       </AntAvatar>
     );

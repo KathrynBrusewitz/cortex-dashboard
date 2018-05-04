@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm, Popover } from 'antd';
 import Stat from '../shared/Stat';
 import Loading from '../shared/Loading';
 
 import { contentActions } from '../../actions';
+import Avatar from '../shared/Avatar';
+import AvatarList from '../shared/AvatarList';
 
 class ListArticles extends Component {
   constructor(props) {
@@ -40,6 +42,7 @@ class ListArticles extends Component {
         title: 'Writers',
         dataIndex: 'creators',
         key: 'creators',
+        render: (text, record) => <AvatarList users={record.creators} />,
       }, {
         title: 'Status',
         dataIndex: 'state',
