@@ -38,6 +38,10 @@ class ListEvents extends Component {
         dataIndex: 'dateEnd',
         key: 'dateEnd',
       }, {
+        title: 'Location',
+        dataIndex: 'location',
+        key: 'location',
+      }, {
         title: 'Actions',
         dataIndex: 'actions',
         key: 'actions',

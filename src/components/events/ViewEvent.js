@@ -57,6 +57,7 @@ class ViewEvent extends Component {
           <Stat stat={28} icon="smile-o" tooltip="28 going" />
         </Row>
         <h1>{event.title}</h1>
+        <h3>Location: {event.location}</h3>
         <p>{event.description && event.description}</p>
         <h3>Date Start: {event.dateStart}</h3>
         <h3>Date End: {event.dateEnd}</h3>

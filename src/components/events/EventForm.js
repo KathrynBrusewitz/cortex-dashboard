@@ -44,6 +44,14 @@ class EventForm extends Component {
             <Input />
           )}
         </Form.Item>
+        <Form.Item label="Location">
+          {getFieldDecorator('location', {
+            rules: [{ required: true }],
+            initialValue: event.location || null,
+          })(
+            <Input.TextArea />
+          )}
+        </Form.Item>
         <Form.Item label="Description">
           {getFieldDecorator('description', {
             rules: [{ required: true }],
