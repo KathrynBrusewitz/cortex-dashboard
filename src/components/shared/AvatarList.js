@@ -8,7 +8,7 @@ class AvatarList extends Component {
       <span>
         {this.props.users.map((user) => {
           return (
-            <Popover content={user.name}>
+            <Popover content={user.name} key={user._id}>
               <Avatar name={user.name} size="small" style={{ marginRight: '5px' }}/>
             </Popover>
           );
