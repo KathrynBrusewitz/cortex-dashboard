@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Tag, Button, Row, Col, Divider, Popconfirm } from 'antd';
+import { Row, Divider, Popconfirm } from 'antd';
 
 import { eventsActions } from '../../actions';
 import Loading from '../shared/Loading';
@@ -51,7 +51,7 @@ class ViewEvent extends Component {
             okText="Yes"
             cancelText="No"
           >
-            <a href="#">Delete</a>
+            <a href={null}>Delete</a>
           </Popconfirm>
           <Divider type="vertical" />
           <Stat stat={28} icon="smile-o" tooltip="28 going" />

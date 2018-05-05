@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
-import { Layout, Icon, Row, Col, Button } from 'antd';
+import { Layout, Icon, Row, Col } from 'antd';
 
 class Header extends Component {
   render() {

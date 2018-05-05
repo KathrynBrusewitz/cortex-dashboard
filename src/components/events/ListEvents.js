@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Table, Divider, Button, Row, Col, Calendar, Popconfirm } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
 import Stat from '../shared/Stat';
-import Loading from '../shared/Loading';
 
 import { eventsActions } from '../../actions';
 
@@ -60,7 +59,7 @@ class ListEvents extends Component {
               okText="Yes"
               cancelText="No"
             >
-              <a href="#">Delete</a>
+              <a href={null}>Delete</a>
             </Popconfirm>
           </span>
         ),

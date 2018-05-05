@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Tag, Button, Row, Col, Divider, Popconfirm } from 'antd';
+import { Row, Divider, Popconfirm } from 'antd';
 import Loading from '../shared/Loading';
 import Avatar from '../shared/Avatar';
 
@@ -49,7 +49,7 @@ class ViewUser extends Component {
                 okText="Yes"
                 cancelText="No"
               >
-                <a href="#">Delete</a>
+                <a href={null}>Delete</a>
               </Popconfirm>
             </span>
           }

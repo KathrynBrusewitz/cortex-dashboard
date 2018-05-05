@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Layout, Row, Col, Icon } from 'antd';
+import { Layout } from 'antd';
 import Header from './Header';
 
 import Marketing from './Marketing';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Layout, Row, Col, Icon } from 'antd';
+import { Row, Col } from 'antd';
 import LoginForm from './LoginForm';
 
 import { authActions } from '../../actions';

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Radio } from 'antd';
-import Mentions from '../shared/Mentions';
+import { Form, Input, Button, Radio } from 'antd';
 import UploadDragger from '../shared/UploadDragger';
 import SelectUserTags from '../shared/SelectUserTags';
 

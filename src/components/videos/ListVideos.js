@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col, Popconfirm, Popover } from 'antd';
-import Stat from '../shared/Stat';
+import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import Loading from '../shared/Loading';
 import AvatarList from '../shared/AvatarList';
 
@@ -36,6 +35,7 @@ class ListVideos extends Component {
       title: 'Title',
       dataIndex: 'title',
       key: 'title',
+      width: 250,
     }, {
       title: 'Creators',
       dataIndex: 'creators',
@@ -72,7 +72,7 @@ class ListVideos extends Component {
             okText="Yes"
             cancelText="No"
           >
-            <a href="#">Delete</a>
+            <a href={null}>Delete</a>
           </Popconfirm>
         </span>
       ),

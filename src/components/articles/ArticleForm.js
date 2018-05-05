@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Radio } from 'antd';
-import Mentions from '../shared/Mentions';
+import { Form, Input, Button, Radio } from 'antd';
 import SelectUserTags from '../shared/SelectUserTags';
 
 class ArticleForm extends Component {

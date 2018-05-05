@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Radio } from 'antd';
-import Mentions from '../shared/Mentions';
-import SelectUserTags from '../shared/SelectUserTags';
 
 class UserForm extends Component {
   handleSubmit = (e) => {

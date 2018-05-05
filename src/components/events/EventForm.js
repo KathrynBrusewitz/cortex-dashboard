@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Radio } from 'antd';
 import moment from 'moment';
-import CheckableTags from '../shared/CheckableTags';
-import Mentions from '../shared/Mentions';
+import { Form, Input, Button } from 'antd';
 import DateTimePicker from '../shared/DateTimePicker';
 
 const removeKey = (object, key) => {

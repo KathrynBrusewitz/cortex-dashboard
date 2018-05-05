@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col, Icon } from 'antd';
 
 class Marketing extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

@@ -114,3 +114,20 @@ shows all local and remote branches that (local) git knows about.
 
 ### `git remote update origin --prune`
 refreshes the local list of remote branches.
+
+When you want to retain the styling of a link but not necessarily route to another page when clicked, use `<a href={null}></a>`, not `<a href="#"></a>`. Using `#` will trigger `Links must not point to "#". Use a more descriptive href or use a button instead jsx-a11y/href-no-hash`.
+
+Example:
+```
+<Popconfirm
+  title="Are you sure delete this event?"
+  onConfirm={() => {
+    this.props.deleteEvent(record._id);
+  }}
+  onCancel={() => {}}
+  okText="Yes"
+  cancelText="No"
+>
+  <a href={null}>Delete</a>
+</Popconfirm>
+```
