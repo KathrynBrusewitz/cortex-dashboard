@@ -6,7 +6,6 @@ import queryString from 'query-string';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
-const token = cookies.get('token');
 
 // Types
 export const eventsConstants = {
@@ -50,7 +49,7 @@ function getEvents(filters = {}) {
       method: 'get',
       url: `/events?${query}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -79,7 +78,7 @@ function getEvent(id) {
       method: 'get',
       url: `/events/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -118,7 +117,7 @@ function createEvent(fields) {
       data: {
         ...fields,
       },
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -159,7 +158,7 @@ function updateEvent(fields, id) {
       data: {
         ...fields,
       },
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -190,7 +189,7 @@ function deleteEvent(id) {
       method: 'delete',
       url: `/events/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {

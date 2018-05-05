@@ -6,7 +6,6 @@ import queryString from 'query-string';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
-const token = cookies.get('token');
 
 // Types
 export const termsConstants = {
@@ -50,7 +49,7 @@ function getTerms(filters = {}) {
       method: 'get',
       url: `/terms?${query}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -79,7 +78,7 @@ function getTerm(id) {
       method: 'get',
       url: `/terms/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -118,7 +117,7 @@ function createTerm(fields) {
       data: {
         ...fields,
       },
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -159,7 +158,7 @@ function updateTerm(fields, id) {
       data: {
         ...fields,
       },
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -190,7 +189,7 @@ function deleteTerm(id) {
       method: 'delete',
       url: `/terms/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {

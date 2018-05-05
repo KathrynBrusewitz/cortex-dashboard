@@ -6,7 +6,6 @@ import queryString from 'query-string';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
-const token = cookies.get('token');
 
 // Types
 export const contentConstants = {
@@ -50,7 +49,7 @@ function getContents(filters = {}) {
       method: 'get',
       url: `/prot/contents?${query}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -79,7 +78,7 @@ function getContent(id) {
       method: 'get',
       url: `/prot/contents/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -118,7 +117,7 @@ function createContent(fields) {
       data: {
         ...fields,
       },
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -159,7 +158,7 @@ function updateContent(fields, id) {
       data: {
         ...fields,
       },
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -190,7 +189,7 @@ function deleteContent(id) {
       method: 'delete',
       url: `/contents/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {

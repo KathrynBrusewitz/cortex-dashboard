@@ -6,7 +6,6 @@ import queryString from 'query-string';
 
 const baseURL = 'http://localhost:8080/api/';
 const cookies = new Cookies();
-const token = cookies.get('token');
 
 // Types
 export const usersConstants = {
@@ -49,7 +48,7 @@ function getUsers(filters = {}) {
       method: 'get',
       url: `/users?${query}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -78,7 +77,7 @@ function getUser(id) {
       method: 'get',
       url: `/users/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -110,7 +109,7 @@ function updateUser(fields, id) {
       data: {
         ...fields,
       },
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -141,7 +140,7 @@ function deleteUser(id) {
       method: 'delete',
       url: `/users/${id}`,
       baseURL,
-      headers: {'x-access-token': token},
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
