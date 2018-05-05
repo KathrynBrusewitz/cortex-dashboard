@@ -6,7 +6,7 @@ import Header from './Header';
 import Marketing from './Marketing';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
-import DeadEnd from '../shared/DeadEnd';
+import DeadEnd from './DeadEnd';
 
 class Landing extends Component {
   render() {

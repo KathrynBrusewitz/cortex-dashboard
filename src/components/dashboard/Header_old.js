@@ -1,29 +1,30 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
-import { Layout, Icon, Row, Col, Menu } from 'antd';
+import { Layout, Icon, Row, Col } from 'antd';
 import DropdownMenu from './DropdownMenu';
 import Avatar from '../shared/Avatar';
 
 import { menuActions } from '../../actions';
-import HeaderMenu from "./HeaderMenu";
 
 class Header extends Component {
+  toggleMenu = () => {
+    this.props.openMenu(!this.props.menuOpen);
+  }
+
   render() {
     return (
-      <Layout.Header theme="dark" style={{ padding: '0px initial 0px 0px'}}>
+      <Layout.Header style={{ background: '#fff', padding: '0px initial 0px 0px'}}>
         <Row type="flex" justify="space-between" align="middle">
-          <Col style={{fontSize: 40}}>
-            <Link to="/" style={{ lineHeight: '64px', color: "#fff" }}>
-              <Icon type="api" />
-            </Link>
-          </Col>
-          <HeaderMenu />
+          <Icon
+            className='trigger'
+            type={this.props.menuOpen ? 'menu-fold': 'menu-unfold'}
+            onClick={this.toggleMenu}
+          />
           <Col>
-            <span style={{ marginRight: 8, color: '#fff' }}>{this.props.user.name}</span>
+            <span style={{ marginRight: 8 }}>{this.props.user.name}</span>
             <DropdownMenu>
-              <Avatar name={this.props.user.name} style={{ lineHeight: '64px', cursor: 'pointer', backgroundColor: '#666' }} />
+              <Avatar name={this.props.user.name} style={{ lineHeight: '64px', cursor: 'pointer' }} />
             </DropdownMenu>
           </Col>
         </Row>

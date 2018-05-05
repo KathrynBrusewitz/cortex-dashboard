@@ -12,6 +12,7 @@ import { authActions } from '../../actions'
 
 class App extends Component {
   componentDidMount() {
+    // Browser may have refreshed and store re-initialized
     if (!this.props.user) {
       this.props.tokenLogin();
     }

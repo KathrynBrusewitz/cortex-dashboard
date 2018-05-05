@@ -36,18 +36,32 @@ import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
 import Header from './Header';
 import Sider from './Sider';
+import Contents from "./Contents";
+
+// Troy's Example
+// <Route name="Users" path="users">
+//   <IndexRoute component={ListUsers} />
+//   <Route name="Profile" path="me" component={ShowUser} />
+//   <Route name="Invite User" path="invite" component={ShowInviteUser} />
+//   <Route name="User Profile" path=":userId" component={ShowUser} />
+// </Route>
 
 class Dashboard extends Component {
   render() {
     return (
       <Layout>
-        <Sider />
+        {/* <Sider /> */}
         <Layout>
           <Header />
           <Layout.Content className='dashboard-content'>
             <Switch>
               <Route exact path="/" component={Analytics} />
               <Route exact path="/settings" component={Settings} />
+
+
+
+              <Route exact path="/contents" component={Contents} />
+
 
               <Route exact path="/articles" component={ListArticles} />
               <Route exact path="/articles/new" component={CreateArticle} />

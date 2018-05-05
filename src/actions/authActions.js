@@ -48,7 +48,7 @@ function login({ email, password }) {
         cookies.set('token', res.data.token, { path: '/' });
         dispatch(success(res.data));
         dispatch(alertActions.success(`Welcome ${res.data.name}!`));
-        dispatch(push('/articles'));
+        dispatch(push('/'));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -82,7 +82,7 @@ function tokenLogin() {
       .then(res => {
         if (res.data.success) {
           dispatch(success(res.data));
-          dispatch(alertActions.success(`Welcome ${res.data.name}!`));
+          dispatch(alertActions.success(`Welcome back ${res.data.name}!`));
         } else {
           dispatch(failure());
           dispatch(alertActions.error(res.data.message));
