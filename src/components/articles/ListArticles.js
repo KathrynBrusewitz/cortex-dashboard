@@ -16,13 +16,17 @@ class ListArticles extends Component {
     };
   }
 
+  rehydrateState() {
+    this.props.getContents({ type: 'article' })
+  }
+
   componentDidMount() {
-    this.props.getContents({ type: 'article' });
+    this.rehydrateState();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.isDeletingContent) {
-      this.props.getContents({ type: 'article' });
+      this.rehydrateState();
     }
   }
 

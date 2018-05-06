@@ -35,10 +35,11 @@ class ListTerms extends Component {
         title: 'Term',
         dataIndex: 'term',
         key: 'term',
+        width: 240,
       }, {
-        title: 'Description',
-        dataIndex: 'description',
-        key: 'description',
+        title: 'Definition',
+        dataIndex: 'definition',
+        key: 'definition',
       }, {
         title: 'Actions',
         dataIndex: 'actions',
