@@ -30,6 +30,14 @@ class TermForm extends Component {
             <Input />
           )}
         </Form.Item>
+        <Form.Item label="Definition">
+          {getFieldDecorator('definition', {
+            rules: [{ required: true }],
+            initialValue: term.definition || null,
+          })(
+            <Input.TextArea />
+          )}
+        </Form.Item>
         <Form.Item label="Description">
           {getFieldDecorator('description', {
             rules: [{ required: true }],
