@@ -49,7 +49,6 @@ function getTerms(filters = {}) {
       method: 'get',
       url: `/terms?${query}`,
       baseURL,
-      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -78,7 +77,6 @@ function getTerm(id) {
       method: 'get',
       url: `/terms/${id}`,
       baseURL,
-      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {

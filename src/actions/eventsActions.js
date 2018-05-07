@@ -49,7 +49,6 @@ function getEvents(filters = {}) {
       method: 'get',
       url: `/events?${query}`,
       baseURL,
-      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -78,7 +77,6 @@ function getEvent(id) {
       method: 'get',
       url: `/events/${id}`,
       baseURL,
-      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
