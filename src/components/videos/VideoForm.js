@@ -36,6 +36,14 @@ class VideoForm extends Component {
             <Input />
           )}
         </Form.Item>
+        <Form.Item label="Video URL">
+          {getFieldDecorator('url', {
+            rules: [{ required: true }],
+            initialValue: content.url || null,
+          })(
+            <Input />
+          )}
+        </Form.Item>
         <Form.Item label="Description" help="Summarize or describe the video under 160 characters. This shows up underneath the title when scrolling through content">
           {getFieldDecorator('description', {
             initialValue: content.description || null,
