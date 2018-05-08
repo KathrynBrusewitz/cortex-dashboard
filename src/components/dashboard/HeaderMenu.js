@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 const items = [
-  { icon: 'pie-chart', name: 'Analytics', route: '/' },
+  { icon: 'pie-chart', name: 'Analytics', route: '/analytics' },
   { icon: 'profile', name: 'Contents', route: '/contents' },
   // { icon: 'profile', name: 'Articles', route: '/articles' },
   // { icon: 'sound', name: 'Podcasts', route: '/podcasts' },
@@ -27,8 +27,10 @@ const menuItems = (
 
 class HeaderMenu extends Component {
   getMenuKey() {
-    const key = items.findIndex(item => (item.route === this.props.location.pathname));
+    const key = items.findIndex(item => (this.props.location.pathname.startsWith(item.route)));
     // antd.Menu.defaultSelectedKeys only accepts an array of strings
+    console.log(key);
+    console.log(this.props.location.pathname);
     return [key.toString()];
   }
 

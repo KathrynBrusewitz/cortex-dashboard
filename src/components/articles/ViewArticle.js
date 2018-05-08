@@ -38,7 +38,7 @@ class ViewArticle extends Component {
     return (
       <div>
         <Row type="flex" justify="end">
-          <Link to={`/articles/${content._id}/edit`}>Edit</Link>
+          <Link to={`/contents/articles/${content._id}/edit`}>Edit</Link>
           <Divider type="vertical" />
           <Popconfirm
             title="Are you sure delete this article?"

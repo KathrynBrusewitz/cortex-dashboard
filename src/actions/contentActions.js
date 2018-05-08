@@ -122,7 +122,7 @@ function createContent(fields) {
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(push(`/${fields.type}s`));
+        dispatch(push(`/contents/${fields.type}s`));
         dispatch(alertActions.success('Successfully created!'));
       } else {
         dispatch(failure());
@@ -163,7 +163,7 @@ function updateContent(fields, id) {
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(push(`/${fields.type}s`));
+        dispatch(push(`/contents/${fields.type}s`));
         dispatch(alertActions.success('Successfully updated!'));
       } else {
         dispatch(failure());

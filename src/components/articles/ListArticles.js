@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
+import moment from 'moment';
 import Loading from '../shared/Loading';
 
 import { contentActions } from '../../actions';
@@ -54,19 +55,21 @@ class ListArticles extends Component {
         title: 'Update Time',
         dataIndex: 'updateTime',
         key: 'updateTime',
+        render: (text, record) => moment(text).fromNow(),
       }, {
         title: 'Publish Time',
         dataIndex: 'publishTime',
         key: 'publishTime',
+        render: (text, record) => text ? moment(text).fromNow() : null,
       }, {
         title: 'Actions',
         dataIndex: 'actions',
         key: 'actions',
         render: (text, record) => (
           <span>
-            <Link to={`/articles/${record._id}`}>View</Link>
+            <Link to={`/contents/articles/${record._id}`}>View</Link>
             <Divider type="vertical" />
-            <Link to={`/articles/${record._id}/edit`}>Edit</Link>
+            <Link to={`/contents/articles/${record._id}/edit`}>Edit</Link>
             <Divider type="vertical" />
             <Popconfirm
               title="Are you sure delete this article?"
@@ -116,7 +119,7 @@ class ListArticles extends Component {
               </span>
             </Col>
             <Col>
-              <Link to={'/articles/new'}>
+              <Link to={'/contents/articles/new'}>
                 <Button type="primary">
                   Create New Article
                 </Button>

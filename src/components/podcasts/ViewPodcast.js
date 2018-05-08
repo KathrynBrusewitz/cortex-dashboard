@@ -38,7 +38,7 @@ class ViewPodcast extends Component {
     return (
       <div>
         <Row type="flex" justify="end">
-          <Link to={`/podcasts/${content._id}/edit`}>Edit</Link>
+          <Link to={`/contents/podcasts/${content._id}/edit`}>Edit</Link>
           <Divider type="vertical" />
           <Popconfirm
             title="Are you sure delete this podcast?"

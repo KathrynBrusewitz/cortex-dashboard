@@ -38,7 +38,7 @@ class ViewVideo extends Component {
     return (
       <div>
         <Row type="flex" justify="end">
-          <Link to={`/videos/${content._id}/edit`}>Edit</Link>
+          <Link to={`/contents/videos/${content._id}/edit`}>Edit</Link>
           <Divider type="vertical" />
           <Popconfirm
             title="Are you sure delete this article?"

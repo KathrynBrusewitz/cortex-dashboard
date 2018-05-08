@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
+import moment from 'moment';
 import Loading from '../shared/Loading';
 import AvatarList from '../shared/AvatarList';
 
@@ -50,10 +51,12 @@ class ListPodcasts extends Component {
         title: 'Update Time',
         dataIndex: 'updateTime',
         key: 'updateTime',
+        render: (text, record) => moment(text).fromNow(),
       }, {
         title: 'Publish Time',
         dataIndex: 'publishTime',
         key: 'publishTime',
+        render: (text, record) => text ? moment(text).fromNow() : null,
       }, {
         title: 'Duration',
         dataIndex: 'duration',
@@ -64,9 +67,9 @@ class ListPodcasts extends Component {
         key: 'actions',
         render: (text, record) => (
           <span>
-            <Link to={`/podcasts/${record._id}`}>View</Link>
+            <Link to={`/contents/podcasts/${record._id}`}>View</Link>
             <Divider type="vertical" />
-            <Link to={`/podcasts/${record._id}/edit`}>Edit</Link>
+            <Link to={`/contents/podcasts/${record._id}/edit`}>Edit</Link>
             <Divider type="vertical" />
             <Popconfirm
               title="Are you sure delete this podcast?"
@@ -116,7 +119,7 @@ class ListPodcasts extends Component {
               </span>
             </Col>
             <Col>
-              <Link to={'/podcasts/new'}>
+              <Link to={'/contents/podcasts/new'}>
                 <Button type="primary">
                   Create New Podcast
                 </Button>

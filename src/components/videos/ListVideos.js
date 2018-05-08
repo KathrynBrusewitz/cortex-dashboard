@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
+import moment from 'moment';
 import Loading from '../shared/Loading';
 import AvatarList from '../shared/AvatarList';
 
@@ -49,6 +50,7 @@ class ListVideos extends Component {
       title: 'Publish Time',
       dataIndex: 'publishTime',
       key: 'publishTime',
+      render: (text, record) => text ? moment(text).fromNow() : null,
     }, {
       title: 'Duration',
       dataIndex: 'duration',
@@ -59,9 +61,9 @@ class ListVideos extends Component {
       key: 'actions',
       render: (text, record) => (
         <span>
-          <Link to={`/videos/${record._id}`}>View</Link>
+          <Link to={`/contents/videos/${record._id}`}>View</Link>
           <Divider type="vertical" />
-          <Link to={`/videos/${record._id}/edit`}>Edit</Link>
+          <Link to={`/contents/videos/${record._id}/edit`}>Edit</Link>
           <Divider type="vertical" />
           <Popconfirm
             title="Are you sure delete this video?"
@@ -110,7 +112,7 @@ class ListVideos extends Component {
               </span>
             </Col>
             <Col>
-              <Link to={'/videos/new'}>
+              <Link to={'/contents/videos/new'}>
                 <Button type="primary">
                   Create New Video
                 </Button>

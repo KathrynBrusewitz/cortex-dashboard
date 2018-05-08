@@ -36,15 +36,8 @@ import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
 import Header from './Header';
 import Sider from './Sider';
-import Contents from "./Contents";
-
-// Troy's Example
-// <Route name="Users" path="users">
-//   <IndexRoute component={ListUsers} />
-//   <Route name="Profile" path="me" component={ShowUser} />
-//   <Route name="Invite User" path="invite" component={ShowInviteUser} />
-//   <Route name="User Profile" path=":userId" component={ShowUser} />
-// </Route>
+import Contents from './Contents';
+import ContentsMenu from './ContentsMenu';
 
 class Dashboard extends Component {
   render() {
@@ -55,29 +48,12 @@ class Dashboard extends Component {
           <Header />
           <Layout.Content className='dashboard-content'>
             <Switch>
-              <Route exact path="/" component={Analytics} />
+              {/* <Route exact path="/" component={Analytics} /> */}
+              <Route exact path="/analytics" component={Analytics} />
               <Route exact path="/settings" component={Settings} />
 
-
-
-              <Route exact path="/contents" component={Contents} />
-
-
-              <Route exact path="/articles" component={ListArticles} />
-              <Route exact path="/articles/new" component={CreateArticle} />
-              <Route exact path="/articles/:id" component={ViewArticle} />
-              <Route exact path="/articles/:id/edit" component={EditArticle} />
-
-              <Route exact path="/videos" component={ListVideos} />
-              <Route exact path="/videos/new" component={CreateVideo} />
-              <Route exact path="/videos/:id" component={ViewVideo} />
-              <Route exact path="/videos/:id/edit" component={EditVideo} />
-
-              <Route exact path="/podcasts" component={ListPodcasts} />
-              <Route exact path="/podcasts/new" component={CreatePodcast} />
-              <Route exact path="/podcasts/:id" component={ViewPodcast} />
-              <Route exact path="/podcasts/:id/edit" component={EditPodcast} />
-
+              <Route path="/contents" component={Contents} />
+              
               <Route exact path="/users" component={ListUsers} />
               <Route exact path="/users/:id" component={ViewUser} />
               <Route exact path="/users/:id/edit" component={EditUser} />
