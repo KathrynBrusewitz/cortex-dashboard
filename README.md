@@ -11,37 +11,43 @@ More extensive documentation can be found in `/docs`. Below should give you enou
 ```
 Frontend
 
+[ ] User Invite  
+  [ ] Form Signup  
+[ ] Content Body Supports Rich Text and Media  
+[ ] User Settings  
+[ ] Mobile App Settings  
+[ ] Dashboard Settings  
 [x] General Page Routing  
 [x] Global Alerts  
 [x] Main Landing Components  
-  [x] Form Login
-[ ] Main Dash Components   
+  [x] Form Login  
+[x] Main Dash Components   
   Articles: [x] List [x] Create [x] Edit [x] View  
   Podcasts: [x] List [x] Create [x] Edit [x] View  
   Videos: [x] List [x] Create [x] Edit [x] View  
-  Glossary: [x] List [ ] Create [ ] Edit [ ] View  
+  Glossary: [x] List [x] Create [x] Edit [x] View  
   Events: [x] List [x] Create [x] Edit [x] View  
-  Users: [x] List [ ] Create [ ] Edit [ ] View  
-[ ] User Invite
-  [ ] Form Signup
-[x] Cookies (See Api README)
-  [x] Setting/Removing Token in Cookies
-  [x] Login with Token: Call server
-[ ] Populate Edit Forms from Store
+  Users: [x] List [x] Create [x] Edit [x] View  
+[x] Cookies (See Api README)  
+  [x] Setting/Removing Token in Cookies  
+  [x] Login with Token: Call server  
+[x] Populate Edit Forms from Store  
 
 Middle
 
 [ ] Host on Heroku Dynos (or Zeit or Amazon ec2)
-[ ] Use `react-ga` (Google Analytics) to track page views, etc.
+[ ] Use `react-ga` (Google Analytics)
 
 Backend
 
 See Api README for more detailed todo
-[x] Connect with Cortex API and MongoDB (Local Env)  
+[x] Use Cortex API and MongoDB (Local Env)  
 [x] Schema
 [x] Login with Token: Verify, then send back User
 
 ```
+
+# Setup
 
 ## Setup and Run Dashboard
 
@@ -65,6 +71,8 @@ The page will reload if you make edits. You will also see any lint errors in the
 
 Clone the [Cortex API](https://github.com/KathrynBrusewitz/cortex-api.git).<br>
 Follow the README instructions and run it alongside your Dashboard instance.
+
+# Development
 
 ## Folder structure
 
@@ -93,10 +101,11 @@ Just my opinion, but generally:
 
 App design uses components from [Ant Design React UI Library](https://ant.design).
 
-## Developer Notes
+# Developer Notes
 
 <i>To be organized into docs at a later time.</i>
 
+## Component Lifecycle
 `componentDidMount` is the best place to call actions making an API calls that hydrate the Redux state.
 
 ```
@@ -104,8 +113,6 @@ componentDidMount() is invoked immediately after a component is mounted. Initial
 ```
 
 Avoid `componentWillMount`. It will be deprecated in React 17.
-
-Consider [Authenticated Components](https://stackoverflow.com/questions/34624257/react-router-redux-how-can-i-update-state-on-load-of-page-for-authentication) or fallback on Authenticated Routes.
 
 ## Useful git Commands
 
@@ -115,6 +122,7 @@ shows all local and remote branches that (local) git knows about.
 ### `git remote update origin --prune`
 refreshes the local list of remote branches.
 
+## Other
 When you want to retain the styling of a link but not necessarily route to another page when clicked, use `<a href={null}></a>`, not `<a href="#"></a>`. Using `#` will trigger `Links must not point to "#". Use a more descriptive href or use a button instead jsx-a11y/href-no-hash`.
 
 Example:
