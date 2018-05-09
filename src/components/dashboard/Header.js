@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Layout, Icon, Row, Col, Menu } from 'antd';
+import { Layout, Icon, Row, Col } from 'antd';
 import DropdownMenu from './DropdownMenu';
 import Avatar from '../shared/Avatar';
 

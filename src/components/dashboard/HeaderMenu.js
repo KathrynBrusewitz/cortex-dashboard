@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Layout, Menu, Icon } from 'antd';
+import { Menu, Icon } from 'antd';
 
 const items = [
   { icon: 'pie-chart', name: 'Analytics', route: '/analytics' },

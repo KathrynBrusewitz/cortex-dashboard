@@ -2,22 +2,6 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 
-import CreateTerm from '../terms/CreateTerm';
-import EditTerm from '../terms/EditTerm';
-import ListTerms from '../terms/ListTerms';
-
-import CreateEvent from '../events/CreateEvent';
-import ViewEvent from '../events/ViewEvent';
-import EditEvent from '../events/EditEvent';
-import ListEvents from '../events/ListEvents';
-
-import ViewUser from '../users/ViewUser';
-import EditUser from '../users/EditUser';
-import ListUsers from '../users/ListUsers';
-
-import Analytics from '../analytics/Analytics';
-import DeadEnd from '../shared/DeadEnd';
-import Settings from './Settings';
 import Header from './Header';
 import Breadcrumbs from "./Breadcrumbs";
 

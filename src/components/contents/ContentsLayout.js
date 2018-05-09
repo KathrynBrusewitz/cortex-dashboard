@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
-import { Layout, Menu, Icon } from 'antd';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { Layout } from 'antd';
 
 import CreateArticle from '../articles/CreateArticle';
 import ViewArticle from '../articles/ViewArticle';

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Switch, Route, Link } from 'react-router-dom';
-import { Layout, Menu, Icon } from 'antd';
+import { Link } from 'react-router-dom';
+import { Menu, Icon } from 'antd';
 
 const items = [
   { icon: 'profile', name: 'Articles', route: '/contents/articles' },
