@@ -104,7 +104,6 @@ class ListArticles extends Component {
 
     return (
       <div>
-        <h1>Articles</h1>
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>

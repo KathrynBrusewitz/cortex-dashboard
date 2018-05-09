@@ -21,9 +21,9 @@ const menuItems = (
 );
 
 class ContentsMenu extends Component {
-  getMenuKey() {
-    const key = items.findIndex(item => (item.route === this.props.location.pathname));
-    // antd.Menu.defaultSelectedKeys only accepts an array of strings
+  getKey() {
+    const key = items.findIndex(item => (this.props.pathname.startsWith(item.route)));
+    // antd.Menu.selectedKeys expects type String[]
     return [key.toString()];
   }
 
@@ -32,7 +32,8 @@ class ContentsMenu extends Component {
       <Menu
         mode="horizontal"
         style={{ lineHeight: '64px' }}
-        defaultSelectedKeys={this.getMenuKey()}
+        // defaultSelectedKeys did not work with react-router-dom's <Redirect/>
+        selectedKeys={this.getKey()}
       >
         {menuItems}
       </Menu>
@@ -41,7 +42,7 @@ class ContentsMenu extends Component {
 }
 
 const mapStateToProps = state => ({
-  location: state.router.location,
+  pathname: state.router.location.pathname,
 });
 
 export default connect(mapStateToProps)(ContentsMenu);

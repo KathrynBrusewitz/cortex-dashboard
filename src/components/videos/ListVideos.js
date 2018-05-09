@@ -97,7 +97,6 @@ class ListVideos extends Component {
 
     return (
       <div>
-        <h1>Videos</h1>
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>

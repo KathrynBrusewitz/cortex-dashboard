@@ -8,7 +8,7 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import DeadEnd from './DeadEnd';
 
-class Landing extends Component {
+class LandingLayout extends Component {
   render() {
     return (
       <Layout>
@@ -26,4 +26,4 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+export default LandingLayout;

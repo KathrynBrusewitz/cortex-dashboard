@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 import CreateArticle from '../articles/CreateArticle';
@@ -19,13 +19,19 @@ import EditPodcast from '../podcasts/EditPodcast';
 import ListPodcasts from '../podcasts/ListPodcasts';
 import ContentsMenu from './ContentsMenu';
 
-class Contents extends Component {
+import DeadEnd from "../shared/DeadEnd";
+
+class ContentsLayout extends Component {
   render() {
     return (
       <Layout>
         <ContentsMenu />
-        <Layout.Content className='dashboard-content'>
+        <Layout.Content style={{ padding: '20px', background: '#fff' }}>
           <Switch>
+            {/* Redirects */}
+            <Redirect exact from='/contents' to='/contents/articles'/>
+
+            {/* Contents Layout Routes */}
             <Route exact path="/contents/articles" component={ListArticles} />
             <Route exact path="/contents/articles/new" component={CreateArticle} />
             <Route exact path="/contents/articles/:id" component={ViewArticle} />
@@ -39,7 +45,10 @@ class Contents extends Component {
             <Route exact path="/contents/podcasts" component={ListPodcasts} />
             <Route exact path="/contents/podcasts/new" component={CreatePodcast} />
             <Route exact path="/contents/podcasts/:id" component={ViewPodcast} />
-            <Route exact path="/contents/podcasts/:id/edit" component={EditPodcast} /> 
+            <Route exact path="/contents/podcasts/:id/edit" component={EditPodcast} />
+
+            {/* No Matching Route */}
+            <Route component={DeadEnd} />
           </Switch>
         </Layout.Content>
       </Layout>
@@ -47,4 +56,4 @@ class Contents extends Component {
   }
 }
 
-export default Contents;
+export default ContentsLayout;
