@@ -38,6 +38,7 @@ class ListPodcasts extends Component {
         dataIndex: 'title',
         key: 'title',
         width: 250,
+        sorter: (a, b) => a.title.localeCompare(b.title),
       }, {
         title: 'Writers',
         dataIndex: 'creators',
@@ -47,16 +48,23 @@ class ListPodcasts extends Component {
         title: 'Status',
         dataIndex: 'state',
         key: 'state',
+        sorter: (a, b) => a.state.localeCompare(b.state),
       }, {
-        title: 'Update Time',
+        title: 'Updated',
         dataIndex: 'updateTime',
         key: 'updateTime',
         render: (text, record) => moment(text).fromNow(),
+        sorter: (a, b) => moment(a.updateTime).diff(moment(b.updateTime)),
       }, {
-        title: 'Publish Time',
+        title: 'Published',
         dataIndex: 'publishTime',
         key: 'publishTime',
         render: (text, record) => text ? moment(text).fromNow() : null,
+        sorter: (a, b) => {
+          const aTime = a.publishTime ? moment(a.publishTime).unix() : 0;
+          const bTime = b.publishTime ? moment(b.publishTime).unix() : 0;
+          return aTime - bTime;
+        },
       }, {
         title: 'Duration',
         dataIndex: 'duration',

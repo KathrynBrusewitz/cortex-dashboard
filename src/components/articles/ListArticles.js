@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm, Icon } from 'antd';
 import moment from 'moment';
 import Loading from '../shared/Loading';
 
@@ -14,6 +14,8 @@ class ListArticles extends Component {
     super(props);
     this.state = {
       selectedRowKeys: [],
+      filteredInfo: null,
+      sortedInfo: null,
     };
   }
 
@@ -42,6 +44,7 @@ class ListArticles extends Component {
         dataIndex: 'title',
         key: 'title',
         width: 250,
+        sorter: (a, b) => a.title.localeCompare(b.title),
       }, {
         title: 'Writers',
         dataIndex: 'creators',
@@ -51,16 +54,23 @@ class ListArticles extends Component {
         title: 'Status',
         dataIndex: 'state',
         key: 'state',
+        sorter: (a, b) => a.state.localeCompare(b.state),
       }, {
-        title: 'Update Time',
+        title: 'Updated',
         dataIndex: 'updateTime',
         key: 'updateTime',
         render: (text, record) => moment(text).fromNow(),
+        sorter: (a, b) => moment(a.updateTime).diff(moment(b.updateTime)),
       }, {
-        title: 'Publish Time',
+        title: 'Published',
         dataIndex: 'publishTime',
         key: 'publishTime',
         render: (text, record) => text ? moment(text).fromNow() : null,
+        sorter: (a, b) => {
+          const aTime = a.publishTime ? moment(a.publishTime).unix() : 0;
+          const bTime = b.publishTime ? moment(b.publishTime).unix() : 0;
+          return aTime - bTime;
+        },
       }, {
         title: 'Actions',
         dataIndex: 'actions',
