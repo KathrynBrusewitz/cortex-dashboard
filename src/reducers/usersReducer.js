@@ -7,6 +7,7 @@ const USERS_INITIAL = {
   isGettingUser: false,
   isUpdatingUser: false,
   isDeletingUser: false,
+  isInvitingUser: false,
 };
 
 export const usersReducer = (state = USERS_INITIAL, action) => {
@@ -75,6 +76,22 @@ export const usersReducer = (state = USERS_INITIAL, action) => {
       return {
         ...state,
         isDeletingUser: false,
+      };
+
+    case usersConstants.INVITE_USER_REQUEST:
+      return {
+        ...state,
+        isInvitingUser: true,
+      };
+    case usersConstants.INVITE_USER_SUCCESS:
+      return {
+        ...state,
+        isInvitingUser: false,
+      };
+    case usersConstants.INVITE_USER_FAILURE:
+      return {
+        ...state,
+        isInvitingUser: false,
       };
 
     default:

@@ -13,7 +13,7 @@ class EditUser extends Component {
   }
 
   render() {
-    const { updateUser, isUpdatingUser, user, isGettingUser } = this.props;
+    const { updateUser, isUpdatingUser, user, isGettingUser, currentUser } = this.props;
 
     if (isGettingUser) {
       return (
@@ -33,7 +33,13 @@ class EditUser extends Component {
     return (
       <div>
         <h1>Update User</h1>
-        <UserForm onSubmit={updateUser} loading={isUpdatingUser} edit={true} user={user} />
+        <UserForm
+          onSubmit={updateUser}
+          loading={isUpdatingUser} 
+          edit={true} 
+          user={user} 
+          isCurrentUser={currentUser._id === user._id} 
+        />
       </div>
     );
   }
@@ -43,6 +49,7 @@ const mapStateToProps = state => ({
   isUpdatingUser: state.users.isUpdatingUser,
   isGettingUser: state.users.isGettingUser,
   user: state.users.user,
+  currentUser: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

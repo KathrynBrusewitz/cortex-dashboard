@@ -8,19 +8,18 @@ import Loading from '../shared/Loading';
 import { usersActions } from '../../actions';
 
 class ListUsers extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedRowKeys: [],
-    };
-  }
-
-  componentDidMount() {
+  rehydrateState() {
     this.props.getUsers();
   }
 
-  onSelectChange = (selectedRowKeys) => {
-    this.setState({ selectedRowKeys });
+  componentDidMount() {
+    this.rehydrateState();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.isDeletingUser) {
+      this.rehydrateState();
+    }
   }
 
   getColumns() {
@@ -29,23 +28,26 @@ class ListUsers extends Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
+        sorter: (a, b) => a.name.localeCompare(b.name),
       }, {
         title: 'Email',
         dataIndex: 'email',
         key: 'email',
+        sorter: (a, b) => a.email.localeCompare(b.email),
       }, {
         title: 'Role',
         dataIndex: 'role',
         key: 'role',
+        sorter: (a, b) => a.role.localeCompare(b.role),
       }, {
         title: 'Actions',
         dataIndex: 'actions',
         key: 'actions',
         render: (text, record) => (
           <span>
-            <Link to={`/users/${record._id}`}>View</Link>
+            <Link to={`/users/userbase/${record._id}`}>View</Link>
             <Divider type="vertical" />
-            <Link to={`/users/${record._id}/edit`}>Edit</Link>
+            <Link to={`/users/userbase/${record._id}/edit`}>Edit</Link>
             <Divider type="vertical" />
             { (this.props.currentUser._id !== record._id) &&
               <Popconfirm
@@ -67,14 +69,7 @@ class ListUsers extends Component {
   }
 
   render() {
-    const { selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
-
-    if (this.props.isGettingUsers) {
+    if (this.props.isGettingUsers || this.props.isDeletingUser) {
       return (
         <Loading />
       );
@@ -82,25 +77,24 @@ class ListUsers extends Component {
 
     return (
       <div>
-        <h1>Users</h1>
+        <h1>Userbase</h1>
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>
-              <Button>
-                Email
-              </Button>
-              <span style={{ marginLeft: 8 }}>
-                {hasSelected ? `Selected ${selectedRowKeys.length} users` : ''}
-              </span>
-            </Col>
-            <Col>
-              <Button type="primary">
-                Invite New User
-              </Button>
+              <Link to="/users/userbase/new">
+                <Button type="primary">
+                  Create New User
+                </Button>
+              </Link>
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.users} columns={this.getColumns()} loading={this.props.isGettingUsers || this.props.isDeletingUser} rowKey={record => record._id} />
+        <Table 
+          dataSource={this.props.users} 
+          columns={this.getColumns()} 
+          loading={this.props.isGettingUsers || this.props.isDeletingUser} 
+          rowKey={record => record._id} 
+        />
       </div>
     );
   }

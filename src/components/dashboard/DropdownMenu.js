@@ -19,7 +19,7 @@ class DropdownMenu extends Component {
     return (
       <Menu onClick={this.handleClick}>
         <Menu.Item key="1">
-          <Link to={`/users/${currentUser._id}`}>Profile Settings</Link>
+          <Link to={`/users/userbase/${currentUser._id}`}>Profile Settings</Link>
         </Menu.Item>
         <Menu.Item key="2">
           <Link to="/settings">Cortex Settings</Link>

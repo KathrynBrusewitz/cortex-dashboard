@@ -38,21 +38,32 @@ class UserForm extends Component {
             <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
           )}
         </Form.Item>
-        <Form.Item
-          label="Choose a Role"
-        >
-          {getFieldDecorator('role', {
-            rules: [{ required: true }],
-            initialValue: user.role || null,
-          })(
-            <Radio.Group>
-              <Radio value="admin">Admin</Radio>
-              <Radio value="writer">Writer</Radio>
-              <Radio value="artist">Artist</Radio>
-              <Radio value="reader">Reader</Radio>
-            </Radio.Group>
-          )}
-        </Form.Item>
+        { !this.props.edit &&
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [{ required: true }],
+            })(
+              <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+            )}
+          </Form.Item>
+        }
+        { !this.props.isCurrentUser &&
+          <Form.Item
+            label="Choose a Role"
+          >
+            {getFieldDecorator('role', {
+              rules: [{ required: true }],
+              initialValue: user.role || null,
+            })(
+              <Radio.Group>
+                <Radio value="admin">Admin</Radio>
+                <Radio value="writer">Writer</Radio>
+                <Radio value="artist">Artist</Radio>
+                <Radio value="reader">Reader</Radio>
+              </Radio.Group>
+            )}
+          </Form.Item>
+        }
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={loading}>
             {this.props.edit ? 'Update User' : 'Create User'}

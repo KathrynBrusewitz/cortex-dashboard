@@ -17,6 +17,10 @@ export const usersConstants = {
   GET_USER_SUCCESS: 'GET_USER_SUCCESS',
   GET_USER_FAILURE: 'GET_USER_FAILURE',
 
+  CREATE_USER_REQUEST: 'CREATE_USER_REQUEST',
+  CREATE_USER_SUCCESS: 'CREATE_USER_SUCCESS',
+  CREATE_USER_FAILURE: 'CREATE_USER_FAILURE',
+
   UPDATE_USER_REQUEST: 'UPDATE_USER_REQUEST',
   UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS',
   UPDATE_USER_FAILURE: 'UPDATE_USER_FAILURE',
@@ -24,14 +28,20 @@ export const usersConstants = {
   DELETE_USER_REQUEST: 'DELETE_USER_REQUEST',
   DELETE_USER_SUCCESS: 'DELETE_USER_SUCCESS',
   DELETE_USER_FAILURE: 'DELETE_USER_FAILURE',
+
+  INVITE_USER_REQUEST: 'INVITE_USER_REQUEST',
+  INVITE_USER_SUCCESS: 'INVITE_USER_SUCCESS',
+  INVITE_USER_FAILURE: 'INVITE_USER_FAILURE',
 };
 
 // Creators
 export const usersActions = {
   getUsers,
   getUser,
+  createUser,
   updateUser,
   deleteUser,
+  inviteUser,
 };
 
 // Implementations
@@ -60,7 +70,7 @@ function getUsers(filters = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get Users'));
+      dispatch(alertActions.error(`Server is unable to get users. Args: ${filters} Query: ${query}`));
     });
   };
 
@@ -89,7 +99,7 @@ function getUser(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get User'));
+      dispatch(alertActions.error(`Server is unable to get user with id: ${id}`));
     });
   };
 
@@ -98,7 +108,52 @@ function getUser(id) {
   function failure() { return { type: usersConstants.GET_USER_FAILURE } }
 }
 
+function createUser(fields) {
+  if (!fields.name || !fields.email || !fields.password || !fields.role) {
+    return dispatch => {
+      dispatch(alertActions.error('User is missing required fields.'));
+    };
+  }
+
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'post',
+      url: '/users',
+      baseURL,
+      data: {
+        ...fields,
+      },
+      headers: {'x-access-token': cookies.get('token')},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success());
+        dispatch(push('/users'));
+        dispatch(alertActions.success(`New user created: "${fields.name}"`));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure(error));
+      dispatch(alertActions.error(`Server was unable to create user: "${fields.name}"`));
+    });
+  };
+
+  function request() { return { type: usersConstants.CREATE_USER_REQUEST } }
+  function success() { return { type: usersConstants.CREATE_USER_SUCCESS } }
+  function failure() { return { type: usersConstants.CREATE_USER_FAILURE } }
+}
+
 function updateUser(fields, id) {
+  if (!fields.name) {
+    return dispatch => {
+      dispatch(alertActions.error('User is missing name'));
+    };
+  }
   return dispatch => {
     dispatch(request());
 
@@ -115,7 +170,7 @@ function updateUser(fields, id) {
       if (res.data.success) {
         dispatch(success());
         dispatch(push('/users'));
-        dispatch(alertActions.success('Successfully updated!'));
+        dispatch(alertActions.success(`Updated user ${fields.name}`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -123,7 +178,7 @@ function updateUser(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to update user'));
+      dispatch(alertActions.error(`Server was unable to update user ${fields.name}`));
     });
   };
 
@@ -145,7 +200,7 @@ function deleteUser(id) {
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(alertActions.success('Successfully deleted!'));
+        dispatch(alertActions.success(`Deleted user with id: ${id}`));
         dispatch(getUsers());
       } else {
         dispatch(failure());
@@ -154,11 +209,50 @@ function deleteUser(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to delete user'));
+      dispatch(alertActions.error(`Server was unable to delete user with id: ${id}`));
     });
   };
 
   function request() { return { type: usersConstants.DELETE_USER_REQUEST } }
   function success() { return { type: usersConstants.DELETE_USER_SUCCESS } }
   function failure() { return { type: usersConstants.DELETE_USER_FAILURE } }
+}
+
+function inviteUser(fields = {}) {
+  if (!fields.email || !fields.role) {
+    return dispatch => {
+      dispatch(alertActions.error('Email and role is required to invite user.'));
+    };
+  }
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'post',
+      url: '/users/invite',
+      baseURL,
+      data: {
+        ...fields
+      },
+      headers: {'x-access-token': cookies.get('token')},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success());
+        dispatch(push('/users'));
+        dispatch(alertActions.success(`Sent an invite to ${fields.email}`));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure(error));
+      dispatch(alertActions.error(error));
+    });
+  };
+
+  function request() { return { type: usersConstants.INVITE_USER_REQUEST } }
+  function success() { return { type: usersConstants.INVITE_USER_SUCCESS } }
+  function failure() { return { type: usersConstants.INVITE_USER_FAILURE } }
 }

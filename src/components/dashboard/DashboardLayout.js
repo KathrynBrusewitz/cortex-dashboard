@@ -6,7 +6,8 @@ import Header from './Header';
 import Breadcrumbs from "./Breadcrumbs";
 
 import ContentsLayout from '../contents/ContentsLayout';
-import NonContentsLayout from "./NonContentsLayout";
+import UsersLayout from '../users/UsersLayout';
+import StandardLayout from "./StandardLayout";
 
 // Dashboard Layout Routes are put inside it's own Layout because we want to
 // pad all pages except the Contents Layout, whose menu should remain full-width.
@@ -27,7 +28,8 @@ class DashboardLayout extends Component {
 
             {/* Layouts */}
             <Route path="/contents" component={ContentsLayout} />
-            <Route component={NonContentsLayout} />
+            <Route path="/users" component={UsersLayout} />
+            <Route component={StandardLayout} />
           </Switch>
         </Layout.Content>
       </Layout>

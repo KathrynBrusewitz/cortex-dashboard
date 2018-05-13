@@ -15,7 +15,7 @@ class ViewUser extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.isDeletingUser) {
-      this.props.history.push('/users');
+      this.props.history.push('/users/userbase');
     }
   }
 
@@ -36,7 +36,7 @@ class ViewUser extends Component {
     return (
       <div>
         <Row type="flex" justify="end">
-          <Link to={`/users/${user._id}/edit`}>Edit</Link>
+          <Link to={`/users/userbase/${user._id}/edit`}>Edit</Link>
           { (this.props.currentUser._id !== user._id) &&
             <span>
               <Divider type="vertical" />

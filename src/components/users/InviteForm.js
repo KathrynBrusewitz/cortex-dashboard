@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Radio } from 'antd';
 
-class SignUpForm extends Component {
+class InviteForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields((err, options) => {
       if (!err) {
-        this.props.onSubmit(values);
+        this.props.onSubmit(options);
       }
     });
   }
@@ -14,27 +14,14 @@ class SignUpForm extends Component {
   render() {
     const { loading } = this.props;
     const { getFieldDecorator } = this.props.form;
+
     return (
-      <Form onSubmit={this.handleSubmit} className="login-form">
-        <Form.Item>
-          {getFieldDecorator('name', {
-            rules: [{ required: true }],
-          })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Name" />
-          )}
-        </Form.Item>
-        <Form.Item>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Item label="Email">
           {getFieldDecorator('email', {
             rules: [{ required: true }],
           })(
             <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [{ required: true }],
-          })(
-            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
           )}
         </Form.Item>
         <Form.Item
@@ -52,8 +39,8 @@ class SignUpForm extends Component {
           )}
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button" loading={loading}>
-            Create Account
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Send Invite to User
           </Button>
         </Form.Item>
       </Form>
@@ -61,6 +48,4 @@ class SignUpForm extends Component {
   }
 }
 
-// Form.create() decorates SignUpForm
-export default Form.create()(SignUpForm);
-
+export default Form.create()(InviteForm);

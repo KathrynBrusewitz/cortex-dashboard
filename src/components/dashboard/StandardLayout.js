@@ -11,6 +11,7 @@ import ViewEvent from '../events/ViewEvent';
 import EditEvent from '../events/EditEvent';
 import ListEvents from '../events/ListEvents';
 
+import CreateUser from '../users/CreateUser';
 import ViewUser from '../users/ViewUser';
 import EditUser from '../users/EditUser';
 import ListUsers from '../users/ListUsers';
@@ -21,9 +22,9 @@ import DeadEnd from '../shared/DeadEnd';
 import Settings from './Settings';
 
 // Dashboard Layout Routes are put inside it's own Layout because we want to
-// pad all pages except the Contents Layout, whose menu should remain full-width.
+// pad all pages except Custom Layouts.
 
-class NonContentsLayout extends Component {
+class StandardLayout extends Component {
   render() {
     return (
       <Layout style={{ padding: '20px', background: '#fff' }}>
@@ -32,6 +33,7 @@ class NonContentsLayout extends Component {
           <Route exact path="/settings" component={Settings} />
 
           <Route exact path="/users" component={ListUsers} />
+          <Route exact path="/users/new" component={CreateUser} />
           <Route exact path="/users/:id" component={ViewUser} />
           <Route exact path="/users/:id/edit" component={EditUser} />
 
@@ -52,4 +54,4 @@ class NonContentsLayout extends Component {
   }
 }
 
-export default NonContentsLayout;
+export default StandardLayout;
