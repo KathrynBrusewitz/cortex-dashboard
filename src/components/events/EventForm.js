@@ -42,12 +42,20 @@ class EventForm extends Component {
             <Input />
           )}
         </Form.Item>
+        <Form.Item label="URL">
+          {getFieldDecorator('url', {
+            rules: [{ required: true }],
+            initialValue: event.url || null,
+          })(
+            <Input />
+          )}
+        </Form.Item>
         <Form.Item label="Location">
           {getFieldDecorator('location', {
             rules: [{ required: true }],
             initialValue: event.location || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 3 }} />
           )}
         </Form.Item>
         <Form.Item label="Description">
@@ -55,7 +63,7 @@ class EventForm extends Component {
             rules: [{ required: true }],
             initialValue: event.description || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 5 }} />
           )}
         </Form.Item>
         <Form.Item label="Date and Time">

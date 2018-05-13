@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
@@ -24,30 +25,30 @@ class ListEvents extends Component {
         title: 'Title',
         dataIndex: 'title',
         key: 'title',
-      }, {
-        title: 'Description',
-        dataIndex: 'description',
-        key: 'description',
+        sorter: (a, b) => a.title.localeCompare(b.title),
       }, {
         title: 'Date Start',
         dataIndex: 'dateStart',
         key: 'dateStart',
+        render: (text, record) => moment(text).format('MMMM D YYYY, h:mm a'),
+        sorter: (a, b) => moment(a.dateStart).diff(moment(b.dateStart)),
       }, {
         title: 'Date End',
         dataIndex: 'dateEnd',
         key: 'dateEnd',
+        render: (text, record) => moment(text).format('MMMM D YYYY, h:mm a'),
+        sorter: (a, b) => moment(a.dateEnd).diff(moment(b.dateEnd)),
       }, {
         title: 'Location',
         dataIndex: 'location',
         key: 'location',
+        sorter: (a, b) => a.location.localeCompare(b.location),
       }, {
         title: 'Actions',
         dataIndex: 'actions',
         key: 'actions',
         render: (text, record) => (
           <span>
-            <Link to={`/events/${record._id}`}>View</Link>
-            <Divider type="vertical" />
             <Link to={`/events/${record._id}/edit`}>Edit</Link>
             <Divider type="vertical" />
             <Popconfirm
@@ -61,15 +62,6 @@ class ListEvents extends Component {
             >
               <a href={null}>Delete</a>
             </Popconfirm>
-          </span>
-        ),
-      }, {
-        title: 'Stats',
-        dataIndex: 'stats',
-        key: 'stats',
-        render: (text, record) => (
-          <span>
-            <Stat stat={20} icon="smile-o" tooltip={`${20} going`} />
           </span>
         ),
       }]
@@ -92,7 +84,19 @@ class ListEvents extends Component {
             </Col>
           </Row>
         </div>
-        <Table dataSource={this.props.events} columns={this.getColumns()} loading={this.props.isGettingEvents || this.props.isDeletingEvent} rowKey={record => record._id} />
+        <Table 
+          dataSource={this.props.events} 
+          columns={this.getColumns()} 
+          expandedRowRender={(record) => (
+            <div>
+              <h2><Link to={record.url}>{record.url}</Link></h2>
+              <h2>Description</h2>
+              <p>{record.description}</p>
+            </div>
+          )} 
+          loading={this.props.isGettingEvents || this.props.isDeletingEvent} 
+          rowKey={record => record._id} 
+        />
       </div>
     );
   }

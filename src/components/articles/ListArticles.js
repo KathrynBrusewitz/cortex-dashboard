@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col, Popconfirm, Icon } from 'antd';
+import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import moment from 'moment';
 import Loading from '../shared/Loading';
 
@@ -10,15 +10,6 @@ import { contentActions } from '../../actions';
 import AvatarList from '../shared/AvatarList';
 
 class ListArticles extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedRowKeys: [],
-      filteredInfo: null,
-      sortedInfo: null,
-    };
-  }
-
   rehydrateState() {
     this.props.getContents({ type: 'article' })
   }
@@ -31,10 +22,6 @@ class ListArticles extends Component {
     if (prevProps.isDeletingContent) {
       this.rehydrateState();
     }
-  }
-
-  onSelectChange = (selectedRowKeys) => {
-    this.setState({ selectedRowKeys });
   }
 
   getColumns() {
@@ -59,13 +46,13 @@ class ListArticles extends Component {
         title: 'Updated',
         dataIndex: 'updateTime',
         key: 'updateTime',
-        render: (text, record) => moment(text).fromNow(),
+        render: (text, record) => moment(text).format('MMMM D YYYY, h:mm a'),
         sorter: (a, b) => moment(a.updateTime).diff(moment(b.updateTime)),
       }, {
         title: 'Published',
         dataIndex: 'publishTime',
         key: 'publishTime',
-        render: (text, record) => text ? moment(text).fromNow() : null,
+        render: (text, record) => text ? moment(text).format('MMMM D YYYY, h:mm a') : null,
         sorter: (a, b) => {
           const aTime = a.publishTime ? moment(a.publishTime).unix() : 0;
           const bTime = b.publishTime ? moment(b.publishTime).unix() : 0;
@@ -99,13 +86,6 @@ class ListArticles extends Component {
   }
 
   render() {
-    const { selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
-
     if (this.props.isGettingContents || this.props.isDeletingContent) {
       return (
         <Loading />
@@ -117,17 +97,6 @@ class ListArticles extends Component {
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>
-              <Button
-                type="primary"
-                disabled={!hasSelected}
-              >
-                Publish
-              </Button>
-              <span style={{ marginLeft: 8 }}>
-                {hasSelected ? `Selected ${selectedRowKeys.length} articles` : ''}
-              </span>
-            </Col>
-            <Col>
               <Link to={'/contents/articles/new'}>
                 <Button type="primary">
                   Create New Article
@@ -136,11 +105,16 @@ class ListArticles extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={this.getColumns()} loading={this.props.isGettingContents || this.props.isDeletingContent} rowKey={record => record._id} />
+        <Table
+          dataSource={this.props.contents} 
+          columns={this.getColumns()} 
+          loading={this.props.isGettingContents || this.props.isDeletingContent} 
+          rowKey={record => record._id} 
+        />
       </div>
     );
   }
-}
+};
 
 const mapStateToProps = state => ({
   contents: state.content.contents,

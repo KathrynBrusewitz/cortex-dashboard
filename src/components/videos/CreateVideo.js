@@ -10,7 +10,7 @@ import { usersActions } from '../../actions';
 
 class CreateVideo extends Component {
   componentDidMount() {
-    this.props.getUsers({ role: [ 'admin', 'writer' ] });
+    this.props.getUsers({ role: [ 'admin', 'writer', 'artist' ] });
   }
 
   render() {

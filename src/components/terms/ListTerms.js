@@ -8,25 +8,18 @@ import Loading from '../shared/Loading';
 import { termsActions } from '../../actions';
 
 class ListTerms extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedRowKeys: [],
-    };
+  rehydrateState() {
+    this.props.getTerms();
   }
 
   componentDidMount() {
-    this.props.getTerms();
+    this.rehydrateState();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.isDeletingTerm) {
-      this.props.getTerms();
+      this.rehydrateState();
     }
-  }
-
-  onSelectChange = (selectedRowKeys) => {
-    this.setState({ selectedRowKeys });
   }
 
   getColumns() {
@@ -35,7 +28,7 @@ class ListTerms extends Component {
         title: 'Term',
         dataIndex: 'term',
         key: 'term',
-        width: 240,
+        sorter: (a, b) => a.term.localeCompare(b.term),
       }, {
         title: 'Definition',
         dataIndex: 'definition',
@@ -66,13 +59,6 @@ class ListTerms extends Component {
   }
 
   render() {
-    const { selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
-
     if (this.props.isGettingTerms || this.props.isDeletingTerm) {
       return (
         <Loading />
@@ -85,17 +71,6 @@ class ListTerms extends Component {
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>
-              <Button
-                type="danger"
-                disabled={!hasSelected}
-              >
-                Delete
-              </Button>
-              <span style={{ marginLeft: 8 }}>
-                {hasSelected ? `Selected ${selectedRowKeys.length} terms` : ''}
-              </span>
-            </Col>
-            <Col>
               <Link to="/terms/new">
                 <Button type="primary">
                   Add New Term
@@ -104,7 +79,20 @@ class ListTerms extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.terms} columns={this.getColumns()} expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>} loading={this.props.isGettingTerms || this.props.isDeletingTerm} rowKey={record => record._id} />
+        <Table
+          dataSource={this.props.terms} 
+          columns={this.getColumns()} 
+          expandedRowRender={record => (
+            <div>
+              <h2>Definition</h2>
+              <p>{record.definition}</p>
+              <h2>Description</h2>
+              <p>{record.description}</p>
+            </div>
+          )} 
+          loading={this.props.isGettingTerms || this.props.isDeletingTerm} 
+          rowKey={record => record._id} 
+        />
       </div>
     );
   }

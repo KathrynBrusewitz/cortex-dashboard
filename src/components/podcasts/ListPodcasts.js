@@ -10,25 +10,18 @@ import AvatarList from '../shared/AvatarList';
 import { contentActions } from '../../actions';
 
 class ListPodcasts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedRowKeys: [],
-    };
+  rehydrateState() {
+    this.props.getContents({ type: 'podcast' })
   }
 
   componentDidMount() {
-    this.props.getContents({ type: 'podcast' });
+    this.rehydrateState();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.isDeletingContent) {
-      this.props.getContents({ type: 'podcast' });
+      this.rehydrateState();
     }
-  }
-
-  onSelectChange = (selectedRowKeys) => {
-    this.setState({ selectedRowKeys });
   }
 
   getColumns() {
@@ -53,13 +46,13 @@ class ListPodcasts extends Component {
         title: 'Updated',
         dataIndex: 'updateTime',
         key: 'updateTime',
-        render: (text, record) => moment(text).fromNow(),
+        render: (text, record) => moment(text).format('MMMM D YYYY, h:mm a'),
         sorter: (a, b) => moment(a.updateTime).diff(moment(b.updateTime)),
       }, {
         title: 'Published',
         dataIndex: 'publishTime',
         key: 'publishTime',
-        render: (text, record) => text ? moment(text).fromNow() : null,
+        render: (text, record) => text ? moment(text).format('MMMM D YYYY, h:mm a') : null,
         sorter: (a, b) => {
           const aTime = a.publishTime ? moment(a.publishTime).unix() : 0;
           const bTime = b.publishTime ? moment(b.publishTime).unix() : 0;
@@ -97,13 +90,6 @@ class ListPodcasts extends Component {
   }
 
   render() {
-    const { selectedRowKeys } = this.state;
-    const rowSelection = {
-      selectedRowKeys,
-      onChange: this.onSelectChange,
-    };
-    const hasSelected = selectedRowKeys.length > 0;
-
     if (this.props.isGettingContents || this.props.isDeletingContent) {
       return (
         <Loading />
@@ -115,17 +101,6 @@ class ListPodcasts extends Component {
         <div style={{ marginBottom: 16 }}>
           <Row type="flex" justify="space-between">
             <Col>
-              <Button
-                type="primary"
-                disabled={!hasSelected}
-              >
-                Publish
-              </Button>
-              <span style={{ marginLeft: 8 }}>
-                {hasSelected ? `Selected ${selectedRowKeys.length} podcasts` : ''}
-              </span>
-            </Col>
-            <Col>
               <Link to={'/contents/podcasts/new'}>
                 <Button type="primary">
                   Create New Podcast
@@ -134,11 +109,16 @@ class ListPodcasts extends Component {
             </Col>
           </Row>
         </div>
-        <Table rowSelection={rowSelection} dataSource={this.props.contents} columns={this.getColumns()} loading={this.props.isGettingContents || this.props.isDeletingContent} rowKey={record => record._id} />
+        <Table
+          dataSource={this.props.contents}
+          columns={this.getColumns()} 
+          loading={this.props.isGettingContents || this.props.isDeletingContent} 
+          rowKey={record => record._id} 
+        />
       </div>
     );
   }
-}
+};
 
 const mapStateToProps = state => ({
   contents: state.content.contents,

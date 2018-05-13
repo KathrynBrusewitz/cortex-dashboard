@@ -35,7 +35,7 @@ class ArticleForm extends Component {
           {getFieldDecorator('description', {
             initialValue: content.description || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 4 }} />
           )}
         </Form.Item>
         <Form.Item label="Writers">
@@ -45,19 +45,26 @@ class ArticleForm extends Component {
             <SelectUserTags placeholder="Select one or more writers or write names" users={this.props.creatorOptions} />
           )}
         </Form.Item>
-        <Form.Item label="Article Body" help="Will soon support Markdown">
+        <Form.Item label="Artists">
+          {getFieldDecorator('artists', {
+            initialValue: content.artists || [],
+          })(
+            <SelectUserTags placeholder="Select one or more artists or write names" users={this.props.creatorOptions} />
+          )}
+        </Form.Item>
+        <Form.Item label="Article Body">
           {getFieldDecorator('body', {
             rules: [{ required: true }],
             initialValue: content.body || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 10 }} />
           )}
         </Form.Item>
         <Form.Item label="References">
           {getFieldDecorator('references', {
             initialValue: content.references || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 5 }} />
           )}
         </Form.Item>
         <Form.Item label="What should be the status of this article?">

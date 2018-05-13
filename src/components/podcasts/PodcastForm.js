@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Radio } from 'antd';
-import UploadDragger from '../shared/UploadDragger';
 import SelectUserTags from '../shared/SelectUserTags';
 
 class PodcastForm extends Component {
@@ -15,10 +14,6 @@ class PodcastForm extends Component {
         }
       }
     });
-  }
-
-  handlePublishSelect = (e) => {
-    console.log('publish value selected: ', e.target.value);
   }
 
   render() {
@@ -48,15 +43,7 @@ class PodcastForm extends Component {
           {getFieldDecorator('description', {
             initialValue: content.description || null,
           })(
-            <Input.TextArea />
-          )}
-        </Form.Item>
-        <Form.Item label="Upload" help="Will be supported soon.">
-          {getFieldDecorator('podcastRef', {
-            // rules: [{ required: true }],
-            initialValue: content.podcastRef || null,
-          })(
-            <UploadDragger />
+            <Input.TextArea autosize={{ minRows: 4 }} />
           )}
         </Form.Item>
         <Form.Item label="Hosts">
@@ -66,19 +53,26 @@ class PodcastForm extends Component {
             <SelectUserTags placeholder="Select one or more hosts or write names" users={this.props.creatorOptions} />
           )}
         </Form.Item>
-        <Form.Item label="Podcast Body" help="Will soon support Markdown. Good for transcripts or for more detailed reading">
+        <Form.Item label="Artists">
+          {getFieldDecorator('artists', {
+            initialValue: content.artists || [],
+          })(
+            <SelectUserTags placeholder="Select one or more artists or write names" users={this.props.creatorOptions} />
+          )}
+        </Form.Item>
+        <Form.Item label="Podcast Body" help="Good for transcripts or for more detailed reading">
           {getFieldDecorator('body', {
             rules: [{ required: true }],
             initialValue: content.body || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 10 }} />
           )}
         </Form.Item>
         <Form.Item label="References">
           {getFieldDecorator('references', {
             initialValue: content.references || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 5 }} />
           )}
         </Form.Item>
         <Form.Item label="What should be the status of this podcast?">

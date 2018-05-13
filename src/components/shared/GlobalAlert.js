@@ -20,10 +20,6 @@ const AntAlert = (type, text) => {
 
 // Only pushes message if alert state changed and exists
 class GlobalAlert extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.alert !== this.props.alert) {
       if (this.props.alert) {

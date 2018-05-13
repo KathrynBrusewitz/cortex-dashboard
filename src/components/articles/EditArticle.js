@@ -10,7 +10,7 @@ import { usersActions } from '../../actions';
 
 class EditArticle extends Component {
   componentDidMount() {
-    this.props.getUsers({ role: [ 'admin', 'writer' ] });
+    this.props.getUsers({ role: [ 'admin', 'writer', 'artist' ] });
     this.props.getContent(this.props.match.params.id);
   }
 
