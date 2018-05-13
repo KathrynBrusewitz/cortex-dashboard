@@ -38,10 +38,9 @@ class UserForm extends Component {
             <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Email" />
           )}
         </Form.Item>
-        { !this.props.edit &&
-          <Form.Item>
+        { (!this.props.edit || this.props.isCurrentUser) &&
+          <Form.Item label="New Password">
             {getFieldDecorator('password', {
-              rules: [{ required: true }],
             })(
               <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
             )}

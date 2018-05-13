@@ -46,8 +46,8 @@ function login({ email, password }) {
     .then(res => {
       if (res.data.success) {
         cookies.set('token', res.data.token, { path: '/' });
-        dispatch(success(res.data));
-        dispatch(alertActions.success(`Welcome ${res.data.name}!`));
+        dispatch(success(res.data.payload));
+        dispatch(alertActions.success(`Welcome ${res.data.payload.name}!`));
         dispatch(push('/'));
       } else {
         dispatch(failure());
@@ -81,8 +81,8 @@ function tokenLogin() {
       })
       .then(res => {
         if (res.data.success) {
-          dispatch(success(res.data));
-          dispatch(alertActions.success(`Welcome back ${res.data.name}!`));
+          dispatch(success(res.data.payload));
+          dispatch(alertActions.success(`Welcome back ${res.data.payload.name}!`));
         } else {
           dispatch(failure());
           // Do not alert failure because this login attempt is automatic by Cortex, not user
@@ -129,7 +129,7 @@ function signup({ name, email, password, role }) {
     })
     .then(res => {
       if (res.data.success) {
-        dispatch(success(res.data));
+        dispatch(success());
         dispatch(push('/login'));
         dispatch(alertActions.success('Account created! Try logging in now.'));
       } else {

@@ -14,7 +14,7 @@ import Loading from '../shared/Loading';
 class App extends Component {
   // After the <App/> DOM node is first created, the state is fresh and we have no information on the user.
   // Attempt to login with the stored token, if there is any. The tokenLogin() Action will handle either case.
-  // <App/> will rerender if state.auth.user changes and login successfully stored a token in the state.
+  // <App/> will rerender if state.auth.user changes and login successfully stored a token in cookies.
 
   // The <App/> is responsible for rendering all Layout Routes. Each Layout is responsible for all their components.
   // <Dashboard/> and <Landing/> define the overall layout of their respective halves of the App and the routes within them.
@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   render() {
-    const layout = (this.props.user && this.props.user.token)
+    const layout = this.props.user
       ? <Route path="/" component={DashboardLayout} />
       : <Route path="/" component={LandingLayout} />;
     
