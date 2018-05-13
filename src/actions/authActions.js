@@ -57,7 +57,7 @@ function login({ email, password }) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error('Unable to Complete Request'));
+      dispatch(alertActions.error('Server is unable to authenticate.'));
       cookies.remove('token', { path: '/' });
     });
   };
@@ -85,12 +85,13 @@ function tokenLogin() {
           dispatch(alertActions.success(`Welcome back ${res.data.name}!`));
         } else {
           dispatch(failure());
-          dispatch(alertActions.error(res.data.message));
+          // Do not alert failure because this login attempt is automatic by Cortex, not user
           cookies.remove('token', { path: '/' });
         }
       })
       .catch(error => {
         dispatch(failure());
+        // Do not alert failure because this login attempt is automatic by Cortex, not user
         cookies.remove('token', { path: '/' });
       });
     }
@@ -130,7 +131,7 @@ function signup({ name, email, password, role }) {
       if (res.data.success) {
         dispatch(success(res.data));
         dispatch(push('/login'));
-        dispatch(alertActions.success('Account successfully created! Try logging in now.'));
+        dispatch(alertActions.success('Account created! Try logging in now.'));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -138,7 +139,7 @@ function signup({ name, email, password, role }) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error('Unable to Complete Request'));
+      dispatch(alertActions.error('Server is unable to create user.'));
     });
   };
 

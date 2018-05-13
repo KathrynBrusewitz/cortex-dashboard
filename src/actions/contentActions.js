@@ -61,7 +61,7 @@ function getContents(filters = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get Contents'));
+      dispatch(alertActions.error(`Server is unable to get contents. Args: ${filters} Query: ${query}`));
     });
   };
 
@@ -90,7 +90,7 @@ function getContent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get Content'));
+      dispatch(alertActions.error(`Server is unable to get content with id: ${id}`));
     });
   };
 
@@ -123,7 +123,7 @@ function createContent(fields) {
       if (res.data.success) {
         dispatch(success());
         dispatch(push(`/contents/${fields.type}s`));
-        dispatch(alertActions.success('Successfully created!'));
+        dispatch(alertActions.success(`New ${fields.type} created: "${fields.title}"`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -131,7 +131,7 @@ function createContent(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to create content'));
+      dispatch(alertActions.error(`Server was unable to create new ${fields.type}: "${fields.title}"`));
     });
   };
 
@@ -164,7 +164,7 @@ function updateContent(fields, id) {
       if (res.data.success) {
         dispatch(success());
         dispatch(push(`/contents/${fields.type}s`));
-        dispatch(alertActions.success('Successfully updated!'));
+        dispatch(alertActions.success(`Updated ${fields.type}: "${fields.title}"`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -172,7 +172,7 @@ function updateContent(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to update content'));
+      dispatch(alertActions.error(`Server was unable to update ${fields.type}: "${fields.title}"`));
     });
   };
 
@@ -194,7 +194,7 @@ function deleteContent(id) {
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(alertActions.success('Successfully deleted!'));
+        dispatch(alertActions.success(`Deleted content with id: ${id}`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -202,7 +202,7 @@ function deleteContent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to delete content'));
+      dispatch(alertActions.error(`Server was unable to delete content with id: ${id}`));
     });
   };
 

@@ -60,7 +60,7 @@ function getEvents(filters = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get Events'));
+      dispatch(alertActions.error(`Server is unable to get events. Args: ${filters} Query: ${query}`));
     });
   };
 
@@ -88,7 +88,7 @@ function getEvent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get Event'));
+      dispatch(alertActions.error(`Server is unable to get event with id: ${id}`));
     });
   };
 
@@ -99,9 +99,8 @@ function getEvent(id) {
 
 function createEvent(fields) {
   if (!fields.title || !fields.description) {
-    console.log('Error: Missing event or description');
     return dispatch => {
-      dispatch(alertActions.error('Missing event or description'));
+      dispatch(alertActions.error('Event is missing title or description'));
     };
   }
 
@@ -121,7 +120,7 @@ function createEvent(fields) {
       if (res.data.success) {
         dispatch(success());
         dispatch(push('/events'));
-        dispatch(alertActions.success('Successfully created!'));
+        dispatch(alertActions.success(`New event created: "${fields.title}"`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -129,7 +128,7 @@ function createEvent(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to create event'));
+      dispatch(alertActions.error(`Server was unable to create new event: "${fields.title}"`));
     });
   };
 
@@ -140,9 +139,8 @@ function createEvent(fields) {
 
 function updateEvent(fields, id) {
   if (!fields.title || !fields.description) {
-    console.log('Error: Missing title or description');
     return dispatch => {
-      dispatch(alertActions.error('Missing title or description'));
+      dispatch(alertActions.error('Event is missing title or description'));
     };
   }
 
@@ -162,7 +160,7 @@ function updateEvent(fields, id) {
       if (res.data.success) {
         dispatch(success());
         dispatch(push('/events'));
-        dispatch(alertActions.success('Successfully updated!'));
+        dispatch(alertActions.success(`Updated event: "${fields.title}"`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -170,7 +168,7 @@ function updateEvent(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to update event'));
+      dispatch(alertActions.error(`Server was unable to update new event: "${fields.title}"`));
     });
   };
 
@@ -192,7 +190,7 @@ function deleteEvent(id) {
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(alertActions.success('Successfully deleted!'));
+        dispatch(alertActions.success(`Deleted event with id: ${id}`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -200,7 +198,7 @@ function deleteEvent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to delete event'));
+      dispatch(alertActions.error(`Server was unable to delete event with id: ${id}`));
     });
   };
 

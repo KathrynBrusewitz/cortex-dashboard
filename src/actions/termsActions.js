@@ -60,7 +60,7 @@ function getTerms(filters = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get Terms'));
+      dispatch(alertActions.error(`Server is unable to get terms. Args: ${filters} Query: ${query}`));
     });
   };
 
@@ -88,7 +88,7 @@ function getTerm(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to Get Term'));
+      dispatch(alertActions.error(`Server is unable to get term with id: ${id}`));
     });
   };
 
@@ -99,9 +99,8 @@ function getTerm(id) {
 
 function createTerm(fields) {
   if (!fields.term || !fields.description) {
-    console.log('Error: Missing term or description');
     return dispatch => {
-      dispatch(alertActions.error('Missing term or description'));
+      dispatch(alertActions.error('Term is missing term or description fields.'));
     };
   }
 
@@ -121,7 +120,7 @@ function createTerm(fields) {
       if (res.data.success) {
         dispatch(success());
         dispatch(push('/terms'));
-        dispatch(alertActions.success('Successfully created!'));
+        dispatch(alertActions.success(`New term created: "${fields.term}"`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -129,7 +128,7 @@ function createTerm(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to create term'));
+      dispatch(alertActions.error(`Server was unable to create new term: "${fields.term}"`));
     });
   };
 
@@ -140,9 +139,8 @@ function createTerm(fields) {
 
 function updateTerm(fields, id) {
   if (!fields.term || !fields.description) {
-    console.log('Error: Missing term or description');
     return dispatch => {
-      dispatch(alertActions.error('Missing term or description'));
+      dispatch(alertActions.error('Term is missing term or description fields'));
     };
   }
 
@@ -162,7 +160,7 @@ function updateTerm(fields, id) {
       if (res.data.success) {
         dispatch(success());
         dispatch(push('/terms'));
-        dispatch(alertActions.success('Successfully updated!'));
+        dispatch(alertActions.success(`Updated term: "${fields.term}"`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -170,7 +168,7 @@ function updateTerm(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to update term'));
+      dispatch(alertActions.error(`Server was unable to update term: "${fields.term}"`));
     });
   };
 
@@ -192,7 +190,7 @@ function deleteTerm(id) {
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(alertActions.success('Successfully deleted!'));
+        dispatch(alertActions.success(`Deleted term with id: ${id}`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -200,7 +198,7 @@ function deleteTerm(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error('Unable to delete term'));
+      dispatch(alertActions.error(`Server was unable to delete term with id: ${id}`));
     });
   };
 
