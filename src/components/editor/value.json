@@ -31,7 +31,7 @@
                 ]
               },
               {
-                "text": " better than a "
+                "text": " better than a regular "
               },
               {
                 "text": "<textarea>",
@@ -42,24 +42,7 @@
                 ]
               },
               {
-                "text": "! "
-              }
-            ]
-          },
-          {
-            "object": "inline",
-            "type": "link",
-            "data": {
-              "href": "https://en.wikipedia.org/wiki/Hypertext"
-            },
-            "nodes": [
-              {
-                "object": "text",
-                "leaves": [
-                  {
-                    "text": "this is a link"
-                  }
-                ]
+                "text": ". "
               }
             ]
           }
@@ -114,7 +97,45 @@
             "object": "text",
             "leaves": [
               {
-                "text": "Try it out for yourself!"
+                "text": "There are two ways to add links. You can either add a link via the toolbar icon above, or if you want in on a little secret, copy a URL to your keyboard and paste it while a range of text is selected."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text": "Images are possible too."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "object": "block",
+        "type": "image",
+        "isVoid": true,
+        "data": {
+          "src":
+            "https://img.washingtonpost.com/wp-apps/imrs.php?src=https://img.washingtonpost.com/news/speaking-of-science/wp-content/uploads/sites/36/2015/10/as12-49-7278-1024x1024.jpg&w=1484"
+        }
+      },
+      {
+        "object": "block",
+        "type": "paragraph",
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "text":
+                  "You can either add an image via the toolbar icon above, or just like links, copy an image URL to your keyboard and paste it anywhere in the editor."
               }
             ]
           }

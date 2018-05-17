@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Editor, getEventTransfer } from 'slate-react';
-import { Value } from 'slate';
+import { Editor, getEventRange, getEventTransfer } from 'slate-react';
+import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations';
+import { Block, Value } from 'slate';
 import { isKeyHotkey } from 'is-hotkey';
 import isUrl from 'is-url';
+import imageExtensions from 'image-extensions';
+
+import 'material-icons';
+import './TextEditor.css';
 
 import initialValue from './value.json';
-import './TextEditor.css';
-import 'material-icons';
 
 /**
  * Define the default node type.
@@ -22,6 +25,53 @@ const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
 const isUnderlinedHotkey = isKeyHotkey('mod+u');
 const isCodeHotkey = isKeyHotkey('mod+`');
+
+/**
+ * A schema to enforce that there's always a paragraph as the last block.
+ * @type {Object}
+ */
+const schema = {
+  document: {
+    last: { types: ['paragraph'] },
+    normalize: (change, reason, { node, child }) => {
+      switch (reason) {
+        case LAST_CHILD_TYPE_INVALID: {
+          const paragraph = Block.create('paragraph');
+          return change.insertNodeByKey(node.key, node.nodes.size, paragraph);
+        }
+        default:
+          return;
+      }
+    },
+  },
+};
+
+/**
+ * A function helper to determine whether a URL has an image extension.
+ * @param {String} url
+ * @return {Boolean}
+ */
+function isImage(url) {
+  return !!imageExtensions.find(ext => url.endsWith(ext));
+}
+
+/**
+ * A change helper to standardize inserting images.
+ * @param {Change} change
+ * @param {String} src
+ * @param {Range} target
+ */
+function insertImage(change, src, target) {
+  if (target) {
+    change.select(target);
+  }
+
+  change.insertBlock({
+    type: 'image',
+    isVoid: true,
+    data: { src },
+  });
+}
 
 /**
  * A change helper to standardize wrapping links.
@@ -89,7 +139,6 @@ class TextEditor extends Component {
    * @param {Change} change
    */
   onChange = ({ value }) => {
-    // console.log(value.toJSON());
     this.setState({ value });
   }
 
@@ -210,24 +259,77 @@ class TextEditor extends Component {
   }
 
   /**
-   * On paste, if the text is a link, wrap the selection in a link.
+   * On clicking the image button, prompt for an image and insert it.
+   * @param {Event} event
+   */
+  onClickImage = event => {
+    event.preventDefault();
+    const src = window.prompt('Enter the URL of the image:');
+    if (!src) return;
+
+    const change = this.state.value.change().call(insertImage, src);
+
+    this.onChange(change);
+  }
+
+  /**
+   * On paste, if the text is an image, insert the image.
+   * If the text is a link, wrap the selection in a link.
    * @param {Event} event
    * @param {Change} change
+   * @param {Editor} editor
    */
-  onPaste = (event, change) => {
-    if (change.value.isCollapsed) return;
-
+  onPaste = (event, change, editor) => {
     const transfer = getEventTransfer(event);
     const { type, text } = transfer;
+
     if (type !== 'text' && type !== 'html') return;
     if (!isUrl(text)) return;
 
-    if (this.hasLinks()) {
-      change.call(unwrapLink);
-    }
+    if (isImage(text)) {
+      const target = getEventRange(event, change.value);
+      if (!target) return;
+      change.call(insertImage, text, target);
+    } else {
+      if (change.value.isCollapsed) return;
 
-    change.call(wrapLink, text);
+      if (this.hasLinks()) {
+        change.call(unwrapLink);
+      }
+
+      change.call(wrapLink, text);
+    }
     return true;
+  }
+
+  /**
+   * On drop, insert the image wherever it is dropped.
+   * @param {Event} event
+   * @param {Change} change
+   * @param {Editor} editor
+   */
+  onDrop = (event, change, editor) => {
+    const target = getEventRange(event, change.value);
+    if (!target || !event.type === 'drop') return;
+
+    const transfer = getEventTransfer(event);
+    const { type, files } = transfer;
+
+    if (type === 'files') {
+      for (const file of files) {
+        const reader = new FileReader();
+        const [mime] = file.type.split('/');
+        if (mime !== 'image') continue;
+
+        reader.addEventListener('load', () => {
+          editor.change(c => {
+            c.call(insertImage, reader.result, target);
+          })
+        });
+
+        reader.readAsDataURL(file);
+      }
+    }
   }
 
   render() {
@@ -256,6 +358,7 @@ class TextEditor extends Component {
         {this.renderBlockButton('numbered-list', 'format_list_numbered')}
         {this.renderBlockButton('bulleted-list', 'format_list_bulleted')}
         {this.renderLinkButton('link')}
+        {this.renderImageButton('image')}
       </div>
     );
   }
@@ -321,6 +424,23 @@ class TextEditor extends Component {
   }
 
   /**
+   * Render an image-toggling toolbar button.
+   * @param {String} type
+   * @param {String} icon
+   * @return {Element}
+   */
+  renderImageButton = (icon) => {
+    const onMouseDown = event => this.onClickImage(event);
+
+    return (
+      // eslint-disable-next-line react/jsx-no-bind
+      <span className="button" onMouseDown={onMouseDown}>
+        <span className="material-icons">{icon}</span>
+      </span>
+    );
+  }
+
+  /**
    * Render the Slate editor.
    * @return {Element}
    */
@@ -328,14 +448,16 @@ class TextEditor extends Component {
     return (
       <div className="editor">
         <Editor
-          placeholder="Enter some rich text..."
+          placeholder="What do you want to talk about?"
           value={this.state.value}
+          schema={schema}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
+          onDrop={this.onDrop}
+          onPaste={this.onPaste}
           renderNode={this.renderNode}
           renderMark={this.renderMark}
           spellCheck
-          // autoFocus
         />
       </div>
     );
@@ -347,7 +469,7 @@ class TextEditor extends Component {
    * @return {Element}
    */
   renderNode = props => {
-    const { attributes, children, node } = props;
+    const { attributes, children, node, isSelected } = props;
     switch (node.type) {
       case 'block-quote':
         return <blockquote {...attributes}>{children}</blockquote>
@@ -369,6 +491,14 @@ class TextEditor extends Component {
             {children}
           </a>
         );
+      }
+      case 'image': {
+        const src = node.data.get('src')
+        const className = isSelected ? 'active' : null
+        const style = { display: 'block' }
+        return (
+          <img src={src} className={className} style={style} alt='' {...attributes} />
+        )
       }
       default:
         return

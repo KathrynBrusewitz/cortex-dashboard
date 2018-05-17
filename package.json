@@ -6,6 +6,7 @@
     "antd": "^3.3.3",
     "axios": "^0.18.0",
     "history": "^4.7.2",
+    "image-extensions": "^1.1.0",
     "immutable": "^3.8.2",
     "is-hotkey": "^0.1.2",
     "is-url": "^1.2.4",
@@ -22,6 +23,7 @@
     "redux-thunk": "^2.2.0",
     "slate": "^0.33.6",
     "slate-react": "^0.12.6",
+    "slate-schema-violations": "^0.1.10",
     "universal-cookie": "^2.1.2"
   },
   "scripts": {
