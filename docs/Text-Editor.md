@@ -13,7 +13,6 @@ Keyboard Shortcuts:
 
 Images:
 - Add image via Toolbar.
-- Copy and paste an image URL.
 - Drag and drop multiple Images anywhere.
 - Click and drag Images around the editor.
 
@@ -21,6 +20,11 @@ Links:
 - Add Link via Toolbar.
 - Copy and paste a Link while a range of text is selected.
 
+### Future Features
+
+[Complex embedded nodes](http://slatejs.org/#/embeds):
+- Videos
+- D3 Visualizations
 
 ## Useful Packages
 
