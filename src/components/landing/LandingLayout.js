@@ -7,6 +7,7 @@ import Marketing from './Marketing';
 import LogIn from './LogIn';
 import SignUp from './SignUp';
 import DeadEnd from './DeadEnd';
+import Demo from './Demo';
 
 class LandingLayout extends Component {
   render() {
@@ -18,6 +19,7 @@ class LandingLayout extends Component {
             <Route exact path="/" component={Marketing} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/demo" component={Demo} />
             <Route component={DeadEnd}/>
           </Switch>
         </Layout.Content>

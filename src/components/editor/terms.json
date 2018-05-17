@@ -1,0 +1,17 @@
+{
+  "terms": [
+    {
+      "term": "elephant",
+      "definition": "short definition about elephant",
+      "description": "long description about elephant"
+    }, {
+      "term": "turtle",
+      "definition": "short definition about turtle",
+      "description": "long description about turtle"
+    }, {
+      "term": "ethiopian walrus",
+      "definition": "short definition about walrus",
+      "description": "long description about walrus"
+    }
+  ]
+}
