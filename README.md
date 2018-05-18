@@ -15,7 +15,7 @@ Frontend
 [ ] Action Dropdown for Tables
 [ ] User Invite  
   [ ] Form Signup  
-[ ] Content Body Supports Rich Text and Media  
+[x] Content Body Supports Rich Text and Media  
 [ ] User Settings  
 [ ] Mobile App Settings  
 [ ] Dashboard Settings  
@@ -37,7 +37,9 @@ Frontend
 
 Middle
 
-[ ] Host on Amazon EC2
+[x] Deploy API on AWS EC2
+[x] Deploy Dashboard on AWS S3 Bucket
+[x] Deploy Mongo Database with Atlas on AWS EC2 Instance
 [ ] Use `react-ga` (Google Analytics)
 
 Backend
@@ -46,7 +48,7 @@ See Api README for more detailed todo
 [x] Use Cortex API and MongoDB (Local Env)  
 [x] Schema
 [x] Login with Token: Verify, then send back User
-[ ] Hash Passwords
+[x] Hash Passwords
 [ ] Amazon SES for Email
 
 Future
