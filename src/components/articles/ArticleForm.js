@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Radio } from 'antd';
 import SelectUserTags from '../shared/SelectUserTags';
+import TextEditor from '../editor/TextEditor';
 
 class ArticleForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, options) => {
       if (!err) {
+        console.log(options);
         if (this.props.content) {
           this.props.onSubmit({...options, type: "article"}, this.props.content._id);
         } else {
@@ -57,7 +59,7 @@ class ArticleForm extends Component {
             rules: [{ required: true }],
             initialValue: content.body || null,
           })(
-            <Input.TextArea autosize={{ minRows: 10 }} />
+            <TextEditor />
           )}
         </Form.Item>
         <Form.Item label="References">

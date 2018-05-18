@@ -1,41 +1,39 @@
-html,
-input,
-textarea {
+.TextEditor input,
+.TextEditor textarea {
   font-family: 'Roboto', sans-serif;
-  line-height: 1.4;
+  line-height: 1.0;
   background: #eee;
 }
 
-body {
+.TextEditor body {
   margin: 0;
 }
 
-p {
+.TextEditor p {
   margin: 0;
 }
 
-pre {
+.TextEditor pre {
   padding: 10px;
   background-color: #eee;
   white-space: pre-wrap;
 }
 
-:not(pre) > code {
+.TextEditor :not(pre) > code {
   font-family: monospace;
   background-color: #eee;
   padding: 3px;
 }
 
-img {
+.TextEditor img {
   max-width: 100%;
-  max-height: 20em;
 }
 
-img.active {
+.TextEditor img.active {
   box-shadow: 0 0 0 2px blue;
 }
 
-blockquote {
+.TextEditor blockquote {
   border-left: 2px solid #ddd;
   margin-left: 0;
   margin-right: 0;
@@ -44,23 +42,23 @@ blockquote {
   font-style: italic;
 }
 
-blockquote[dir='rtl'] {
+.TextEditor blockquote[dir='rtl'] {
   border-left: none;
   padding-left: 0;
   padding-right: 10px;
   border-right: 2px solid #ddd;
 }
 
-table {
+.TextEditor table {
   border-collapse: collapse;
 }
 
-td {
+.TextEditor td {
   padding: 10px;
   border: 2px solid #ddd;
 }
 
-input {
+.TextEditor input {
   box-sizing: border-box;
   font-size: 0.85em;
   width: 100%;
@@ -69,7 +67,7 @@ input {
   background: #fafafa;
 }
 
-input:focus {
+.TextEditor input:focus {
   outline: 0;
   border-color: blue;
 }
@@ -78,7 +76,7 @@ input:focus {
  * Icons.
  */
 
-.material-icons {
+.TextEditor .material-icons {
   font-size: 18px;
   vertical-align: text-bottom;
 }
@@ -87,39 +85,39 @@ input:focus {
  * App.
  */
 
-.nav {
+.TextEditor .nav {
   padding: 10px 15px;
   color: #aaa;
   background: #000;
 }
 
-.nav-title {
+.TextEditor .nav-title {
   margin-right: 0.5em;
 }
 
-.nav-links {
+.TextEditor .nav-links {
   float: right;
 }
 
-.nav-link {
+.TextEditor .nav-link {
   margin-left: 1em;
   color: #aaa;
   text-decoration: none;
 }
 
-.nav-link:hover {
+.TextEditor .nav-link:hover {
   color: #fff;
   text-decoration: underline;
 }
 
-.tabs {
+.TextEditor .tabs {
   padding: 15px 15px;
   background-color: #222;
   text-align: center;
   margin-bottom: 30px;
 }
 
-.tab {
+.TextEditor .tab {
   color: #777;
   display: inline-block;
   text-decoration: none;
@@ -128,15 +126,15 @@ input:focus {
   margin-bottom: 0.2em;
 }
 
-.tab:hover {
+.TextEditor .tab:hover {
   background: #333;
 }
 
-.tab + .tab {
+.TextEditor .tab + .tab {
   margin-left: 0.5em;
 }
 
-.tab.active {
+.TextEditor .tab.active {
   color: white;
   background: #333;
 }
@@ -145,72 +143,72 @@ input:focus {
  * Example.
  */
 
-.example,
-.error {
+.TextEditor .example,
+.TextEditor .error {
   padding: 20px;
 }
 
-.example {
+.TextEditor .example {
   background: #fff;
 }
 
-.error {
+.TextEditor .error {
   background: #fffae0;
 }
 
-.error .info {
+.TextEditor .error .info {
   background: #fbf1bd;
   white-space: pre;
   overflow-x: scroll;
   margin-bottom: 0;
 }
 
-.editor > * > * + * {
+.TextEditor .editor > * > * + * {
   margin-top: 1em;
 }
 
-.menu > * {
+.TextEditor .menu > * {
   display: inline-block;
 }
 
-.menu > * + * {
+.TextEditor .menu > * + * {
   margin-left: 15px;
 }
 
-.button {
+.TextEditor .button {
   color: #ccc;
   cursor: pointer;
 }
 
-.button[data-active='true'] {
+.TextEditor .button[data-active='true'] {
   color: black;
 }
 
-.toolbar-menu {
+.TextEditor .toolbar-menu {
   position: relative;
-  padding: 1px 18px 17px;
+  /* padding: 1px 18px 17px; */
   margin: 0 -20px;
   border-bottom: 2px solid #eee;
   margin-bottom: 20px;
 }
 
-.toolbar-menu .search {
+.TextEditor .toolbar-menu .search {
   position: relative;
 }
 
-.toolbar-menu .search-icon {
+.TextEditor .toolbar-menu .search-icon {
   position: absolute;
   top: 0.5em;
   left: 0.5em;
   color: #ccc;
 }
 
-.toolbar-menu .search-box {
+.TextEditor .toolbar-menu .search-box {
   padding-left: 2em;
   width: 100%;
 }
 
-.hover-menu {
+.TextEditor .hover-menu {
   padding: 8px 7px 6px;
   position: absolute;
   z-index: 1;
@@ -223,46 +221,46 @@ input:focus {
   transition: opacity 0.75s;
 }
 
-.hover-menu .button {
+.TextEditor .hover-menu .button {
   color: #aaa;
 }
 
-.hover-menu .button[data-active='true'] {
+.TextEditor .hover-menu .button[data-active='true'] {
   color: #fff;
 }
 
-.emoji.selected {
+.TextEditor .emoji.selected {
   outline: 2px solid blue;
 }
 
-.check-list-item + .check-list-item {
+.TextEditor .check-list-item + .check-list-item {
   margin-top: 0;
 }
 
-.check-list-item {
+.TextEditor .check-list-item {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.check-list-item.checked {
+.TextEditor .check-list-item.checked {
   opacity: 0.666;
   text-decoration: line-through;
 }
 
-.check-list-item > span:first-child {
+.TextEditor .check-list-item > span:first-child {
   margin-right: 0.75em;
 }
 
-.check-list-item > span:last-child {
+.TextEditor .check-list-item > span:last-child {
   flex: 1;
 }
 
-.check-list-item > span:last-child:focus {
+.TextEditor .check-list-item > span:last-child:focus {
   outline: none;
 }
 
-.word-counter {
+.TextEditor .word-counter {
   margin-top: 10px;
   padding: 12px;
   background-color: #ebebeb;

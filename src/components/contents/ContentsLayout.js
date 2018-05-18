@@ -20,6 +20,32 @@ import ContentsMenu from './ContentsMenu';
 
 import DeadEnd from "../shared/DeadEnd";
 
+class ContentDetailsLayout extends Component {
+  render() {
+    return (
+      <Layout.Content style={{ maxWidth: 600, margin: '0 auto' }}>
+        <Switch>
+          {/* Details Layout Routes */}
+          <Route exact path="/contents/articles/new" component={CreateArticle} />
+          <Route exact path="/contents/articles/:id" component={ViewArticle} />
+          <Route exact path="/contents/articles/:id/edit" component={EditArticle} />
+
+          <Route exact path="/contents/videos/new" component={CreateVideo} />
+          <Route exact path="/contents/videos/:id" component={ViewVideo} />
+          <Route exact path="/contents/videos/:id/edit" component={EditVideo} />
+
+          <Route exact path="/contents/podcasts/new" component={CreatePodcast} />
+          <Route exact path="/contents/podcasts/:id" component={ViewPodcast} />
+          <Route exact path="/contents/podcasts/:id/edit" component={EditPodcast} />
+
+          {/* No Matching Route */}
+          <Route component={DeadEnd} />
+        </Switch>
+      </Layout.Content>
+    );
+  }
+}
+
 class ContentsLayout extends Component {
   render() {
     return (
@@ -32,22 +58,11 @@ class ContentsLayout extends Component {
 
             {/* Contents Layout Routes */}
             <Route exact path="/contents/articles" component={ListArticles} />
-            <Route exact path="/contents/articles/new" component={CreateArticle} />
-            <Route exact path="/contents/articles/:id" component={ViewArticle} />
-            <Route exact path="/contents/articles/:id/edit" component={EditArticle} />
-
             <Route exact path="/contents/videos" component={ListVideos} />
-            <Route exact path="/contents/videos/new" component={CreateVideo} />
-            <Route exact path="/contents/videos/:id" component={ViewVideo} />
-            <Route exact path="/contents/videos/:id/edit" component={EditVideo} />
-
             <Route exact path="/contents/podcasts" component={ListPodcasts} />
-            <Route exact path="/contents/podcasts/new" component={CreatePodcast} />
-            <Route exact path="/contents/podcasts/:id" component={ViewPodcast} />
-            <Route exact path="/contents/podcasts/:id/edit" component={EditPodcast} />
 
             {/* No Matching Route */}
-            <Route component={DeadEnd} />
+            <Route component={ContentDetailsLayout} />
           </Switch>
         </Layout.Content>
       </Layout>

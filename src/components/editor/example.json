@@ -1,0 +1,740 @@
+{
+    "object" : "value",
+    "document" : {
+        "object" : "document",
+        "data" : {},
+        "nodes" : [ 
+            {
+                "object" : "block",
+                "type" : "heading-one",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "Text Styles",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "paragraph",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "This is editable rich text, much better than a regular ",
+                                "marks" : []
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : "<textarea>",
+                                "marks" : [ 
+                                    {
+                                        "object" : "mark",
+                                        "type" : "code",
+                                        "data" : {}
+                                    }
+                                ]
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : ". You can ",
+                                "marks" : []
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : "underline selections",
+                                "marks" : [ 
+                                    {
+                                        "object" : "mark",
+                                        "type" : "underlined",
+                                        "data" : {}
+                                    }
+                                ]
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : ", ",
+                                "marks" : []
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : "bold things",
+                                "marks" : [ 
+                                    {
+                                        "object" : "mark",
+                                        "type" : "bold",
+                                        "data" : {}
+                                    }
+                                ]
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : ", ",
+                                "marks" : []
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : "italicize whatever",
+                                "marks" : [ 
+                                    {
+                                        "object" : "mark",
+                                        "type" : "italic",
+                                        "data" : {}
+                                    }
+                                ]
+                            }, 
+                            {
+                                "object" : "leaf",
+                                "text" : ", and add quotes like this:",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "block-quote",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "A wise quote.",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "heading-one",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "Other Features",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "heading-two",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "Links",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "paragraph",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "To add Links, you can:",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "bulleted-list",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "Click the Link icon in the Toolbar above.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "Copy and paste a URL while some text is selected.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "heading-two",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "Images",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "paragraph",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "Images are possible too.",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "image",
+                "isVoid" : true,
+                "data" : {
+                    "src" : "https://images.unsplash.com/photo-1494031021996-ac2eb738d846?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=5d4fd15c4a9461288fdd6b1e323fff26&auto=format&fit=crop&w=2203&q=80"
+                },
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "paragraph",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "To add Images, you can:",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "bulleted-list",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "Click the Image icon in the Toolbar above.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "Drag and drop one or more images anywhere into the editor. ",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "paragraph",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "You can even select and drag images within the editor to move them around.",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "heading-two",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "Keyboard Shortcuts",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "bulleted-list",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "cmd-z",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " or ",
+                                        "marks" : []
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "ctrl-z",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " to undo changes. The Editor keeps track of history.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "cmd+b",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " or ",
+                                        "marks" : []
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "ctrl+b",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " to bold selection.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "cmd+i",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " or ",
+                                        "marks" : []
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "ctrl+i",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " to italicize selection.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "cmd+u",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " or ",
+                                        "marks" : []
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "ctrl+u",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " to underline selection.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "cmd+`",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " or ",
+                                        "marks" : []
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "ctrl+`",
+                                        "marks" : [ 
+                                            {
+                                                "object" : "mark",
+                                                "type" : "code",
+                                                "data" : {}
+                                            }
+                                        ]
+                                    }, 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " to code selection.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "heading-one",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "Near Future Features",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "paragraph",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "There are some things that would be really nice to have...",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "numbered-list",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "Hover Menu. Useful when the article gets very long and you don't want to scroll back up to the Toolbar.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "object" : "block",
+                        "type" : "list-item",
+                        "isVoid" : false,
+                        "data" : {},
+                        "nodes" : [ 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : "Embed Complex Nodes. Just a fancy way of saying being able to support things like Video and ",
+                                        "marks" : []
+                                    }
+                                ]
+                            }, 
+                            {
+                                "object" : "inline",
+                                "type" : "link",
+                                "isVoid" : false,
+                                "data" : {
+                                    "href" : "https://github.com/d3/d3"
+                                },
+                                "nodes" : [ 
+                                    {
+                                        "object" : "text",
+                                        "leaves" : [ 
+                                            {
+                                                "object" : "leaf",
+                                                "text" : "D3 Visualizations",
+                                                "marks" : []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }, 
+                            {
+                                "object" : "text",
+                                "leaves" : [ 
+                                    {
+                                        "object" : "leaf",
+                                        "text" : " to visualize data.",
+                                        "marks" : []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "object" : "block",
+                "type" : "paragraph",
+                "isVoid" : false,
+                "data" : {},
+                "nodes" : [ 
+                    {
+                        "object" : "text",
+                        "leaves" : [ 
+                            {
+                                "object" : "leaf",
+                                "text" : "",
+                                "marks" : []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

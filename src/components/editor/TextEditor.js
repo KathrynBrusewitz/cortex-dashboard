@@ -9,7 +9,7 @@ import imageExtensions from 'image-extensions';
 import 'material-icons';
 import './TextEditor.css';
 
-import initialValue from './value.json';
+import initialJSON from './blank.json'; // Choose from `blank` or `example`
 
 /**
  * Define the default node type.
@@ -101,8 +101,16 @@ class TextEditor extends Component {
 
     this.state = {
       // Deserialize the initial editor value
-      value: Value.fromJSON(initialValue),
+      value: Value.fromJSON(initialJSON),
     };
+  }
+
+  componentDidMount() {
+    if (this.props.value) {
+      this.setState({
+        value: Value.fromJSON(this.props.value),
+      });
+    }
   }
 
   /**
@@ -139,6 +147,7 @@ class TextEditor extends Component {
    * @param {Change} change
    */
   onChange = ({ value }) => {
+    this.props.onChange(value.toJSON());
     this.setState({ value });
   }
 
@@ -334,7 +343,7 @@ class TextEditor extends Component {
 
   render() {
     return (
-      <div className="example">
+      <div className="TextEditor example">
         {this.renderToolbar()}
         {this.renderEditor()}
       </div>
@@ -448,7 +457,7 @@ class TextEditor extends Component {
     return (
       <div className="editor">
         <Editor
-          placeholder="What do you want to talk about?"
+          placeholder="Start writing..."
           value={this.state.value}
           schema={schema}
           onChange={this.onChange}
