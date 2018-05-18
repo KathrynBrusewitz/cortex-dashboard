@@ -55,9 +55,9 @@ class ArticleForm extends Component {
           )}
         </Form.Item>
         <Form.Item label="Article Body">
-          {getFieldDecorator('body', {
+          {getFieldDecorator('bodySlate', {
             rules: [{ required: true }],
-            initialValue: content.body || null,
+            initialValue: content.bodySlate || null,
           })(
             <TextEditor />
           )}
