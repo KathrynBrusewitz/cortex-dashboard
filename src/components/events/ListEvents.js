@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Table, Divider, Button, Row, Col, Popconfirm } from 'antd';
 import { Link } from 'react-router-dom';
-import Stat from '../shared/Stat';
 
 import { eventsActions } from '../../actions';
 

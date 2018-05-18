@@ -4,8 +4,8 @@
   "private": true,
   "author": {
     "name": "Kathryn Brusewitz",
-		"email": "kathryn.brusewitz@gmail.com",
-		"url": "http://kathryn.vc/"
+    "email": "kathryn.brusewitz@gmail.com",
+    "url": "http://kathryn.vc/"
   },
   "license": "MIT",
   "description": "Cortex Dashboard",
@@ -29,7 +29,7 @@
     "is-url": "^1.2.4",
     "material-icons": "^0.2.3",
     "moment": "^2.22.1",
-    "query-string": "^6.0.0",
+    "query-string": "5.1.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
