@@ -1,10 +1,7 @@
 import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
-import Cookies from 'universal-cookie';
-
-const baseURL = 'http://localhost:8080/api/';
-const cookies = new Cookies();
+import { baseURL, cookies } from '../constants';
 
 // Types
 export const authConstants = {
