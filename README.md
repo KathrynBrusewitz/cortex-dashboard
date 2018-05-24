@@ -9,8 +9,17 @@ More extensive documentation can be found in `/docs`. Below should give you enou
 # Todo
 
 ```
+Current Task
+[ ] Bookmarks
+
+Bugs
+
+[ ] Fix routing: Avatar in table field -> User Profile Page (users route was updated)
+
 Frontend
 
+[ ] Add image field (used as header) in terms
+[ ] Remove description field from terms
 [ ] Action to Download Userbase CSV
 [ ] Action Dropdown for Tables
 [ ] User Invite  
@@ -50,6 +59,8 @@ See Api README for more detailed todo
 [x] Login with Token: Verify, then send back User
 [x] Hash Passwords
 [ ] Amazon SES for Email
+[ ] Endpoint for update password
+[ ] On sign up, send new user and token
 
 Future
 

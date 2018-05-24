@@ -8,12 +8,15 @@ export const authConstants = {
   LOGIN_REQUEST: 'AUTH_LOGIN_REQUEST',
   LOGIN_SUCCESS: 'AUTH_LOGIN_SUCCESS',
   LOGIN_FAILURE: 'AUTH_LOGIN_FAILURE',
+
   TOKEN_LOGIN_REQUEST: 'AUTH_TOKEN_LOGIN_REQUEST',
   TOKEN_LOGIN_SUCCESS: 'AUTH_TOKEN_LOGIN_SUCCESS',
   TOKEN_LOGIN_FAILURE: 'AUTH_TOKEN_LOGIN_FAILURE',
+
   SIGNUP_REQUEST: 'AUTH_SIGNUP_REQUEST',
   SIGNUP_SUCCESS: 'AUTH_SIGNUP_SUCCESS',
   SIGNUP_FAILURE: 'AUTH_SIGNUP_FAILURE',
+
   LOGOUT: 'AUTH_LOGOUT',
 };
 
@@ -32,7 +35,7 @@ function login({ email, password }) {
 
     axios({
       method: 'post',
-      url: '/authenticate',
+      url: '/login',
       baseURL,
       data: {
         email,
@@ -72,7 +75,7 @@ function tokenLogin() {
       dispatch(request());
       axios({
         method: 'get',
-        url: '/user',
+        url: '/decode',
         baseURL,
         headers: {'x-access-token': cookies.get('token')},
       })
@@ -109,7 +112,7 @@ function logout() {
   function success() { return { type: authConstants.LOGOUT } }
 }
 
-function signup({ name, email, password, role }) {
+function signup({ name, email, password, roles }) {
   return dispatch => {
     dispatch(request());
 
@@ -121,7 +124,7 @@ function signup({ name, email, password, role }) {
         name,
         email,
         password,
-        role,
+        roles,
       }
     })
     .then(res => {
