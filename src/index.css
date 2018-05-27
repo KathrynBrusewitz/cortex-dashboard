@@ -11,37 +11,38 @@ body {
 
 /* Landing */
 
+
 .gradient-bg {
   /* width: 100vw;
   height: 100vh; */
-  background: linear-gradient(237deg, #596f8a, #6cb2cc, #496a72, #28454d, #8fd3d3);
-  background-size: 1200% 1200%;
+  background: linear-gradient(233deg, #333635, #111d21, #505f6b, #272829, #0b131a);
+  background-size: 1000% 1000%;
 
-  -webkit-animation: LandingGradient 22s ease infinite;
-  -moz-animation: LandingGradient 22s ease infinite;
-  -o-animation: LandingGradient 22s ease infinite;
-  animation: LandingGradient 22s ease infinite;
+  -webkit-animation: LandingGradient 47s ease infinite;
+  -moz-animation: LandingGradient 47s ease infinite;
+  -o-animation: LandingGradient 47s ease infinite;
+  animation: LandingGradient 47s ease infinite;
 }
 
 @-webkit-keyframes LandingGradient {
-  0%{background-position:14% 0%}
-  50%{background-position:87% 100%}
-  100%{background-position:14% 0%}
+  0%{background-position:0% 90%}
+  50%{background-position:100% 11%}
+  100%{background-position:0% 90%}
 }
 @-moz-keyframes LandingGradient {
-  0%{background-position:14% 0%}
-  50%{background-position:87% 100%}
-  100%{background-position:14% 0%}
+  0%{background-position:0% 90%}
+  50%{background-position:100% 11%}
+  100%{background-position:0% 90%}
 }
 @-o-keyframes LandingGradient {
-  0%{background-position:14% 0%}
-  50%{background-position:87% 100%}
-  100%{background-position:14% 0%}
+  0%{background-position:0% 90%}
+  50%{background-position:100% 11%}
+  100%{background-position:0% 90%}
 }
 @keyframes LandingGradient { 
-  0%{background-position:14% 0%}
-  50%{background-position:87% 100%}
-  100%{background-position:14% 0%}
+  0%{background-position:0% 90%}
+  50%{background-position:100% 11%}
+  100%{background-position:0% 90%}
 }
 
 .login-form-wrap {
