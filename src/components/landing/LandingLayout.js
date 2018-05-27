@@ -5,7 +5,6 @@ import Header from './Header';
 
 import Marketing from './Marketing';
 import LogIn from './LogIn';
-import SignUp from './SignUp';
 import DeadEnd from './DeadEnd';
 import Demo from './Demo';
 
