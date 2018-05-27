@@ -1,7 +1,6 @@
 import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
-import queryString from 'query-string';
 import qs from 'qs';
 import { baseURL, cookies } from '../constants';
 
@@ -65,7 +64,7 @@ function getUsers({ q, roles } = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -94,7 +93,7 @@ function getUser(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get user with id: ${id}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -134,7 +133,7 @@ function createUser(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to create user: "${fields.name}"`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -173,7 +172,7 @@ function updateUser(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to update user ${fields.name}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -204,7 +203,7 @@ function deleteUser(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to delete user with id: ${id}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -243,7 +242,7 @@ function inviteUser(fields = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error));
+      dispatch(alertActions.error(error.message));
     });
   };
 

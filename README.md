@@ -18,6 +18,7 @@ Bugs
 
 Frontend
 
+[ ] Add image field (used as header) in all contents
 [ ] Add image field (used as header) in terms
 [ ] Remove description field from terms
 [ ] Action to Download Userbase CSV

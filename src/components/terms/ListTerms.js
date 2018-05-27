@@ -28,6 +28,7 @@ class ListTerms extends Component {
         title: 'Term',
         dataIndex: 'term',
         key: 'term',
+        width: 200,
         sorter: (a, b) => a.term.localeCompare(b.term),
       }, {
         title: 'Definition',
@@ -37,6 +38,7 @@ class ListTerms extends Component {
         title: 'Actions',
         dataIndex: 'actions',
         key: 'actions',
+        width: 150,
         render: (text, record) => (
           <span>
             <Link to={`/terms/${record._id}/edit`}>Edit</Link>
@@ -86,8 +88,6 @@ class ListTerms extends Component {
             <div>
               <h2>Definition</h2>
               <p>{record.definition}</p>
-              <h2>Description</h2>
-              <p>{record.description}</p>
             </div>
           )} 
           loading={this.props.isGettingTerms || this.props.isDeletingTerm} 

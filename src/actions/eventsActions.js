@@ -46,6 +46,7 @@ function getEvents(filters = {}) {
       method: 'get',
       url: `/events?${query}`,
       baseURL,
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -57,7 +58,7 @@ function getEvents(filters = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get events. Args: ${filters} Query: ${query}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -74,6 +75,7 @@ function getEvent(id) {
       method: 'get',
       url: `/events/${id}`,
       baseURL,
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -85,7 +87,7 @@ function getEvent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get event with id: ${id}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -125,7 +127,7 @@ function createEvent(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to create new event: "${fields.title}"`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -165,7 +167,7 @@ function updateEvent(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to update new event: "${fields.title}"`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -195,7 +197,7 @@ function deleteEvent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to delete event with id: ${id}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 

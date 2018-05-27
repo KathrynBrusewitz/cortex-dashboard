@@ -38,14 +38,6 @@ class TermForm extends Component {
             <Input.TextArea />
           )}
         </Form.Item>
-        <Form.Item label="Description">
-          {getFieldDecorator('description', {
-            rules: [{ required: true }],
-            initialValue: term.description || null,
-          })(
-            <Input.TextArea />
-          )}
-        </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={loading}>
             {this.props.edit ? 'Update Term' : 'Create Term'}

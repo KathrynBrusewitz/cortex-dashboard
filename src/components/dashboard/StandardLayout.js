@@ -24,6 +24,31 @@ import Settings from './Settings';
 // Dashboard Layout Routes are put inside it's own Layout because we want to
 // pad all pages except Custom Layouts.
 
+class FormLayout extends Component {
+  render() {
+    return (
+      <Layout.Content style={{ width: 700, margin: '0 auto' }}>
+        <Switch>
+          {/* Details Layout Routes */}
+          <Route exact path="/users/new" component={CreateUser} />
+          <Route exact path="/users/:id" component={ViewUser} />
+          <Route exact path="/users/:id/edit" component={EditUser} />
+
+          <Route exact path="/terms/new" component={CreateTerm} />
+          <Route exact path="/terms/:id/edit" component={EditTerm} />
+
+          <Route exact path="/events/new" component={CreateEvent} />
+          <Route exact path="/events/:id" component={ViewEvent} />
+          <Route exact path="/events/:id/edit" component={EditEvent} />
+
+          {/* No Matching Route */}
+          <Route component={DeadEnd} />
+        </Switch>
+      </Layout.Content>
+    );
+  }
+}
+
 class StandardLayout extends Component {
   render() {
     return (
@@ -33,21 +58,11 @@ class StandardLayout extends Component {
           <Route exact path="/settings" component={Settings} />
 
           <Route exact path="/users" component={ListUsers} />
-          <Route exact path="/users/new" component={CreateUser} />
-          <Route exact path="/users/:id" component={ViewUser} />
-          <Route exact path="/users/:id/edit" component={EditUser} />
-
           <Route exact path="/terms" component={ListTerms} />
-          <Route exact path="/terms/new" component={CreateTerm} />
-          <Route exact path="/terms/:id/edit" component={EditTerm} />
-
           <Route exact path="/events" component={ListEvents} />
-          <Route exact path="/events/new" component={CreateEvent} />
-          <Route exact path="/events/:id" component={ViewEvent} />
-          <Route exact path="/events/:id/edit" component={EditEvent} />
 
           {/* No Matching Route */}
-          <Route component={DeadEnd}/>
+          <Route component={FormLayout}/>
         </Switch>
       </Layout>
     );

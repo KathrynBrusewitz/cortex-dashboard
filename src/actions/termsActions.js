@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
-import queryString from 'query-string';
+import qs from 'qs';
 import { baseURL, cookies } from '../constants';
 
 // Types
@@ -37,8 +37,8 @@ export const termsActions = {
 };
 
 // Implementations
-function getTerms(filters = {}) {
-  const query = queryString.stringify(filters);
+function getTerms({ q } = {}) {
+  const query = qs.stringify({ q });
   return dispatch => {
     dispatch(request());
 
@@ -46,6 +46,7 @@ function getTerms(filters = {}) {
       method: 'get',
       url: `/terms?${query}`,
       baseURL,
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -56,8 +57,8 @@ function getTerms(filters = {}) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get terms. Args: ${filters} Query: ${query}`));
+      dispatch(failure());
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -74,6 +75,7 @@ function getTerm(id) {
       method: 'get',
       url: `/terms/${id}`,
       baseURL,
+      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
@@ -85,7 +87,7 @@ function getTerm(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get term with id: ${id}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -95,9 +97,9 @@ function getTerm(id) {
 }
 
 function createTerm(fields) {
-  if (!fields.term || !fields.description) {
+  if (!fields.term) {
     return dispatch => {
-      dispatch(alertActions.error('Term is missing term or description fields.'));
+      dispatch(alertActions.error('Term is missing.'));
     };
   }
 
@@ -125,7 +127,7 @@ function createTerm(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to create new term: "${fields.term}"`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -135,9 +137,9 @@ function createTerm(fields) {
 }
 
 function updateTerm(fields, id) {
-  if (!fields.term || !fields.description) {
+  if (!fields.term) {
     return dispatch => {
-      dispatch(alertActions.error('Term is missing term or description fields'));
+      dispatch(alertActions.error('Term is missing.'));
     };
   }
 
@@ -165,7 +167,7 @@ function updateTerm(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to update term: "${fields.term}"`));
+      dispatch(alertActions.error(error.message));
     });
   };
 
@@ -195,7 +197,7 @@ function deleteTerm(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to delete term with id: ${id}`));
+      dispatch(alertActions.error(error.message));
     });
   };
 

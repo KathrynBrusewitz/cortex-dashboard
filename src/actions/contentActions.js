@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
-import queryString from 'query-string';
+import qs from 'qs';
 import { baseURL, cookies } from '../constants';
 
 // Types
@@ -37,8 +37,8 @@ export const contentActions = {
 };
 
 // Implementations
-function getContents(filters = {}) {
-  const query = queryString.stringify(filters);
+function getContents({ q, type } = {}) {
+  const query = qs.stringify({ q, type });
   return dispatch => {
     dispatch(request());
 
@@ -58,7 +58,7 @@ function getContents(filters = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get contents. Args: ${filters} Query: ${query}`));
+      dispatch(alertActions.error(`Server is unable to get contents. Query: ${query}`));
     });
   };
 
@@ -87,7 +87,7 @@ function getContent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error));
+      dispatch(alertActions.error('Server error.'));
     });
   };
 
@@ -127,7 +127,7 @@ function createContent(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error));
+      dispatch(alertActions.error('Server error.'));
     });
   };
 
@@ -167,7 +167,7 @@ function updateContent(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error));
+      dispatch(alertActions.error('Server error.'));
     });
   };
 
@@ -197,7 +197,7 @@ function deleteContent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error));
+      dispatch(alertActions.error('Server error.'));
     });
   };
 
