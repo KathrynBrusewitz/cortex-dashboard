@@ -58,7 +58,7 @@ function getTerms({ q } = {}) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error(error.message));
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -86,8 +86,8 @@ function getTerm(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -126,8 +126,8 @@ function createTerm(fields) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -166,8 +166,8 @@ function updateTerm(fields, id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -196,8 +196,8 @@ function deleteTerm(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 

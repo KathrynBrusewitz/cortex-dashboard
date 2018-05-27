@@ -63,8 +63,8 @@ function getUsers({ q, roles } = {}) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -92,8 +92,8 @@ function getUser(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -103,12 +103,6 @@ function getUser(id) {
 }
 
 function createUser(fields) {
-  if (!fields.name || !fields.email || !fields.password || !fields.role) {
-    return dispatch => {
-      dispatch(alertActions.error('User is missing required fields.'));
-    };
-  }
-
   return dispatch => {
     dispatch(request());
 
@@ -132,8 +126,8 @@ function createUser(fields) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -143,11 +137,6 @@ function createUser(fields) {
 }
 
 function updateUser(fields, id) {
-  if (!fields.name) {
-    return dispatch => {
-      dispatch(alertActions.error('User is missing name'));
-    };
-  }
   return dispatch => {
     dispatch(request());
 
@@ -172,7 +161,7 @@ function updateUser(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -202,8 +191,8 @@ function deleteUser(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -213,9 +202,9 @@ function deleteUser(id) {
 }
 
 function inviteUser(fields = {}) {
-  if (!fields.email || !fields.role) {
+  if (!fields.email || !fields.roles) {
     return dispatch => {
-      dispatch(alertActions.error('Email and role is required to invite user.'));
+      dispatch(alertActions.error('Email and roles are required to invite user.'));
     };
   }
   return dispatch => {
@@ -241,8 +230,8 @@ function inviteUser(fields = {}) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 

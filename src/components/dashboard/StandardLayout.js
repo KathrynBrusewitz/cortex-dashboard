@@ -11,11 +11,6 @@ import ViewEvent from '../events/ViewEvent';
 import EditEvent from '../events/EditEvent';
 import ListEvents from '../events/ListEvents';
 
-import CreateUser from '../users/CreateUser';
-import ViewUser from '../users/ViewUser';
-import EditUser from '../users/EditUser';
-import ListUsers from '../users/ListUsers';
-
 import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
 
@@ -29,11 +24,7 @@ class FormLayout extends Component {
     return (
       <Layout.Content style={{ width: 700, margin: '0 auto' }}>
         <Switch>
-          {/* Details Layout Routes */}
-          <Route exact path="/users/new" component={CreateUser} />
-          <Route exact path="/users/:id" component={ViewUser} />
-          <Route exact path="/users/:id/edit" component={EditUser} />
-
+          {/* Form Layout Routes */}
           <Route exact path="/terms/new" component={CreateTerm} />
           <Route exact path="/terms/:id/edit" component={EditTerm} />
 
@@ -57,7 +48,6 @@ class StandardLayout extends Component {
           <Route exact path="/analytics" component={Analytics} />
           <Route exact path="/settings" component={Settings} />
 
-          <Route exact path="/users" component={ListUsers} />
           <Route exact path="/terms" component={ListTerms} />
           <Route exact path="/events" component={ListEvents} />
 

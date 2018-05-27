@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Radio } from 'antd';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 class InviteForm extends Component {
   handleSubmit = (e) => {
@@ -25,17 +25,17 @@ class InviteForm extends Component {
           )}
         </Form.Item>
         <Form.Item
-          label="Choose a Role"
+          label="Select Roles"
         >
-          {getFieldDecorator('role', {
+          {getFieldDecorator('roles', {
             rules: [{ required: true }],
           })(
-            <Radio.Group>
-              <Radio value="admin">Admin</Radio>
-              <Radio value="writer">Writer</Radio>
-              <Radio value="artist">Artist</Radio>
-              <Radio value="reader">Reader</Radio>
-            </Radio.Group>
+            <Checkbox.Group>
+              <Checkbox value="admin">Admin</Checkbox>
+              <Checkbox value="writer">Writer</Checkbox>
+              <Checkbox value="artist">Artist</Checkbox>
+              <Checkbox value="reader">Reader</Checkbox>
+            </Checkbox.Group>
           )}
         </Form.Item>
         <Form.Item>

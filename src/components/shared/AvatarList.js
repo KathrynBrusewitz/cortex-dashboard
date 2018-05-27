@@ -10,7 +10,7 @@ class AvatarList extends Component {
         {this.props.users.map((user) => {
           return (
             <Popover content={user.name} key={user._id}>
-              <Link to={`/users/${user._id}`}>
+              <Link to={`/users/userbase/${user._id}`}>
                 <Avatar name={user.name} size="small" style={{ marginRight: '5px' }}/>
               </Link>
             </Popover>

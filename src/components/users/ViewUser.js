@@ -62,7 +62,7 @@ class ViewUser extends Component {
             Email: {user.email}
           </h2>
           <h2> 
-            Role: {user.role}
+            Roles: {user.roles.map(r => `${r} `)}
           </h2>
         </div>
       </div>

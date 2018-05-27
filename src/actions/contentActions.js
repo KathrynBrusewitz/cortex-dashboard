@@ -57,8 +57,8 @@ function getContents({ q, type } = {}) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get contents. Query: ${query}`));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -86,8 +86,8 @@ function getContent(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error('Server error.'));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -126,8 +126,8 @@ function createContent(fields) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error('Server error.'));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -166,8 +166,8 @@ function updateContent(fields, id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error('Server error.'));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -196,8 +196,8 @@ function deleteContent(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error('Server error.'));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 

@@ -35,10 +35,10 @@ class ListUsers extends Component {
         key: 'email',
         sorter: (a, b) => a.email.localeCompare(b.email),
       }, {
-        title: 'Role',
-        dataIndex: 'role',
-        key: 'role',
-        sorter: (a, b) => a.role.localeCompare(b.role),
+        title: 'Roles',
+        dataIndex: 'roles',
+        key: 'roles',
+        render: (text, record) => record.roles.map(r => `${r} `)
       }, {
         title: 'Actions',
         dataIndex: 'actions',

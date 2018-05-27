@@ -54,7 +54,7 @@ function getMe() {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error('Server error.'));
+      dispatch(alertActions.error(error.response.data.message));
       // Remove token because current user is not authenticated
       cookies.remove('token', { path: '/' });
     });
@@ -93,7 +93,7 @@ function login({ email, password }) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error('Server error.'));
+      dispatch(alertActions.error(error.response.data.message));
       cookies.remove('token', { path: '/' });
     });
   };
@@ -174,7 +174,7 @@ function signup({ name, email, password, roles }) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error('Server error.'));
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 

@@ -57,8 +57,8 @@ function getEvents(filters = {}) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -86,8 +86,8 @@ function getEvent(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -126,8 +126,8 @@ function createEvent(fields) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -166,8 +166,8 @@ function updateEvent(fields, id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
@@ -196,8 +196,8 @@ function deleteEvent(id) {
       }
     })
     .catch(error => {
-      dispatch(failure(error));
-      dispatch(alertActions.error(error.message));
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
     });
   };
 
