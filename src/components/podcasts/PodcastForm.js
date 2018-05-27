@@ -48,33 +48,32 @@ class PodcastForm extends Component {
         </Form.Item>
         <Form.Item label="Hosts">
           {getFieldDecorator('creators', {
-            initialValue: content.creators || [],
+            initialValue: (content.creators && content.creators.map(c => c._id)) || [],
           })(
-            <SelectUserTags placeholder="Select one or more hosts or write names" users={this.props.creatorOptions} />
+            <SelectUserTags placeholder="Select podcast hosts" users={this.props.creatorOptions} />
           )}
         </Form.Item>
         <Form.Item label="Artists">
           {getFieldDecorator('artists', {
-            initialValue: content.artists || [],
+            initialValue: (content.artists && content.artists.map(a => a._id)) || [],
           })(
-            <SelectUserTags placeholder="Select one or more artists or write names" users={this.props.creatorOptions} />
+            <SelectUserTags placeholder="Select artists" users={this.props.creatorOptions} />
           )}
         </Form.Item>
         <Form.Item label="Podcast Body" help="Good for transcripts or for more detailed reading">
           {getFieldDecorator('body', {
-            rules: [{ required: true }],
             initialValue: content.body || null,
           })(
             <Input.TextArea autosize={{ minRows: 10 }} />
           )}
         </Form.Item>
-        <Form.Item label="References">
+        {/* <Form.Item label="References">
           {getFieldDecorator('references', {
             initialValue: content.references || null,
           })(
             <Input.TextArea autosize={{ minRows: 5 }} />
           )}
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="What should be the status of this podcast?">
           {getFieldDecorator('state', {
             rules: [{ required: true }],

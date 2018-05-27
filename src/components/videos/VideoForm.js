@@ -48,14 +48,14 @@ class VideoForm extends Component {
         </Form.Item>
         <Form.Item label="Hosts">
           {getFieldDecorator('creators', {
-            initialValue: content.creators || [],
+            initialValue: (content.creators && content.creators.map(c => c._id)) || [],
           })(
             <SelectUserTags placeholder="Select one or more hosts or write names" users={this.props.creatorOptions} />
           )}
         </Form.Item>
         <Form.Item label="Artists">
           {getFieldDecorator('artists', {
-            initialValue: content.artists || [],
+            initialValue: (content.artists && content.artists.map(a => a._id)) || [],
           })(
             <SelectUserTags placeholder="Select one or more artists or write names" users={this.props.creatorOptions} />
           )}
@@ -68,13 +68,13 @@ class VideoForm extends Component {
             <Input.TextArea autosize={{ minRows: 10 }} />
           )}
         </Form.Item>
-        <Form.Item label="References">
+        {/* <Form.Item label="References">
           {getFieldDecorator('references', {
             initialValue: content.references || null,
           })(
             <Input.TextArea autosize={{ minRows: 5 }} />
           )}
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item label="What should be the status of this video?">
           {getFieldDecorator('state', {
             rules: [{ required: true }],
