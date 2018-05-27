@@ -7,7 +7,7 @@ class SelectUserTags extends Component {
 
     const options = users.map((user, i) => (
       <Select.Option key={user._id}>
-        {user.name} <i>({user.role})</i>
+        {user.name} <i> - {user.roles.map(r => `${r} `)}</i>
       </Select.Option>
     ));
 

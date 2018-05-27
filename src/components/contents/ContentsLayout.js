@@ -23,7 +23,7 @@ import DeadEnd from "../shared/DeadEnd";
 class ContentDetailsLayout extends Component {
   render() {
     return (
-      <Layout.Content style={{ maxWidth: 600, margin: '0 auto' }}>
+      <Layout.Content style={{ width: 700, margin: '0 auto' }}>
         <Switch>
           {/* Details Layout Routes */}
           <Route exact path="/contents/articles/new" component={CreateArticle} />

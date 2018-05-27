@@ -2,6 +2,7 @@ import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
 import queryString from 'query-string';
+import qs from 'qs';
 import { baseURL, cookies } from '../constants';
 
 // Types
@@ -42,11 +43,8 @@ export const usersActions = {
 };
 
 // Implementations
-function getUsers(filters = {}) {
-  const query = queryString.stringify(filters);
-
-  // want my query to be of form:
-  // filters = { _id: this.article.creators }
+function getUsers({ q, roles } = {}) {
+  const query = qs.stringify({ q, roles });
 
   return dispatch => {
     dispatch(request());
@@ -67,7 +65,7 @@ function getUsers(filters = {}) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get users. Args: ${filters} Query: ${query}`));
+      dispatch(alertActions.error(error));
     });
   };
 

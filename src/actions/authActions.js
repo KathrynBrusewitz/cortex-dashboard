@@ -5,6 +5,10 @@ import { baseURL, cookies } from '../constants';
 
 // Types
 export const authConstants = {
+  GETME_REQUEST: 'AUTH_GETME_REQUEST',
+  GETME_SUCCESS: 'AUTH_GETME_SUCCESS',
+  GETME_FAILURE: 'AUTH_GETME_FAILURE',
+
   LOGIN_REQUEST: 'AUTH_LOGIN_REQUEST',
   LOGIN_SUCCESS: 'AUTH_LOGIN_SUCCESS',
   LOGIN_FAILURE: 'AUTH_LOGIN_FAILURE',
@@ -26,7 +30,40 @@ export const authActions = {
   tokenLogin,
   logout,
   signup,
+  getMe,
 };
+
+function getMe() {
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'get',
+      url: '/me',
+      baseURL,
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success(res.data.payload));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+        // Remove token because current user is not authenticated
+        cookies.remove('token', { path: '/' });
+      }
+    })
+    .catch(error => {
+      dispatch(failure());
+      dispatch(alertActions.error(error));
+      // Remove token because current user is not authenticated
+      cookies.remove('token', { path: '/' });
+    });
+  };
+
+  function request() { return { type: authConstants.GETME_REQUEST } }
+  function success(user) { return { type: authConstants.GETME_SUCCESS, user } }
+  function failure() { return { type: authConstants.GETME_FAILURE } }
+}
 
 // Implementations
 function login({ email, password }) {
@@ -47,7 +84,6 @@ function login({ email, password }) {
       if (res.data.success) {
         cookies.set('token', res.data.token, { path: '/' });
         dispatch(success(res.data.payload));
-        dispatch(alertActions.success(`Welcome ${res.data.payload.name}!`));
         dispatch(push('/'));
       } else {
         dispatch(failure());
@@ -57,7 +93,7 @@ function login({ email, password }) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error('Server is unable to authenticate.'));
+      dispatch(alertActions.error(error));
       cookies.remove('token', { path: '/' });
     });
   };
@@ -82,16 +118,15 @@ function tokenLogin() {
       .then(res => {
         if (res.data.success) {
           dispatch(success(res.data.payload));
-          dispatch(alertActions.success(`Welcome back ${res.data.payload.name}!`));
         } else {
           dispatch(failure());
-          // Do not alert failure because this login attempt is automatic by Cortex, not user
+          // Do not alert failure because this login is automatic by Cortex, not user
           cookies.remove('token', { path: '/' });
         }
       })
       .catch(error => {
         dispatch(failure());
-        // Do not alert failure because this login attempt is automatic by Cortex, not user
+        // Do not alert failure because this login is automatic by Cortex, not user
         cookies.remove('token', { path: '/' });
       });
     }
@@ -139,7 +174,7 @@ function signup({ name, email, password, roles }) {
     })
     .catch(error => {
       dispatch(failure());
-      dispatch(alertActions.error('Server is unable to create user.'));
+      dispatch(alertActions.error(error));
     });
   };
 

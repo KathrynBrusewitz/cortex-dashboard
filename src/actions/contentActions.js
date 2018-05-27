@@ -44,7 +44,7 @@ function getContents(filters = {}) {
 
     axios({
       method: 'get',
-      url: `/prot/contents?${query}`,
+      url: `/contents?${query}`,
       baseURL,
       headers: {'x-access-token': cookies.get('token')},
     })
@@ -73,7 +73,7 @@ function getContent(id) {
 
     axios({
       method: 'get',
-      url: `/prot/contents/${id}`,
+      url: `/contents/${id}`,
       baseURL,
       headers: {'x-access-token': cookies.get('token')},
     })
@@ -87,7 +87,7 @@ function getContent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server is unable to get content with id: ${id}`));
+      dispatch(alertActions.error(error));
     });
   };
 
@@ -98,7 +98,6 @@ function getContent(id) {
 
 function createContent(fields) {
   if (!fields.title || !fields.state || !fields.type) {
-    console.log('Error: Missing title, state, or type.');
     return dispatch => {
       dispatch(alertActions.error('Missing title, state, or type.'));
     };
@@ -128,7 +127,7 @@ function createContent(fields) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to create new ${fields.type}: "${fields.title}"`));
+      dispatch(alertActions.error(error));
     });
   };
 
@@ -139,7 +138,6 @@ function createContent(fields) {
 
 function updateContent(fields, id) {
   if (!fields.title || !fields.state || !fields.type) {
-    console.log('Error: Missing title, state, or type.');
     return dispatch => {
       dispatch(alertActions.error('Missing title, state, or type.'));
     };
@@ -169,7 +167,7 @@ function updateContent(fields, id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to update ${fields.type}: "${fields.title}"`));
+      dispatch(alertActions.error(error));
     });
   };
 
@@ -199,7 +197,7 @@ function deleteContent(id) {
     })
     .catch(error => {
       dispatch(failure(error));
-      dispatch(alertActions.error(`Server was unable to delete content with id: ${id}`));
+      dispatch(alertActions.error(error));
     });
   };
 

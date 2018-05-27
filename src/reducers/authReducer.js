@@ -4,10 +4,28 @@ const AUTH_INITIAL = {
   user: null,
   isLoggingIn: false,
   isSigningUp: false,
+  isGettingMe: false,
 };
 
 export const authReducer = (state = AUTH_INITIAL, action) => {
   switch (action.type) {
+    case authConstants.GETME_REQUEST:
+      return {
+        ...state,
+        isGettingMe: true,
+      };
+    case authConstants.GETME_SUCCESS:
+      return {
+        ...state,
+        user: action.user,
+        isGettingMe: false,
+      };
+    case authConstants.GETME_FAILURE:
+      return {
+        ...state,
+        user: null,
+        isGettingMe: false,
+      };
     case authConstants.LOGIN_REQUEST:
       return {
         ...state,
