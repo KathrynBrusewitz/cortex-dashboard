@@ -33,6 +33,7 @@ export const authActions = {
   getMe,
 };
 
+// Implementations
 function getMe() {
   return dispatch => {
     dispatch(request());
@@ -65,7 +66,6 @@ function getMe() {
   function failure() { return { type: authConstants.GETME_FAILURE } }
 }
 
-// Implementations
 function login({ email, password }) {
   return dispatch => {
     dispatch(request());
