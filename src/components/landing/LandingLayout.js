@@ -18,7 +18,6 @@ class LandingLayout extends Component {
           <Switch>
             <Route exact path="/" component={Marketing} />
             <Route exact path="/login" component={LogIn} />
-            <Route exact path="/signup" component={SignUp} />
             <Route exact path="/demo" component={Demo} />
             <Route component={DeadEnd}/>
           </Switch>

@@ -3,11 +3,16 @@ import { usersConstants } from '../actions';
 const USERS_INITIAL = {
   users: null,
   user: null,
+  invites: null,
+
   isGettingUsers: false,
   isGettingUser: false,
   isUpdatingUser: false,
   isDeletingUser: false,
+
   isInvitingUser: false,
+  isGettingInvites: false,
+  isDeletingInvite: false,
 };
 
 export const usersReducer = (state = USERS_INITIAL, action) => {
@@ -92,6 +97,39 @@ export const usersReducer = (state = USERS_INITIAL, action) => {
       return {
         ...state,
         isInvitingUser: false,
+      };
+    
+    case usersConstants.GET_INVITES_REQUEST:
+      return {
+        ...state,
+        isGettingInvites: true,
+      };
+    case usersConstants.GET_INVITES_SUCCESS:
+      return {
+        ...state,
+        invites: action.invites,
+        isGettingInvites: false,
+      };
+    case usersConstants.GET_INVITES_FAILURE:
+      return {
+        ...state,
+        isGettingInvites: false,
+      };
+
+    case usersConstants.DELETE_INVITE_REQUEST:
+      return {
+        ...state,
+        isDeletingInvite: true,
+      };
+    case usersConstants.DELETE_INVITE_SUCCESS:
+      return {
+        ...state,
+        isDeletingInvite: false,
+      };
+    case usersConstants.DELETE_INVITE_FAILURE:
+      return {
+        ...state,
+        isDeletingInvite: false,
       };
 
     default:

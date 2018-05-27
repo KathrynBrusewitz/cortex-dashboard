@@ -16,9 +16,6 @@ class Header extends Component {
             <Link to="/login" style={{ marginRight: 8 }}>
                 Log In
             </Link>
-            <Link to="/signup">
-                Sign Up
-            </Link>
           </Col>
         </Row>
       </Layout.Header>

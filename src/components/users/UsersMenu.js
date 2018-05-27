@@ -5,7 +5,7 @@ import { Menu, Icon } from 'antd';
 
 const items = [
   { icon: 'user', name: 'Userbase', route: '/users/userbase' },
-  { icon: 'mail', name: 'Invite User', route: '/users/invite' },
+  { icon: 'mail', name: 'User Invites', route: '/users/invites' },
 ];
 
 const menuItems = (

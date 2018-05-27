@@ -29,6 +29,15 @@ export const usersConstants = {
   INVITE_USER_REQUEST: 'INVITE_USER_REQUEST',
   INVITE_USER_SUCCESS: 'INVITE_USER_SUCCESS',
   INVITE_USER_FAILURE: 'INVITE_USER_FAILURE',
+  
+  GET_INVITES_REQUEST: 'GET_INVITES_REQUEST',
+  GET_INVITES_SUCCESS: 'GET_INVITES_SUCCESS',
+  GET_INVITES_FAILURE: 'GET_INVITES_FAILURE',
+
+  DELETE_INVITE_REQUEST: 'DELETE_INVITE_REQUEST',
+  DELETE_INVITE_SUCCESS: 'DELETE_INVITE_SUCCESS',
+  DELETE_INVITE_FAILURE: 'DELETE_INVITE_FAILURE',
+
 };
 
 // Creators
@@ -38,7 +47,10 @@ export const usersActions = {
   createUser,
   updateUser,
   deleteUser,
+
   inviteUser,
+  getInvites,
+  deleteInvite,
 };
 
 // Implementations
@@ -212,7 +224,7 @@ function inviteUser(fields = {}) {
 
     axios({
       method: 'post',
-      url: '/users/invite',
+      url: '/codes/invites',
       baseURL,
       data: {
         ...fields
@@ -222,7 +234,7 @@ function inviteUser(fields = {}) {
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(push('/users'));
+        dispatch(push('/users/invites'));
         dispatch(alertActions.success(`Sent an invite to ${fields.email}`));
       } else {
         dispatch(failure());
@@ -238,4 +250,66 @@ function inviteUser(fields = {}) {
   function request() { return { type: usersConstants.INVITE_USER_REQUEST } }
   function success() { return { type: usersConstants.INVITE_USER_SUCCESS } }
   function failure() { return { type: usersConstants.INVITE_USER_FAILURE } }
+}
+
+function getInvites({ q } = {}) {
+  const query = qs.stringify({ q });
+
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'get',
+      url: `/codes/invites?${query}`,
+      baseURL,
+      headers: {'x-access-token': cookies.get('token')},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success(res.data.payload));
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
+    });
+  };
+
+  function request() { return { type: usersConstants.GET_INVITES_REQUEST } }
+  function success(invites) { return { type: usersConstants.GET_INVITES_SUCCESS, invites } }
+  function failure() { return { type: usersConstants.GET_INVITES_FAILURE } }
+}
+
+function deleteInvite(id) {
+  return dispatch => {
+    dispatch(request());
+
+    axios({
+      method: 'delete',
+      url: `/codes/invites/${id}`,
+      baseURL,
+      headers: {'x-access-token': cookies.get('token')},
+    })
+    .then(res => {
+      if (res.data.success) {
+        dispatch(success());
+        dispatch(alertActions.success(`Deleted invite with id: ${id}`));
+        dispatch(getInvites());
+      } else {
+        dispatch(failure());
+        dispatch(alertActions.error(res.data.message));
+      }
+    })
+    .catch(error => {
+      dispatch(failure());
+      dispatch(alertActions.error(error.response.data.message));
+    });
+  };
+
+  function request() { return { type: usersConstants.DELETE_USER_REQUEST } }
+  function success() { return { type: usersConstants.DELETE_USER_SUCCESS } }
+  function failure() { return { type: usersConstants.DELETE_USER_FAILURE } }
 }
