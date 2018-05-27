@@ -457,7 +457,6 @@ class TextEditor extends Component {
     return (
       <div className="editor">
         <Editor
-          placeholder="Start writing..."
           value={this.state.value}
           schema={schema}
           onChange={this.onChange}

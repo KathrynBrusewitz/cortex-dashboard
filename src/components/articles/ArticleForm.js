@@ -33,11 +33,10 @@ class ArticleForm extends Component {
   }
 
   render() {
-    const { currentStep } = this.state;
     const { loading } = this.props;
     const { getFieldDecorator } = this.props.form;
     const content = this.props.content || {};
-
+    const { currentStep } = this.state;
     const steps = ['Details','Article','Save'];
 
     return (
@@ -55,7 +54,7 @@ class ArticleForm extends Component {
                   <Input />
                 )}
               </Form.Item>
-              <Form.Item label="Description" help="Summarize or describe the article under 160 characters. This shows up underneath the title when scrolling through content">
+              <Form.Item label="Short Description" help="Summarize or describe the article. This shows up underneath the title when scrolling through content">
                 {getFieldDecorator('description', {
                   initialValue: content.description || null,
                 })(
