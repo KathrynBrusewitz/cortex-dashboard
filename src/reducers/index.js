@@ -8,6 +8,7 @@ import { usersReducer } from './usersReducer';
 import { contentReducer } from './contentReducer';
 import { termsReducer } from './termsReducer';
 import { eventsReducer } from './eventsReducer';
+import { imagesReducer } from './imagesReducer';
 
 const rootReducer = combineReducers({
   router: routerReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   content: contentReducer,
   terms: termsReducer,
   events: eventsReducer,
+  images: imagesReducer,
 });
 
 export default rootReducer;

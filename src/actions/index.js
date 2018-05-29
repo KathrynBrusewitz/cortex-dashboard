@@ -5,3 +5,4 @@ export * from './usersActions';
 export * from './contentActions';
 export * from './termsActions';
 export * from './eventsActions';
+export * from './imagesActions';

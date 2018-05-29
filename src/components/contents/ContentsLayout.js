@@ -20,6 +20,11 @@ import ContentsMenu from './ContentsMenu';
 
 import DeadEnd from "../shared/DeadEnd";
 
+import CreateImage from "../images/CreateImage";
+import ViewImage from "../images/ViewImage";
+import EditImage from "../images/EditImage";
+import ListImages from '../images/ListImages';
+
 class ContentDetailsLayout extends Component {
   render() {
     return (
@@ -37,6 +42,10 @@ class ContentDetailsLayout extends Component {
           <Route exact path="/contents/podcasts/new" component={CreatePodcast} />
           <Route exact path="/contents/podcasts/:id" component={ViewPodcast} />
           <Route exact path="/contents/podcasts/:id/edit" component={EditPodcast} />
+
+          <Route exact path="/contents/artwork/new" component={CreateImage} />
+          <Route exact path="/contents/artwork/:id" component={ViewImage} />
+          <Route exact path="/contents/artwork/:id/edit" component={EditImage} />
 
           {/* No Matching Route */}
           <Route component={DeadEnd} />
@@ -60,6 +69,7 @@ class ContentsLayout extends Component {
             <Route exact path="/contents/articles" component={ListArticles} />
             <Route exact path="/contents/videos" component={ListVideos} />
             <Route exact path="/contents/podcasts" component={ListPodcasts} />
+            <Route exact path="/contents/artwork" component={ListImages} />
 
             {/* No Matching Route */}
             <Route component={ContentDetailsLayout} />

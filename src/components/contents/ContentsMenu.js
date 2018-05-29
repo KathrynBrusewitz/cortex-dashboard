@@ -7,6 +7,7 @@ const items = [
   { icon: 'profile', name: 'Articles', route: '/contents/articles' },
   { icon: 'sound', name: 'Podcasts', route: '/contents/podcasts' },
   { icon: 'play-circle', name: 'Videos', route: '/contents/videos' },
+  { icon: 'picture', name: 'Artwork', route: '/contents/artwork' },
 ];
 
 const menuItems = (
