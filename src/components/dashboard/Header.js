@@ -20,7 +20,7 @@ class Header extends Component {
             </Link>
           </Col>
           <HeaderMenu />
-          <Col>
+          <Col className="header-profile-dropdown">
             <span style={{ marginRight: 8, color: '#fff' }}>{this.props.user.name}</span>
             <DropdownMenu>
               <Avatar name={this.props.user.name} style={{ lineHeight: '64px', cursor: 'pointer', backgroundColor: '#666' }} />

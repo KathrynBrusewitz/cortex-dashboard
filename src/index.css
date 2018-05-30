@@ -84,3 +84,9 @@ body {
   line-height: 64px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 900px) {
+  .header-profile-dropdown {
+    display: none;
+  }
+}
