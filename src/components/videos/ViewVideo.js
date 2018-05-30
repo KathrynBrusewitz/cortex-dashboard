@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Row, Divider, Popconfirm } from 'antd';
+import { Row, Divider, Popconfirm, Card } from 'antd';
 
 import { contentActions } from '../../actions';
 import Loading from '../shared/Loading';
@@ -56,12 +56,18 @@ class ViewVideo extends Component {
           <Divider type="vertical" />
           <Stat stat={46} icon="book" tooltip="46 bookmarks" />
         </Row>
+        <Card
+          style={{ marginTop: 20 }}
+          cover={content.coverImage &&
+          <img alt={content.coverImage.description} src={`https://${content.coverImage.s3Bucket}.s3.amazonaws.com/${content.coverImage.s3Key}`} />}
+          bordered={false}
+        >
+          <Card.Meta
+            description={<p><i>{content.description}</i></p>}
+          />
+        </Card>
         <h1>{content.title}</h1>
-        <p>{content.body && content.body}</p>
-        <h2>Description</h2>
-        <p>{content.description && content.description}</p>
-        <h3>Last Updated: {content.updateTime}</h3>
-        <h3>Published: {content.publishTime && content.publishTime}</h3>
+        <p>{content.body}</p>
       </div>
     );
   }

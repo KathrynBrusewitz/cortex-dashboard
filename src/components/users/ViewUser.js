@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Row, Divider, Popconfirm } from 'antd';
+import { Row, Divider, Popconfirm, List } from 'antd';
 import Loading from '../shared/Loading';
 import Avatar from '../shared/Avatar';
 
@@ -57,14 +57,66 @@ class ViewUser extends Component {
         <Row>
           <h1><Avatar name={user.name} /> {user.name}</h1>
         </Row>
-        <div style={{ marginBottom: 16 }}>
-          <h2>
-            Email: {user.email}
-          </h2>
-          <h2> 
-            Roles: {user.roles.map(r => `${r} `)}
-          </h2>
-        </div>
+        <List
+          style={{ marginBottom: 20 }}
+          header="Bio"
+          dataSource={[user.bio]}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                description={item}
+              />
+            </List.Item>
+          )}
+        />
+        <List
+          style={{ marginBottom: 20 }}
+          header="Roles"
+          dataSource={user.roles}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                description={item}
+              />
+            </List.Item>
+          )}
+        />
+        <List
+          style={{ marginBottom: 20 }}
+          header="Email"
+          dataSource={[user.email]}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                description={item}
+              />
+            </List.Item>
+          )}
+        />
+        <List
+          style={{ marginBottom: 20 }}
+          header="Bookmarks"
+          dataSource={user.bookmarks}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                description={item.title}
+              />
+            </List.Item>
+          )}
+        />
+        <List
+          style={{ marginBottom: 20 }}
+          header="Notes"
+          dataSource={user.notes}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                description={item.term.term}
+              />
+            </List.Item>
+          )}
+        />
       </div>
     );
   }

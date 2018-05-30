@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, Card } from 'antd';
+import { Link } from 'react-router-dom';
 
 class Marketing extends Component {
   render() {
@@ -14,32 +15,56 @@ class Marketing extends Component {
             </Row>
           </Col>
         </Row>
+
+
         <Row style={{ padding: 80, backgroundColor: '#fff' }}>
-          <h1>Manage Content</h1>
-          <Row type="flex" justify="space-between" align="middle">
-            <Col>
-              <Row>
-                <p>Articles</p>
-              </Row>
+          <Row type="flex" justify="center" align="middle" gutter={16}>
+            <Col xs={24} sm={12} md={12} lg={8} xl={8}>
+              <Card
+                bordered={false}
+                style={{ fontSize: 100 }}
+                cover={<Icon type="pie-chart" />}
+              >
+                <Card.Meta
+                  style={{ textAlign: 'center' }}
+                  title={<h1>Track Analytics</h1>}
+                />
+              </Card>
             </Col>
-            <Col>
-              <Row>
-                <p>Podcasts and Videos</p>
-              </Row>
+            <Col xs={24} sm={12} md={12} lg={8} xl={8}>
+              <Card
+                bordered={false}
+                style={{ fontSize: 100 }}
+                cover={<Icon type="cloud-upload-o" />}
+              >
+                <Card.Meta
+                  style={{ textAlign: 'center' }}
+                  title={<h1>Upload Content</h1>}
+                />
+              </Card>
             </Col>
-            <Col>
-              <Row>
-                <p>Glossary</p>
-              </Row>
+            <Col xs={24} sm={12} md={12} lg={8} xl={8}>
+              <Card
+                bordered={false}
+                style={{ fontSize: 100 }}
+                cover={<Icon type="smile-o" />}
+              >
+                <Card.Meta
+                  style={{ textAlign: 'center' }}
+                  title={<h1>Manage Users</h1>}
+                />
+              </Card>
             </Col>
           </Row>
         </Row>
-        <Row style={{ padding: 80, backgroundColor: '#fff' }}>
-          <h1>Full-Stack Open Source</h1>
-          <p>inspirational marketing words and stuff</p>
+
+
+        <Row type="flex" justify="center" align="middle" style={{ padding: 40, backgroundColor: '#fff' }}>
+        <Col xs={22} sm={15} style={{ fontSize: 25, textAlign: 'center' }}>
+          <p>Cortex is an open-source, lightweight, and extensible content-management-system composed of an API, database, and admin dashboard. It is used to easily upload, publish, and manage content and users, as well as support data visualizations, permissions, emails, notifications, and analytics. For more information visit <Link to={'https://rimhof.github.io/Grey-Matters/'}>our capstone page.</Link></p>
+          </Col>
         </Row>
         <Row style={{ padding: 80, backgroundColor: '#fff' }}>
-          <h1>maybe put contact here</h1>
         </Row>
       </div>
     );

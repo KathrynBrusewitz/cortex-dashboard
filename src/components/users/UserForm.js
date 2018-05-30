@@ -30,6 +30,13 @@ class UserForm extends Component {
             <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Name" />
           )}
         </Form.Item>
+        <Form.Item label="Bio">
+          {getFieldDecorator('bio', {
+            initialValue: user.bio || null,
+          })(
+            <Input.TextArea autosize={{ minRows: 4 }} />
+          )}
+        </Form.Item>
         <Form.Item label="Email">
           {getFieldDecorator('email', {
             rules: [{ required: true }],
