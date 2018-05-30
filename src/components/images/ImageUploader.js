@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Upload, Button, Icon, message } from 'antd';
-
-const S3URL = 'https://s3.us-west-2.amazonaws.com/cortexuploads/';
+import { Upload, Button, Icon } from 'antd';
 
 class ImageUploader extends Component {
   render() {

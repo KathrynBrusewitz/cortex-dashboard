@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
-import { Row, Divider, Popconfirm } from 'antd';
+import { Row, Popconfirm } from 'antd';
 
 import { imagesActions } from '../../actions';
 import Loading from '../shared/Loading';
@@ -52,7 +51,7 @@ class ViewImage extends Component {
           </Popconfirm>
         </Row>
         <h1>{image.title && image.title}</h1>
-        <img src={`https://${image.s3Bucket}.s3.amazonaws.com/${image.s3Key}`} style={{ width: '400px' }}/>
+        <img alt={image.description} src={`https://${image.s3Bucket}.s3.amazonaws.com/${image.s3Key}`} style={{ width: '400px' }}/>
         <h2>Description</h2>
         <p>{image.description && image.description}</p>
       </div>

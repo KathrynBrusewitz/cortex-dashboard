@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Table, Divider, Button, Row, Col, Popconfirm, Card, Icon } from 'antd';
+import { Button, Row, Col, Popconfirm, Card, Icon } from 'antd';
 import Loading from '../shared/Loading';
-import AvatarList from '../shared/AvatarList';
 
 import { imagesActions } from '../../actions';
-
-const gridStyle = {
-  width: '25%',
-};
 
 class Listimages extends Component {
   rehydrateState() {
