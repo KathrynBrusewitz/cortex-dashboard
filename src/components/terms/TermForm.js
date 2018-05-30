@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Card } from 'antd';
+import SelectImageTags from '../shared/SelectImageTags';
 
 class TermForm extends Component {
   handleSubmit = (e) => {
@@ -17,8 +18,10 @@ class TermForm extends Component {
 
   render() {
     const { loading } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
     const term = this.props.term || {};
+    const selectedCoverImageId = getFieldValue('coverImage');
+    const coverImageValue = this.props.imageOptions.find(image => image._id === selectedCoverImageId);
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -30,12 +33,26 @@ class TermForm extends Component {
             <Input />
           )}
         </Form.Item>
+        {
+          <Card
+            cover={(coverImageValue) &&
+            <img alt={coverImageValue.description} src={`https://${coverImageValue.s3Bucket}.s3.amazonaws.com/${coverImageValue.s3Key}`} />}
+          >
+            <Form.Item label="Term Artwork">
+              {getFieldDecorator('coverImage', {
+                initialValue: (term.coverImage && term.coverImage._id) || null,
+              })(
+                <SelectImageTags placeholder="Select term artwork or image" images={this.props.imageOptions} />
+              )}
+            </Form.Item>
+          </Card>
+        }
         <Form.Item label="Definition">
           {getFieldDecorator('definition', {
             rules: [{ required: true }],
             initialValue: term.definition || null,
           })(
-            <Input.TextArea />
+            <Input.TextArea autosize={{ minRows: 10 }} />
           )}
         </Form.Item>
         <Form.Item>

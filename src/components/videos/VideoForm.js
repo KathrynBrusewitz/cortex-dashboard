@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Radio, Steps } from 'antd';
+import { Form, Input, Button, Radio, Steps, Card } from 'antd';
 import SelectUserTags from '../shared/SelectUserTags';
+import SelectImageTags from '../shared/SelectImageTags';
 import TextEditor from '../editor/TextEditor';
 
 class VideoForm extends Component {
@@ -34,10 +35,12 @@ class VideoForm extends Component {
 
   render() {
     const { loading } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
     const content = this.props.content || {};
     const { currentStep } = this.state;
-    const steps = ['Details','Description','Save'];
+    const steps = ['Details','Regular Editor','Slate Editor','Save'];
+    const selectedCoverImageId = getFieldValue('coverImage');
+    const coverImageValue = this.props.imageOptions.find(image => image._id === selectedCoverImageId);
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -55,6 +58,20 @@ class VideoForm extends Component {
                   <Input />
                 )}
               </Form.Item>
+              {
+                <Card
+                  cover={(selectedCoverImageId && coverImageValue) &&
+                  <img alt={coverImageValue.description} src={`https://${coverImageValue.s3Bucket}.s3.amazonaws.com/${coverImageValue.s3Key}`} />}
+                >
+                  <Form.Item label="Cover Artwork">
+                    {getFieldDecorator('coverImage', {
+                      initialValue: (content.coverImage && content.coverImage._id) || null,
+                    })(
+                      <SelectImageTags placeholder="Select cover artwork" images={this.props.imageOptions} />
+                    )}
+                  </Form.Item>
+                </Card>
+              }
               <Form.Item label="Video URL">
                 {getFieldDecorator('url', {
                   rules: [{ required: true }],
@@ -77,18 +94,20 @@ class VideoForm extends Component {
                   <SelectUserTags placeholder="Select one or more hosts or write names" users={this.props.creatorOptions} />
                 )}
               </Form.Item>
-              <Form.Item label="Artists">
-                {getFieldDecorator('artists', {
-                  initialValue: (content.artists && content.artists.map(a => a._id)) || [],
+            </div>
+          }
+          { <div style={ currentStep !== 1 ? { display: 'none' } : {}}>
+              <Form.Item label="Transcript or more detailed reading">
+                {getFieldDecorator('body', {
+                  initialValue: content.body || null,
                 })(
-                  <SelectUserTags placeholder="Select one or more artists or write names" users={this.props.creatorOptions} />
+                  <Input.TextArea autosize={{ minRows: 16 }} />
                 )}
               </Form.Item>
             </div>
           }
-          {
-            <div style={ currentStep !== 1 ? { display: 'none' } : {}}>
-              <Form.Item label="Transcript or more detailed reading">
+          { <div style={ currentStep !== 2 ? { display: 'none' } : {}}>
+              <Form.Item label="For demo purposes! We are figuring out how to parse the result of this editor into something the app can use">
                 {getFieldDecorator('bodySlate', {
                   initialValue: content.bodySlate || null,
                 })(
@@ -105,7 +124,7 @@ class VideoForm extends Component {
             </div>
           }
           {
-            <div style={ currentStep !== 2 ? { display: 'none' } : {}}>
+            <div style={ currentStep !== 3 ? { display: 'none' } : {}}>
               <Form.Item label="What should be the status of this video?">
                 {getFieldDecorator('state', {
                   rules: [{ required: true }],
@@ -122,6 +141,13 @@ class VideoForm extends Component {
         </div>
         <div style={{ marginBottom: 50 }}>
           {
+            this.state.currentStep > 0
+            &&
+            <Button style={{ marginRight: 8 }} onClick={() => this.prevStep()}>
+              Previous
+            </Button>
+          }
+          {
             this.state.currentStep < steps.length - 1
             &&
             <Button type="primary" onClick={() => this.nextStep()}>Next</Button>
@@ -131,13 +157,6 @@ class VideoForm extends Component {
             &&
             <Button type="primary" htmlType="submit" loading={loading}>
               {this.props.edit ? 'Update Video' : 'Create Video'}
-            </Button>
-          }
-          {
-            this.state.currentStep > 0
-            &&
-            <Button style={{ marginLeft: 8 }} onClick={() => this.prevStep()}>
-              Previous
             </Button>
           }
         </div>

@@ -5,13 +5,17 @@ import { bindActionCreators } from 'redux';
 import EventForm from './EventForm';
 import Loading from '../shared/Loading';
 
-import { eventsActions } from '../../actions';
+import { eventsActions, imagesActions } from '../../actions';
 
 class CreateEvent extends Component {
-  render() {
-    const { createEvent, isCreatingEvent } = this.props;
+  componentDidMount() {
+    this.props.getImages();
+  }
 
-    if (isCreatingEvent) {
+  render() {
+    const { createEvent, isCreatingEvent, isGettingImages, images } = this.props;
+
+    if (isCreatingEvent || isGettingImages) {
       return (
         <Loading text="Loading Form..." />
       );
@@ -20,7 +24,7 @@ class CreateEvent extends Component {
     return (
       <div>
         <h1>Create New Event</h1>
-        <EventForm onSubmit={createEvent} loading={isCreatingEvent} />
+        <EventForm onSubmit={createEvent} loading={isCreatingEvent} imageOptions={images || []} />
       </div>
     );
   }
@@ -28,10 +32,13 @@ class CreateEvent extends Component {
 
 const mapStateToProps = state => ({
   isCreatingEvent: state.events.isCreatingEvent,
+  isGettingImages: state.images.isGettingImages,
+  images: state.images.images,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   createEvent: eventsActions.createEvent,
+  getImages: imagesActions.getImages,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateEvent);

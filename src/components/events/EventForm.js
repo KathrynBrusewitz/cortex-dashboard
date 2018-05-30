@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Card } from 'antd';
 import DateTimePicker from '../shared/DateTimePicker';
+import SelectImageTags from '../shared/SelectImageTags';
 
 const removeKey = (object, key) => {
   const {[key]: deletedKey, ...otherKeys} = object;
@@ -29,8 +30,10 @@ class EventForm extends Component {
 
   render() {
     const { loading } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
     const event = this.props.event || {};
+    const selectedCoverImageId = getFieldValue('coverImage');
+    const coverImageValue = this.props.imageOptions.find(image => image._id === selectedCoverImageId);
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -42,6 +45,20 @@ class EventForm extends Component {
             <Input />
           )}
         </Form.Item>
+        {
+          <Card
+            cover={(selectedCoverImageId && coverImageValue) &&
+            <img alt={coverImageValue.description} src={`https://${coverImageValue.s3Bucket}.s3.amazonaws.com/${coverImageValue.s3Key}`} />}
+          >
+            <Form.Item label="Event Artwork">
+              {getFieldDecorator('coverImage', {
+                initialValue: (event.coverImage && event.coverImage._id) || null,
+              })(
+                <SelectImageTags placeholder="Select event artwork or image" images={this.props.imageOptions} />
+              )}
+            </Form.Item>
+          </Card>
+        }
         <Form.Item label="URL">
           {getFieldDecorator('url', {
             rules: [{ required: true }],

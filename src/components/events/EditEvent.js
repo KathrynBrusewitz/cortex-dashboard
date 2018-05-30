@@ -5,17 +5,18 @@ import { bindActionCreators } from 'redux';
 import EventForm from './EventForm';
 import Loading from '../shared/Loading';
 
-import { eventsActions } from '../../actions';
+import { eventsActions, imagesActions } from '../../actions';
 
 class EditEvent extends Component {
   componentDidMount() {
     this.props.getEvent(this.props.match.params.id);
+    this.props.getImages();
   }
 
   render() {
-    const { updateEvent, isUpdatingEvent, event, isGettingEvent } = this.props;
+    const { updateEvent, isUpdatingEvent, event, isGettingEvent, isGettingImages, images } = this.props;
 
-    if (isGettingEvent) {
+    if (isGettingEvent || isGettingImages) {
       return (
         <Loading text="Loading Form..." />
       );
@@ -33,7 +34,7 @@ class EditEvent extends Component {
     return (
       <div>
         <h1>Update Event</h1>
-        <EventForm onSubmit={updateEvent} loading={isUpdatingEvent} edit={true} event={event} />
+        <EventForm onSubmit={updateEvent} loading={isUpdatingEvent} edit={true} event={event} imageOptions={images} />
       </div>
     );
   }
@@ -42,12 +43,15 @@ class EditEvent extends Component {
 const mapStateToProps = state => ({
   isUpdatingEvent: state.events.isUpdatingEvent,
   isGettingEvent: state.events.isGettingEvent,
+  isGettingImages: state.images.isGettingImages,
+  images: state.images.images,
   event: state.events.event,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   updateEvent: eventsActions.updateEvent,
   getEvent: eventsActions.getEvent,
+  getImages: imagesActions.getImages,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditEvent);

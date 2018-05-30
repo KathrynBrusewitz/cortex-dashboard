@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import ArticleForm from './ArticleForm';
 import Loading from '../shared/Loading';
 
-import { contentActions, imagesActions, usersActions} from '../../actions';
+import { contentActions, imagesActions, usersActions } from '../../actions';
 
 class EditArticle extends Component {
   componentDidMount() {
