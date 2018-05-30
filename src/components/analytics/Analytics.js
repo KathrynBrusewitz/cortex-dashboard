@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import { Card } from 'antd';
+import screenshot from './analytics.png'
 
 class Analytics extends Component {
   render() {
     return (
       <div>
-        <h1>Analytics</h1>
+        <Card
+          bordered={false}
+          cover={
+          <img alt={'Google Analytics Screenshot'} src={screenshot} />}
+        />
       </div>
     );
   }
