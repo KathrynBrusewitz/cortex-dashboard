@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Row, Card } from 'antd';
+import { Form, Input, Button, Card } from 'antd';
 import SelectUserTags from '../shared/SelectUserTags';
 import ImageUploader from './ImageUploader';
 

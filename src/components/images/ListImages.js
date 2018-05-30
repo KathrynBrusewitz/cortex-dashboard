@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
-import { Button, Row, Col, Popconfirm, Card, Icon, Divider } from 'antd';
+import { Button, Row, Col, Popconfirm, Card, Divider } from 'antd';
 import Loading from '../shared/Loading';
 
 import { imagesActions } from '../../actions';
