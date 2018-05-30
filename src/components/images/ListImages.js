@@ -44,8 +44,8 @@ class Listimages extends Component {
           <span>
             <Link to={`/contents/artwork/${record._id}`}>View</Link>
             <Divider type="vertical" />
-            <Link to={`/contents/artwork/${record._id}/edit`}>Edit</Link>
-            <Divider type="vertical" />
+            {/* <Link to={`/contents/artwork/${record._id}/edit`}>Edit</Link>
+            <Divider type="vertical" /> */}
             <Popconfirm
               title="Delete this image?"
               onConfirm={() => {

@@ -26,6 +26,7 @@ class DashboardLayout extends Component {
             <Redirect exact from='/podcasts' to='/contents/podcasts'/>
             <Redirect exact from='/videos' to='/contents/videos'/>
             <Redirect exact from='/artwork' to='/contents/artwork'/>
+            <Redirect exact from='/images' to='/contents/artwork'/>
 
             {/* Layouts */}
             <Route path="/contents" component={ContentsLayout} />

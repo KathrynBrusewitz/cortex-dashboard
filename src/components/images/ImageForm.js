@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
-import UploadDragger from '../shared/UploadDragger';
+import { Form, Input, Button, Upload, Icon } from 'antd';
 import SelectUserTags from '../shared/SelectUserTags';
+import ImageUploader from './ImageUploader';
 
 class ImageForm extends Component {
   handleSubmit = (e) => {
-    e.primageDefault();
+    e.preventDefault();
     this.props.form.validateFields((err, options) => {
       if (!err) {
         if (this.props.image) {
+          console.log(options);
           this.props.onSubmit(options, this.props.image._id);
         } else {
+          console.log('handleSubmit options received:');
+          console.log(options);
           this.props.onSubmit(options);
         }
       }
     });
+  }
+
+  normFile = (e) => {
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
   }
 
   render() {
@@ -26,7 +36,6 @@ class ImageForm extends Component {
       <Form onSubmit={this.handleSubmit}>
         <Form.Item label="Title">
           {getFieldDecorator('title', {
-            rules: [{ required: true }],
             initialValue: image.title || null,
           })(
             <Input />
@@ -39,12 +48,12 @@ class ImageForm extends Component {
             <Input.TextArea autosize={{ minRows: 4 }} />
           )}
         </Form.Item>
-        <Form.Item label="URL">
-          {getFieldDecorator('url', {
-            rules: [{ required: true }],
-            initialValue: null,
+        <Form.Item label="Upload">
+          {getFieldDecorator('upload', {
+            valuePropName: 'fileList',
+            getValueFromEvent: this.normFile,
           })(
-            <UploadDragger />
+            <ImageUploader />
           )}
         </Form.Item>
         <Form.Item label="Artists">
@@ -56,7 +65,7 @@ class ImageForm extends Component {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" loading={loading}>
-            {this.props.edit ? 'Update Artwork' : 'Publish Artwork'}
+            {this.props.edit ? 'Update Artwork' : 'Upload Artwork'}
           </Button>
         </Form.Item>
       </Form>

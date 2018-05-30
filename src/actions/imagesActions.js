@@ -97,11 +97,19 @@ function getImage(id) {
 }
 
 function createImage(fields) {
-  if (!fields.title || !fields.description) {
-    return dispatch => {
-      dispatch(alertActions.error('Image is missing title or description'));
-    };
-  }
+  let formData = new FormData();
+  formData.append("image", fields.upload[0]);
+  Object.keys(fields).forEach(function(key) {
+    let value = fields[key];
+    if (key === "upload") {
+      return;
+    }
+    if (Array.isArray(value)) {
+      formData.append(key, JSON.stringify(value));
+    } else {
+      formData.append(key, value);
+    }
+  });
 
   return dispatch => {
     dispatch(request());
@@ -110,16 +118,17 @@ function createImage(fields) {
       method: 'post',
       url: '/images',
       baseURL,
-      data: {
-        ...fields,
+      data: formData,
+      headers: {
+        'x-access-token': cookies.get('token'),
+        'Content-Type': 'multipart/form-data',
       },
-      headers: {'x-access-token': cookies.get('token')},
     })
     .then(res => {
       if (res.data.success) {
         dispatch(success());
-        dispatch(push('/images'));
-        dispatch(alertActions.success(`New image created: "${fields.title}"`));
+        dispatch(push('/contents/artwork'));
+        dispatch(alertActions.success(`New image created: "${res.data.payload.title}"`));
       } else {
         dispatch(failure());
         dispatch(alertActions.error(res.data.message));
@@ -137,12 +146,6 @@ function createImage(fields) {
 }
 
 function updateImage(fields, id) {
-  if (!fields.title || !fields.description) {
-    return dispatch => {
-      dispatch(alertActions.error('Image is missing title or description'));
-    };
-  }
-
   return dispatch => {
     dispatch(request());
 

@@ -37,8 +37,8 @@ class ViewImage extends Component {
     return (
       <div>
         <Row type="flex" justify="end">
-          <Link to={`/contents/artwork/${image._id}/edit`}>Edit</Link>
-          <Divider type="vertical" />
+          {/* <Link to={`/contents/artwork/${image._id}/edit`}>Edit</Link>
+          <Divider type="vertical" /> */}
           <Popconfirm
             title="Are you sure delete this image?"
             onConfirm={() => {
@@ -52,6 +52,7 @@ class ViewImage extends Component {
           </Popconfirm>
         </Row>
         <h1>{image.title && image.title}</h1>
+        <img src={`https://${image.s3Bucket}.s3.amazonaws.com/${image.s3Key}`} style={{ width: '400px' }}/>
         <h2>Description</h2>
         <p>{image.description && image.description}</p>
       </div>
