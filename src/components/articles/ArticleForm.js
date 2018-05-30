@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Radio, Steps } from 'antd';
+import { Form, Input, Button, Radio, Steps, Card } from 'antd';
 import SelectUserTags from '../shared/SelectUserTags';
+import SelectImageTags from '../shared/SelectImageTags';
 import TextEditor from '../editor/TextEditor';
 
 class ArticleForm extends Component {
@@ -34,10 +35,12 @@ class ArticleForm extends Component {
 
   render() {
     const { loading } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
     const content = this.props.content || {};
     const { currentStep } = this.state;
     const steps = ['Details','Article','Save'];
+    const selectedCoverImageId = getFieldValue('coverImage');
+    const coverImageValue = this.props.imageOptions.find(image => image._id === selectedCoverImageId);
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -54,6 +57,20 @@ class ArticleForm extends Component {
                   <Input />
                 )}
               </Form.Item>
+              {
+                <Card
+                  cover={(selectedCoverImageId && coverImageValue) &&
+                  <img alt={coverImageValue.description} src={`https://${coverImageValue.s3Bucket}.s3.amazonaws.com/${coverImageValue.s3Key}`} />}
+                >
+                  <Form.Item label="Cover Artwork">
+                    {getFieldDecorator('coverImage', {
+                      initialValue: (content.coverImage && content.coverImage._id) || null,
+                    })(
+                      <SelectImageTags placeholder="Select cover artwork" images={this.props.imageOptions} />
+                    )}
+                  </Form.Item>
+                </Card>
+              }
               <Form.Item label="Short Description" help="Summarize or describe the article. This shows up underneath the title when scrolling through content">
                 {getFieldDecorator('description', {
                   initialValue: content.description || null,
@@ -66,13 +83,6 @@ class ArticleForm extends Component {
                   initialValue: (content.creators && content.creators.map(c => c._id)) || [],
                 })(
                   <SelectUserTags placeholder="Select writers" users={this.props.creatorOptions} />
-                )}
-              </Form.Item>
-              <Form.Item label="Artists">
-                {getFieldDecorator('artists', {
-                  initialValue: (content.artists && content.artists.map(a => a._id)) || [],
-                })(
-                  <SelectUserTags placeholder="Select artists" users={this.props.creatorOptions} />
                 )}
               </Form.Item>
             </div>
