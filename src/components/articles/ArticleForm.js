@@ -38,7 +38,7 @@ class ArticleForm extends Component {
     const { getFieldDecorator, getFieldValue } = this.props.form;
     const content = this.props.content || {};
     const { currentStep } = this.state;
-    const steps = ['Details','Article','Save'];
+    const steps = ['Details', 'Regular Editor', 'Slate Editor', 'Save'];
     const selectedCoverImageId = getFieldValue('coverImage');
     const coverImageValue = this.props.imageOptions.find(image => image._id === selectedCoverImageId);
 
@@ -89,8 +89,17 @@ class ArticleForm extends Component {
           }
           { <div style={ currentStep !== 1 ? { display: 'none' } : {}}>
               <Form.Item>
+                {getFieldDecorator('body', {
+                  initialValue: content.body || null,
+                })(
+                  <Input.TextArea autosize={{ minRows: 16 }} />
+                )}
+              </Form.Item>
+            </div>
+          }
+          { <div style={ currentStep !== 2 ? { display: 'none' } : {}}>
+              <Form.Item>
                 {getFieldDecorator('bodySlate', {
-                  rules: [{ required: true }],
                   initialValue: content.bodySlate || null,
                 })(
                   <TextEditor />
@@ -106,7 +115,7 @@ class ArticleForm extends Component {
             </div>
           }
           {
-            <div style={ currentStep !== 2 ? { display: 'none' } : {}}>
+            <div style={ currentStep !== 3 ? { display: 'none' } : {}}>
               <Form.Item label="What should be the status of this article?">
                 {getFieldDecorator('state', {
                   rules: [{ required: true }],
@@ -123,6 +132,13 @@ class ArticleForm extends Component {
         </div>
         <div style={{ marginBottom: 50 }}>
           {
+            this.state.currentStep > 0
+            &&
+            <Button style={{ marginRight: 8 }} onClick={() => this.prevStep()}>
+              Previous
+            </Button>
+          }
+          {
             this.state.currentStep < steps.length - 1
             &&
             <Button type="primary" onClick={() => this.nextStep()}>Next</Button>
@@ -132,13 +148,6 @@ class ArticleForm extends Component {
             &&
             <Button type="primary" htmlType="submit" loading={loading}>
               {this.props.edit ? 'Update Article' : 'Create Article'}
-            </Button>
-          }
-          {
-            this.state.currentStep > 0
-            &&
-            <Button style={{ marginLeft: 8 }} onClick={() => this.prevStep()}>
-              Previous
             </Button>
           }
         </div>
