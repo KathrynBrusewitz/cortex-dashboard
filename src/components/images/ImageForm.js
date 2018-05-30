@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Row, Card } from 'antd';
 import SelectUserTags from '../shared/SelectUserTags';
 import ImageUploader from './ImageUploader';
 
@@ -34,6 +34,21 @@ class ImageForm extends Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
+        {
+          (this.props.edit && image.s3Key) &&
+          <Card
+            style={{ marginBottom: 20 }}
+            cover={<img alt={image.description} src={`https://${image.s3Bucket}.s3.amazonaws.com/${image.s3Key}`} />}
+          >
+            <Card.Meta
+              title={image.title}
+              description={
+              <div>
+                {`https://${image.s3Bucket}.s3.amazonaws.com/${image.s3Key}`}
+              </div>}
+            />
+          </Card>
+        }
         <Form.Item label="Title">
           {getFieldDecorator('title', {
             initialValue: image.title || null,
@@ -48,14 +63,22 @@ class ImageForm extends Component {
             <Input.TextArea autosize={{ minRows: 4 }} />
           )}
         </Form.Item>
-        <Form.Item label="Upload">
-          {getFieldDecorator('upload', {
-            valuePropName: 'fileList',
-            getValueFromEvent: this.normFile,
-          })(
-            <ImageUploader />
-          )}
-        </Form.Item>
+        { !this.props.edit &&
+          <Form.Item label="Upload">
+            {getFieldDecorator('upload', {
+              valuePropName: 'fileList',
+              getValueFromEvent: this.normFile,
+              initialValue: (image.s3Key && [{
+                uid: image._id,
+                name: `${image.title} - https://${image.s3Bucket}.s3.amazonaws.com/${image.s3Key}`,
+                status: 'done',
+                url: `https://${image.s3Bucket}.s3.amazonaws.com/${image.s3Key}`,
+              }]) || null,
+            })(
+              <ImageUploader />
+            )}
+          </Form.Item>
+        }
         <Form.Item label="Artists">
           {getFieldDecorator('artists', {
             initialValue: (image.artists && image.artists.map(a => a._id)) || [],

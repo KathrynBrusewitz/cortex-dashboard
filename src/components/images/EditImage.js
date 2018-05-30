@@ -10,7 +10,7 @@ import { usersActions } from '../../actions';
 
 class EditImage extends Component {
   componentDidMount() {
-    this.props.getUsers({ role: [ 'artist' ] });
+    this.props.getUsers({ roles: [ 'admin', 'writer', 'artist' ] });
     this.props.getImage(this.props.match.params.id);
   }
 
@@ -34,7 +34,7 @@ class EditImage extends Component {
 
     return (
       <div>
-        <h1>Edit Image</h1>
+        <h1>Update Artwork</h1>
         <ImageForm onSubmit={updateImage} loading={isUpdatingImage} artistOptions={users} edit={true} image={image} />
       </div>
     );

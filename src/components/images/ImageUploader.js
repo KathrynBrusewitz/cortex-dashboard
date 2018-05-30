@@ -15,7 +15,7 @@ class ImageUploader extends Component {
         }}
       >
         <Button>
-          <Icon type="upload" /> Click to upload
+          <Icon type="upload" /> Click or Drag/Drop to Upload
         </Button>
       </Upload>
     );

@@ -10,7 +10,7 @@ import { usersActions } from '../../actions';
 
 class CreateImage extends Component {
   componentDidMount() {
-    this.props.getUsers({ role: [ 'artist' ] });
+    this.props.getUsers({ roles: [ 'admin', 'writer', 'artist' ] });
   }
 
   render() {
@@ -26,14 +26,14 @@ class CreateImage extends Component {
     if (!users) {
       return (
         <p>
-          Form unavailable. Need admins or writers in userbase.
+          Form unavailable. Need artists in userbase.
         </p>
       );
     }
 
     return (
       <div>
-        <h1>Create New Image</h1>
+        <h1>Upload Artwork</h1>
         <ImageForm onSubmit={createImage} loading={isCreatingImage} artistOptions={users} />
       </div>
     );
