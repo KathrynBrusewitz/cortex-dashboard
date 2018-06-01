@@ -40,6 +40,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "slate": "^0.33.6",
+    "slate-html-serializer": "^0.6.3",
     "slate-react": "^0.12.6",
     "slate-schema-violations": "^0.1.10",
     "universal-cookie": "^2.1.2"
