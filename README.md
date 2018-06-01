@@ -6,25 +6,23 @@ Admin Portal, Content Management, and Analytics for Grey Matters and other scien
 
 More extensive documentation can be found in `/docs`. Below should give you enough instructions to get started.
 
+# Contents
+
+1. Todo
+2. Setup for Development
+3. Development Docs
+
 # Todo
 
 ```
-Current Task
-[ ] Bookmarks
-
-Bugs
-
-[ ] Fix routing: Avatar in table field -> User Profile Page (users route was updated)
-
 Frontend
 
-[ ] Add image field (used as header) in all contents
-[ ] Add image field (used as header) in terms
-[ ] Remove description field from terms
+[x] Add image field (used as header) in all contents
+[x] Add image field (used as header) in terms
+[x] Remove description field from terms
 [ ] Action to Download Userbase CSV
-[ ] Action Dropdown for Tables
-[ ] User Invite  
-  [ ] Form Signup  
+[x] User Invite  
+  [x] Form Signup  
 [x] Content Body Supports Rich Text and Media  
 [ ] User Settings  
 [ ] Mobile App Settings  
@@ -60,19 +58,18 @@ See Api README for more detailed todo
 [x] Login with Token: Verify, then send back User
 [x] Hash Passwords
 [ ] Amazon SES for Email
-[ ] Endpoint for update password
-[ ] On sign up, send new user and token
+[x] Endpoint for update password
 
 Future
 
 [ ] Use Google Calendar API for Events
-[ ] Multiple roles for users
+[x] Multiple roles for users
 [ ] Send Mass Email via SES
-[ ] Get Content User is associated with
+[x] Get Content User is associated with
 
 ```
 
-# Setup
+# Setup for Development
 
 ## Setup and Run Dashboard
 
@@ -96,7 +93,7 @@ You will also need a local instance of the database and the API for CRUD operati
 
 That's all you need to get started. Read the docs below for developer notes and guidelines.
 
-# Developer Docs
+# Development Docs
 
 ## Folder Structure
 
