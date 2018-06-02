@@ -2,7 +2,12 @@ import { push } from 'react-router-redux';
 import { alertActions } from './';
 import axios from 'axios';
 import qs from 'qs';
-import { baseURL, cookies } from '../constants';
+import { baseURL, cookies, rules } from '../constants';
+import { Value } from 'slate';
+import Html from 'slate-html-serializer';
+
+// Create a new serializer instance with our `rules` from above.
+const html = new Html({ rules });
 
 // Types
 export const contentConstants = {
@@ -141,6 +146,12 @@ function updateContent(fields, id) {
     return dispatch => {
       dispatch(alertActions.error('Missing title, state, or type.'));
     };
+  }
+
+  if (fields.bodySlate) {
+    let value = Value.fromJSON(fields.bodySlate);
+    const string = html.serialize(value);
+    fields.bodyHtml = string;
   }
 
   return dispatch => {
