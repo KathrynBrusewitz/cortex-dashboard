@@ -148,11 +148,10 @@ function updateContent(fields, id) {
     };
   }
 
-  console.log(fields.bodySlate);
   if (fields.bodySlate) {
     let value = Value.fromJSON(fields.bodySlate);
     const string = html.serialize(value);
-    console.log(`string bodySlate: ${string}`);
+    fields.bodyHtml = string;
   }
 
   return dispatch => {
