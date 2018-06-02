@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Row, Col, Icon, Card } from 'antd';
-import { Link } from 'react-router-dom';
 
 class Marketing extends Component {
   render() {
@@ -61,7 +60,7 @@ class Marketing extends Component {
 
         <Row type="flex" justify="center" align="middle" style={{ padding: 40, backgroundColor: '#fff' }}>
         <Col xs={22} sm={15} style={{ fontSize: 25, textAlign: 'center' }}>
-          <p>Cortex is an open-source, lightweight, and extensible content-management-system composed of an API, database, and admin dashboard. It is used to easily upload, publish, and manage content and users, as well as support data visualizations, permissions, emails, notifications, and analytics. For more information visit <Link to={'https://rimhof.github.io/Grey-Matters/'}>our capstone page.</Link></p>
+          <p>Cortex is an open-source, lightweight, and extensible content-management-system composed of an API, database, and admin dashboard. It is used to easily upload, publish, and manage content and users, as well as support data visualizations, permissions, emails, notifications, and analytics. For more information visit <a href={'https://rimhof.github.io/Grey-Matters/'}>our capstone page.</a></p>
           </Col>
         </Row>
         <Row style={{ padding: 80, backgroundColor: '#fff' }}>
