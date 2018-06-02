@@ -8,9 +8,16 @@ More extensive documentation can be found in `/docs`. Below should give you enou
 
 # Contents
 
-1. Todo
-2. Setup for Development
-3. Development Docs
+1. Cortex: Stack and API
+2. Todo
+3. Setup for Development
+4. Development Docs
+5. [Text Editor Components Docs](./docs/Text-Editor.md)
+6. [Routing Docs](./docs/Routing.md)
+
+# Cortex Stack and API
+
+Cortex Dashboard queries the [Cortex Api](https://github.com/KathrynBrusewitz/cortex-api). <i>Please read the README available in the API.</i> It explains the full stack in <b>much</b> greater detail.
 
 # Todo
 
