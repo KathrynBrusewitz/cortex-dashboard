@@ -137,14 +137,11 @@ function tokenLogin() {
   function failure() { return { type: authConstants.TOKEN_LOGIN_FAILURE } }
 }
 
-function logout({ goToPage }) {
+function logout() {
   cookies.remove('token', { path: '/' });
   return dispatch => {
     dispatch(alertActions.success(`Logged Out!`));
     dispatch(success());
-    if (goToPage) {
-      dispatch(push(goToPage));
-    }
   };
 
   function success() { return { type: authConstants.LOGOUT } }
