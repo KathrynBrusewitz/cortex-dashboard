@@ -13,7 +13,9 @@ import Loading from '../shared/Loading';
 
 class App extends Component {
   // After the <App/> DOM node is first created, the state is fresh and we have no information on the user.
-  // Attempt to login with the stored token, if there is any. The tokenLogin() Action will handle either case.
+
+  // First we check if the path includes "/invite"; If so, we want to log the user out and jump to the invite page where they can continue to making a new account with the invite code.
+  // Otherwise, we attempt to login with the stored token, if there is any. The tokenLogin() Action will handle either case.
   // <App/> will rerender if state.auth.user changes and login successfully stored a token in cookies.
 
   // The <App/> is responsible for rendering all Layout Routes. Each Layout is responsible for all their components.
@@ -24,7 +26,11 @@ class App extends Component {
   // When moved onto the production server, speeds will be slower than local environment and make this buggy rendering more noticeable.
 
   componentDidMount() {
-    this.props.tokenLogin();
+    if (this.props.match.path === "/invite") {
+      this.props.logout({ goTo: this.props.match.url });
+    } else {
+      this.props.tokenLogin();
+    }
   }
 
   render() {
