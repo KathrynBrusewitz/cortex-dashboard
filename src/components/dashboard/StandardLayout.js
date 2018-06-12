@@ -15,6 +15,7 @@ import Analytics from '../analytics/Analytics';
 import DeadEnd from '../shared/DeadEnd';
 
 import Settings from './Settings';
+import DashboardInvite from "./Dashboardinvite";
 
 // Dashboard Layout Routes are put inside it's own Layout because we want to
 // pad all pages except Custom Layouts.
@@ -31,6 +32,8 @@ class FormLayout extends Component {
           <Route exact path="/events/new" component={CreateEvent} />
           <Route exact path="/events/:id" component={ViewEvent} />
           <Route exact path="/events/:id/edit" component={EditEvent} />
+
+          <Route exact path="/invite" component={DashboardInvite} />
 
           {/* No Matching Route */}
           <Route component={DeadEnd} />
