@@ -36,7 +36,7 @@ If you **are** working with the API, say, building and testing new routes and fe
 
 ## 3. Next Steps
 
-That's all you need to get started. I recommend you next read the [Developer Resources](./dev-resources) for general tips, workflow, and patterns.
+That's all you need to get started. I recommend you next read the rest of the docs for general tips, workflow, and patterns.
 
 ## 4. Future Changes
 
