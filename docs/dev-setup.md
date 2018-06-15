@@ -43,7 +43,3 @@ That's all you need to get started. I recommend you next read the rest of the do
 In my opinion, it would be nice to utilize Docker for continuous integration and deploy separate Production and Development builds.
 
 TODO: Explore benefits of integrating Docker for Cortex. Put together build and deploy workflow.
-
-Updating the API to use HTTPS had the unfortunate side-effect of being unable to run a local instance of either the Dashboard and the API.
-
-TODO: Figure out what needs to change so that local development setup continues to work. My gut instinct at the moment is to research if CORS has anything to do with it. Otherwise, maybe we can switch transport protocols based on whether Node environment is `dev` or `production` when building.
