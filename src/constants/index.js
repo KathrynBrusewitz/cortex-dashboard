@@ -12,7 +12,7 @@ export const rules = [
       //not gonna use this
     },
     serialize(obj, children) {
-      if (obj.object == 'block') {
+      if (obj.object === 'block') {
         switch (obj.type) {
           case 'paragraph':
             return <p>{children}</p>
@@ -39,9 +39,10 @@ export const rules = [
             );
           case 'image':
             const src = obj.data.get('src')
+            const alt = obj.data.get('alt')
             const style = { display: 'block' }
             return (
-              <img src={src} style={style} />
+              <img src={src} style={style} alt={alt || src} />
             );
           default:
             return
@@ -54,7 +55,7 @@ export const rules = [
       //not gonna use this
     },
     serialize(obj, children) {
-      if (obj.object == 'mark') {
+      if (obj.object === 'mark') {
         switch (obj.type) {
           case 'bold':
             return <strong>{children}</strong>
@@ -76,13 +77,15 @@ export const rules = [
     },
     serialize: function (object, children) {
 
-      if (object.object != 'inline') {
+      if (object.object !== 'inline') {
         return;
       }
 
       switch (object.type) {
         case 'link':
           return <a href={object.data.get('href')}>{children}</a>;
+        default:
+          return;
       }
     }
   },
