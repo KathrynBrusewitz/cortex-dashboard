@@ -2,78 +2,33 @@
   Cortex Dashboard
 </h1>
 
-Admin Portal, Content Management, and Analytics for Grey Matters and other science content/experience creators.
+![Cortex Dashboard](https://dzwonsemrish7.cloudfront.net/items/1o1o0h1R333l0L1z1H14/Screen%20Recording%202018-06-14%20at%2005.35%20PM.gif?v=d4aa0f13)
 
-More extensive documentation can be found in `/docs`. Below should give you enough instructions to get started.
+Admin Portal, Content Management, and Analytics for Grey Matters and other science content/experience creators.
 
 # Contents
 
-1. Cortex: Stack and API
+1. Cortex API
 2. Todo
 3. Setup for Development
 4. Development Docs
 5. [Text Editor Components Docs](./docs/Text-Editor.md)
 6. [Routing Docs](./docs/Routing.md)
 
-# Cortex Stack and API
+# Cortex API
 
-Cortex Dashboard queries the [Cortex Api](https://github.com/KathrynBrusewitz/cortex-api). <i>Please read the README available in the API.</i> It explains the full stack in <b>much</b> greater detail.
+Cortex Dashboard queries the [Cortex API](https://github.com/KathrynBrusewitz/cortex-api). <i>Please read the README available in the API.</i> It explains the full stack in much greater detail.
 
 # Todo
 
 ```
-Frontend
-
-[x] Add image field (used as header) in all contents
-[x] Add image field (used as header) in terms
-[x] Remove description field from terms
+[ ] Get application approved for AWS SES to send emails
 [ ] Action to Download Userbase CSV
-[x] User Invite  
-  [x] Form Signup  
-[x] Content Body Supports Rich Text and Media  
 [ ] User Settings  
 [ ] Mobile App Settings  
 [ ] Dashboard Settings  
-[x] General Page Routing  
-[x] Global Alerts  
-[x] Main Landing Components  
-  [x] Form Login  
-[x] Main Dash Components   
-  Articles: [x] List [x] Create [x] Edit [x] View  
-  Podcasts: [x] List [x] Create [x] Edit [x] View  
-  Videos: [x] List [x] Create [x] Edit [x] View  
-  Glossary: [x] List [x] Create [x] Edit [x] View  
-  Events: [x] List [x] Create [x] Edit [x] View  
-  Users: [x] List [x] Create [x] Edit [x] View  
-[x] Cookies (See Api README)  
-  [x] Setting/Removing Token in Cookies  
-  [x] Login with Token: Call server  
-[x] Populate Edit Forms from Store  
-
-Middle
-
-[x] Deploy API on AWS EC2
-[x] Deploy Dashboard on AWS S3 Bucket
-[x] Deploy Mongo Database with Atlas on AWS EC2 Instance
-[ ] Use `react-ga` (Google Analytics)
-
-Backend
-
-See Api README for more detailed todo
-[x] Use Cortex API and MongoDB (Local Env)  
-[x] Schema
-[x] Login with Token: Verify, then send back User
-[x] Hash Passwords
-[ ] Amazon SES for Email
-[x] Endpoint for update password
-
-Future
-
+[ ] Google Analytics Components
 [ ] Use Google Calendar API for Events
-[x] Multiple roles for users
-[ ] Send Mass Email via SES
-[x] Get Content User is associated with
-
 ```
 
 # Setup for Development
@@ -146,16 +101,6 @@ componentDidMount() is invoked immediately after a component is mounted. Initial
 ```
 
 Avoid `componentWillMount`. It will be deprecated in React 17.
-
-## Useful git Commands
-
-### `git branch -a`
-
-Shows all local and remote branches that (local) git knows about.
-
-### `git remote update origin --prune`
-
-Refreshes the local list of remote branches.
 
 ## Links
 Links must not point to `#`, or a `jsx-a11y/href-no-hash` warning will trigger. When you want to retain the styling of a link but not necessarily route to another page, use `<a href={null}></a>`, not `<a href="#"></a>`. Otherwise use a button.
